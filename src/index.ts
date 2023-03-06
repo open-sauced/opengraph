@@ -1,15 +1,17 @@
 import fs from 'fs';
 import express from 'express';
-import satoriFunc from './satori';
+import createImage from './satori';
 
 const app = express();
 app.use(express.json());
+app.use(express.static('public'))
 
-app.get('/', async (req, res) => {
-  res.writeHead(200, {
-    'Content-Type': 'image/png' // drop Content-Length as it should be automatically added by express
-  });
-  res.end(await satoriFunc());
+app.get('/:name', async (req, res) => {
+    let { name } = req.params;
+    res.writeHead(201, {
+        'Content-Type': 'image/png' // drop Content-Length as it should be automatically added by express
+    });
+    res.end(await createImage(name));
 });
 
 app.listen(3006, () => {
