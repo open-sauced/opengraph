@@ -1,4 +1,5 @@
 import fs from 'fs';
+// @ts-ignore
 import satori from 'satori'
 import { Resvg } from '@resvg/resvg-js';
 
@@ -14,8 +15,10 @@ const html = async (...args: string[]) => {
 
 export default async function satoriFunc() {
   const template = await html(`
-    <div style="font-family: Roboto; font-size: 24px; color: #000000;">
+    <div style="font-family: Roboto; display: flex; flex-direction: column; font-size: 24px; color: #000000;">
       <p>Hello World!</p>
+      <p>This is a test</p>
+      <p>of the emergency broadcast system</p>
     </div>
   `)
   // const template = StringToReact("")
