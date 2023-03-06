@@ -6,13 +6,14 @@ import { Resvg } from '@resvg/resvg-js';
 // import { html } from "satori-html";
 
 // failed 
-const html = (...args: string[]) => {
+const html = async (...args: string[]) => {
+  const { html } = await import('satori-html');
   // @ts-ignore
-  import('satori-html').then(({ html }) => html(...args));
+  return html(...args);
 }
 
 export default async function satoriFunc() {
-  const template = html(`
+  const template = await html(`
     <div style="font-family: Roboto; font-size: 24px; color: #000000;">
       <p>Hello World!</p>
     </div>
