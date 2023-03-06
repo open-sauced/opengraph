@@ -1,12 +1,8 @@
 import fs from 'fs';
 // @ts-ignore
 import satori from 'satori'
-import { Resvg } from '@resvg/resvg-js';
+import { Resvg } from '@resvg/resvg-js'
 
-// failed
-// import { html } from "satori-html";
-
-// failed 
 const html = async (...args: string[]) => {
   const { html } = await import('satori-html');
   // @ts-ignore
@@ -21,7 +17,6 @@ export default async function satoriFunc() {
       <p>of the emergency broadcast system</p>
     </div>
   `)
-  // const template = StringToReact("")
   
   let robotoArrayBuffer = fs.readFileSync('public/Roboto-Regular.ttf');
   const svg = await satori(template , {
@@ -30,7 +25,6 @@ export default async function satoriFunc() {
       fonts: [
         {
           name: 'Roboto',
-          // Use `fs` (Node.js only) or `fetch` to read the font as Buffer/ArrayBuffer and provide `data` here.
           data: robotoArrayBuffer,
           weight: 400,
           style: 'normal',
