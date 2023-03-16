@@ -28,7 +28,7 @@
     "format": "npm run lint -- --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node build",
-    "start:dev": "ts-node ./src/index.ts"
+    "start:dev": "npx tsx ./src/index.ts"
   },
   "devDependencies": {
     "@open-sauced/check-engines": "^1.2.0",
@@ -46,8 +46,8 @@
     "eslint-plugin-promise": "^6.1.1",
     "rimraf": "^4.4.0",
     "satori": "^0.4.3",
-    "ts-node": "^10.9.1",
     "tslib": "^2.5.0",
+    "tsx": "^3.12.5",
     "typescript": "^4.9.5",
     "typesync": "^0.10.0"
   },

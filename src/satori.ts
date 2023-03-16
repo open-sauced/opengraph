@@ -5,7 +5,6 @@ import HTMLTemplate from "./HTMLTemplate";
 
 export default async function createImage (name: string) {
   const { html } = await import("satori-html");
-
   const template = html(HTMLTemplate(name));
 
   const robotoArrayBuffer = await readFile("public/Roboto-Regular.ttf");
