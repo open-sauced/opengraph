@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static("public"));
 
-app.get("/:name", async (req, res) => {
+app.get("/user/:name", async (req, res) => {
   const { name } = req.params;
 
   // drop Content-Length as it should be automatically added by express

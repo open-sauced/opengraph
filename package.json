@@ -28,7 +28,7 @@
     "format": "npm run lint -- --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node build",
-    "start:dev": "npx tsx ./src/index.ts"
+    "start:dev": "npx tsx watch ./src"
   },
   "devDependencies": {
     "@open-sauced/check-engines": "^1.2.0",
