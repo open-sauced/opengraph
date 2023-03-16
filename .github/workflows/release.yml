@@ -1,0 +1,221 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+      - beta
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  setup:
+    name: Set environment variables
+    runs-on: ubuntu-latest
+    outputs:
+      DEPLOY_ENVIRONMENT: ${{ steps.env.outputs.DEPLOY_ENVIRONMENT }}
+      DEPLOY_SUBDOMAIN: ${{ steps.env.outputs.DEPLOY_SUBDOMAIN }}
+    steps:
+      - name: "☁️ compute environment variables"
+        id: env
+        run: |
+          echo "::set-output name=DEPLOY_ENVIRONMENT::$([[ ${{ github.ref_name }} == 'main' ]] && echo 'production' || echo ${{ github.ref_name }})"
+          echo "::set-output name=DEPLOY_SUBDOMAIN::$([[ ${{ github.ref_name }} == 'main' ]] && echo '' || echo '${{ github.ref_name }}.')"
+
+  test:
+    name: Test and lint
+    uses: open-sauced/open-sauced/.github/workflows/development.yml@main
+
+  docker:
+    name: Build container
+    runs-on: ubuntu-latest
+    steps:
+      - name: "☁️ checkout repository"
+        uses: actions/checkout@v2
+
+      - name: "🔧 setup buildx"
+        uses: docker/setup-buildx-action@v1
+
+      - name: "📦 docker build"
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          tags: ${{ github.repository }}:latest
+          outputs: type=docker,dest=/tmp/docker.tar
+          push: false
+
+      - name: "📂 docker artifacts"
+        uses: actions/upload-artifact@v2
+        with:
+          name: docker
+          path: /tmp/docker.tar
+
+  build:
+    name: Build application
+    runs-on: ubuntu-latest
+    steps:
+      - name: "☁️ checkout repository"
+        uses: actions/checkout@v2
+
+      - name: "🔧 setup node"
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: 18
+
+      - name: "🔧 install npm@latest"
+        run: npm i -g npm@latest
+
+      - name: "📦 install dependencies"
+        uses: bahmutov/npm-install@v1
+
+      - name: "🚀 static app"
+        run: |
+          npm run build
+          npm run docs
+
+      - name: "📂 production artifacts"
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist
+
+      - name: "📊 repository visualizer"
+        id: diagram
+        uses: githubocto/repo-visualizer@0.7.1
+        with:
+          excluded_paths: "node_modules,build,.storybook,.netlify,.github,npm-shrinkwrap.json"
+          output_file: "public/diagram.svg"
+          should_push: false
+          root_path: "src/"
+
+      - name: "📊 visualiser artifacts"
+        uses: actions/upload-artifact@v2
+        with:
+          name: diagram
+          path: public/diagram.svg
+
+  release:
+    environment:
+      name: ${{ needs.setup.outputs.DEPLOY_ENVIRONMENT }}
+      url: https://${{ needs.setup.outputs.DEPLOY_SUBDOMAIN }}opengraph.opensauced.pizza/docs
+    outputs:
+      release-tag: ${{ steps.semantic-release.outputs.release-tag }}
+    name: Semantic release
+    needs:
+      - setup
+      - test
+      - build
+      - docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: "☁️ checkout repository"
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: "♻️ clean up artifact paths"
+        run: |
+          rm -rf public/diagram.svg
+          rm -rf public/diagrams/
+
+      - name: "📂 download diagram artifacts"
+        uses: actions/download-artifact@v2
+        with:
+          name: diagram
+          path: public/
+
+      - name: "📂 download docker artifacts"
+        uses: actions/download-artifact@v2
+        with:
+          name: docker
+          path: /tmp
+
+      - name: "📦 load tag"
+        run: |
+          docker load --input /tmp/docker.tar
+          docker image ls -a
+
+      - name: "🚀 release"
+        id: semantic-release
+        uses: open-sauced/release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy:
+    if: github.event.repository.default_branch == github.ref_name
+    name: Deploy to static
+    needs:
+      - release
+    runs-on: ubuntu-latest
+    steps:
+      - name: "☁️ checkout repository"
+        uses: actions/checkout@v2
+
+      - name: "📂 download artifacts"
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: /home/runner/dist
+
+      - name: "📂 copy public folder"
+        run: |
+          cp -R ./public /home/runner/dist/documentation/public
+
+      - name: "🚀 deploy static"
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: /home/runner/dist/documentation
+          commit_message: ${{ github.event.head_commit.message }}
+          enable_jekyll: false
+
+  digital-ocean:
+    if: needs.release.outputs.release-tag
+    name: Deploy to Digital Ocean
+    needs:
+      - release
+    runs-on: ubuntu-latest
+    steps:
+      - name: "☁️ checkout repository"
+        uses: actions/checkout@v2
+
+      - name: "📦 install doctl"
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: "📦 authenticate with docr"
+        run: doctl registry login --expiry-seconds 3600
+
+      - name: "📂 download docker artifacts"
+        uses: actions/download-artifact@v2
+        with:
+          name: docker
+          path: /tmp
+
+      - name: "📦 push docr tag"
+        run: |
+          TARGET="$(${{ github.ref_name == 'main' }} && echo 'latest' || echo '${{ github.ref_name }}')"
+          docker load --input /tmp/docker.tar
+          docker tag ${{ github.repository }}:latest registry.digitalocean.com/opensauced/opengraph.opensauced.pizza:${{ needs.release.outputs.release-tag }}
+          docker tag ${{ github.repository }}:latest registry.digitalocean.com/opensauced/opengraph.opensauced.pizza:$TARGET
+          docker push registry.digitalocean.com/opensauced/opengraph.opensauced.pizza:${{ needs.release.outputs.release-tag }}
+          sleep 10
+          docker push registry.digitalocean.com/opensauced/opengraph.opensauced.pizza:$TARGET
+
+  cleanup:
+    name: Cleanup actions
+    needs:
+      - release
+      - digital-ocean
+    runs-on: ubuntu-latest
+    steps:
+      - name: "♻️ remove build artifacts"
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          name: |
+            diagram
+            dist
+            docker
