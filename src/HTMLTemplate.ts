@@ -1,6 +1,6 @@
 
-export default function HTMLTemplate(name: string) {
-    return `
+export default function HTMLTemplate (name: string) {
+  return `
     <style>
         * {
             margin: 0;
