@@ -15,8 +15,8 @@
     "url": "git+https://github.com/open-sauced/opengraph.opensauced.pizza.git"
   },
   "engines": {
-    "node": ">= 18.15",
-    "npm": ">= 9.2"
+    "node": ">= 16.15",
+    "npm": ">= 8.12"
   },
   "scripts": {
     "types:auto-add": "npx typesync",
