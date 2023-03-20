@@ -1,16 +1,20 @@
 import { readFile } from "node:fs/promises";
+// @ts-ignore
 import { default as satori } from "satori";
 import { Resvg } from "@resvg/resvg-js";
-import HTMLTemplate from "./HTMLTemplate";
+import ProfileCardTemplate from "./Templates/ProfileCardTemplate";
 
 export default async function createImage (name: string) {
+
+  // Based on the design of: User Profile Card - Linkedin Content Images - 1200x627
+
   const { html } = await import("satori-html");
-  const template = html(HTMLTemplate(name));
+  const template = html(await ProfileCardTemplate(name));
 
   const robotoArrayBuffer = await readFile("public/Roboto-Regular.ttf");
   const svg = await satori(template, {
-    width: 600,
-    height: 400,
+    width: 1200,
+    height: 627,
     fonts: [
       {
         name: "Roboto",
