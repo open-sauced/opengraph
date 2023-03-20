@@ -1,12 +1,12 @@
 import { readFile } from "node:fs/promises";
-// @ts-ignore
+
+// @ts-expect-error - satori doesnt have types
 import { default as satori } from "satori";
 import { Resvg } from "@resvg/resvg-js";
 import ProfileCardTemplate from "./Templates/ProfileCardTemplate";
 
 export default async function createImage (name: string) {
-
-  // Based on the design of: User Profile Card - Linkedin Content Images - 1200x627
+  // based on the design of: User Profile Card - Linkedin Content Images - 1200x627
 
   const { html } = await import("satori-html");
   const template = html(await ProfileCardTemplate(name));
