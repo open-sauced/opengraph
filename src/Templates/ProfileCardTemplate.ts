@@ -5,7 +5,7 @@ export default async function ProfileCardTemplate (name: string) {
 
   let string = file.toString("utf-8");
 
-  string = string.replace("{{name}}", name);
+  string = string.replace(/{{name}}/g, name);
 
   return string;
 }
