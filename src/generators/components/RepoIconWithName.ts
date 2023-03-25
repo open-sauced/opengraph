@@ -1,5 +1,4 @@
-export default function RepoIconWithName(name: string, iconURL: string) {
-
+export default function RepoIconWithName (name: string, iconURL: string) {
   return `
     <div style="
       flex-direction: row;
@@ -44,5 +43,5 @@ export default function RepoIconWithName(name: string, iconURL: string) {
           </div>
       </div>
     </div>
-  `
+  `;
 }
