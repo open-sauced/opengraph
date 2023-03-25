@@ -1,20 +1,14 @@
 import express from "express";
-import createImage from "./satori";
+import ProfileCardHandler from "./handlers/ProfileCardHandler";
 
 const app = express();
 
 app.use(express.json());
 app.use(express.static("public"));
 
-app.get("/user/:name", async (req, res) => {
-  const { name } = req.params;
-
-  // drop Content-Length as it should be automatically added by express
-  res.writeHead(201, { "Content-Type": "image/png" });
-
-  res.end(await createImage(name));
-});
+app.get("/user/:name", ProfileCardHandler);
 
 app.listen(3006, () => {
   console.log("Server is running on port 3006");
 });
+
