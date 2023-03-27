@@ -41,7 +41,6 @@ export default async function ProfileCardDataFetcher (name: string): Promise<{ l
 
         res.on("data", d => {
           data.push(d as Uint8Array);
-          console.log("chunk");
         });
         res.on("end", () => {
           const buffer = Buffer.concat(data);
@@ -57,7 +56,7 @@ export default async function ProfileCardDataFetcher (name: string): Promise<{ l
   });
 
   const img = `data:image/jpeg;base64,${imgReqData}`;
-  
+
   return {
     langs,
     repos,
