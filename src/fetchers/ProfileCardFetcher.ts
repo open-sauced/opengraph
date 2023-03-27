@@ -32,8 +32,8 @@ export default async function ProfileCardDataFetcher (name: string): Promise<{ l
     throw new Error(`User '${name}' Not Found`);
   }
 
-  const langs = (contributor.langs || "").split(",");
-  const repos = (contributor.recent_repo_list || "").split(",");
+  const langs = contributor.langs ? contributor.langs.split(",") : [];
+  const repos = contributor.recent_repo_list ? contributor.recent_repo_list.split(",") : [];
 
   const imgReq = await axios.get<ArrayBuffer>(`https://www.github.com/${name}.png?size=300`, { responseType: "arraybuffer" });
   const img = `data:image/jpeg;base64,${Buffer.from(imgReq.data).toString("base64")}`;
