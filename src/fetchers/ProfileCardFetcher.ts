@@ -6,6 +6,11 @@ export default async function ProfileCardDataFetcher (name: string): Promise<{ l
 
   console.log(req.data);
   const contributor = req.data.data[0];
+  
+  // could be undefined if array is empty
+  if (!contributor) {
+    throw new Error(`User '${name}' Not Found`);
+  }
 
   const langs = (contributor.langs || "").split(",");
   const repos = (contributor.recent_repo_list || "").split(",");

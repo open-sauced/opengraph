@@ -9,13 +9,26 @@ import ProfileCardDataFetcher from "../fetchers/ProfileCardFetcher";
 export default async function profileCardHandler (req: Request, res: Response) {
   const { name } = req.params;
 
-  res.writeHead(201, { "Content-Type": "image/png" });
 
   // based on the design of: User Profile Card - Linkedin Content Images - 1200x627
-  const { langs, repos, img } = await ProfileCardDataFetcher(name);
+  let data: Awaited<ReturnType<typeof ProfileCardDataFetcher>>;
+
+  try {
+    data = await ProfileCardDataFetcher(name);
+  } catch (error) {
+    const { message } = error as Error;
+
+    console.error(`Missing data: ${message}`);
+    res.writeHead(404, { "Content-Type": "text/plain" });
+    res.end(message);
+    return;
+  }
+
+  const { langs, repos, img } = data;
+
+  res.writeHead(201, { "Content-Type": "image/png" });
 
   const { html } = await import("satori-html");
-
 
   const template = html(await ProfileCardGenerator(name, langs, repos, img));
 
