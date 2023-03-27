@@ -1,5 +1,4 @@
-import axios from "axios";
-import https from "https";
+import { https } from "follow-redirects";
 import { TopicContributionEndpoint } from "../utils/types/dtos.types";
 
 export default async function ProfileCardDataFetcher (name: string): Promise<{ langs: string[], repos: string[], img: string }> {
@@ -15,7 +14,7 @@ export default async function ProfileCardDataFetcher (name: string): Promise<{ l
 
         // the whole response has been received. Print out the result.
         resp.on("end", () => {
-          resolve(JSON.parse(data));
+          resolve(JSON.parse(data) as TopicContributionEndpoint);
         });
       })
       .on("error", err => {
@@ -35,9 +34,30 @@ export default async function ProfileCardDataFetcher (name: string): Promise<{ l
   const langs = contributor.langs ? contributor.langs.split(",") : [];
   const repos = contributor.recent_repo_list ? contributor.recent_repo_list.split(",") : [];
 
-  const imgReq = await axios.get<ArrayBuffer>(`https://www.github.com/${name}.png?size=300`, { responseType: "arraybuffer" });
-  const img = `data:image/jpeg;base64,${Buffer.from(imgReq.data).toString("base64")}`;
+  const imgReqData = await new Promise<string>((resolve, reject) => {
+    https
+      .get(`https://www.github.com/${name}.png?size=300`, res => {
+        const data: Uint8Array[] = [];
 
+        res.on("data", d => {
+          data.push(d as Uint8Array);
+          console.log("chunk");
+        });
+        res.on("end", () => {
+          const buffer = Buffer.concat(data);
+          const base64String = buffer.toString("base64");
+
+          resolve(base64String);
+        });
+      })
+      .on("error", err => {
+        console.log(`Error: ${err.message}`);
+        reject(err);
+      });
+  });
+
+  const img = `data:image/jpeg;base64,${imgReqData}`;
+  
   return {
     langs,
     repos,
