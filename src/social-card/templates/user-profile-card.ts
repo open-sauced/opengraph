@@ -1,4 +1,5 @@
-<style>
+const userProfileCard = (img: string, name: string, langs: string, repos: string): string => `
+  <style>
   * {
       margin: 0;
       padding: 0;
@@ -42,7 +43,7 @@
             width: 1136px;
             height: 134px;
         ">
-            <img src="{{img}}" width="100px" height="100px" style="
+            <img src="${img}" width="100px" height="100px" style="
                 box-sizing: border-box;
                 width: 132px;
                 height: 132px;
@@ -61,7 +62,7 @@
                 letter-spacing: -0.02em;
                 color: #11181C;
             ">
-                {{name}}
+                ${name}
             </h1>
             <div style="
 
@@ -125,7 +126,7 @@
                 width: 1136px;
                 height: 48px;
             ">
-                {{repos}}
+                ${repos}
             </div>
 
         </div>
@@ -174,10 +175,10 @@
 
                         border-radius: 20px;
                     ">
-                        {{langs}}
+                        ${langs}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div>`;

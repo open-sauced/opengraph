@@ -1,5 +1,4 @@
-export default function RepoIconWithName (name: string, iconURL: string) {
-  return `
+const repoIconWithName = (name: string, iconURL: string) => `
     <div style="
       flex-direction: row;
       align-items: center;
@@ -44,4 +43,5 @@ export default function RepoIconWithName (name: string, iconURL: string) {
       </div>
     </div>
   `;
-}
+
+export default repoIconWithName;

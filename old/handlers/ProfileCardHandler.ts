@@ -2,9 +2,10 @@ import { readFile } from "node:fs/promises";
 
 import { default as satori } from "satori";
 import { Resvg } from "@resvg/resvg-js";
-import ProfileCardGenerator from "../generators/ProfileCardGenerator";
 import { Request, Response } from "express";
 import ProfileCardDataFetcher from "../fetchers/ProfileCardFetcher";
+import userLangs from "../../src/social-card/templates/user-langs";
+import userProfileRepos from "../../src/social-card/templates/user-profile-repos";
 
 export default async function profileCardHandler (req: Request, res: Response) {
   const { name } = req.params;
@@ -30,7 +31,7 @@ export default async function profileCardHandler (req: Request, res: Response) {
 
   const { html } = await import("satori-html");
 
-  const template = html(await ProfileCardGenerator(name, langs, repos, img));
+  const template = html(userProfileCard(name, img, userLangs(langs), userProfileRepos(repos)));
 
   const robotoArrayBuffer = await readFile("public/Roboto-Regular.ttf");
   const svg = await satori(template, {
