@@ -43,7 +43,7 @@ const userProfileCard = (img: string, name: string, langs: string, repos: string
             width: 1136px;
             height: 134px;
         ">
-            <img src="${img}" width="100px" height="100px" style="
+            <img src="data:image/png;base64,${img}" width="100px" height="100px" style="
                 box-sizing: border-box;
                 width: 132px;
                 height: 132px;
@@ -182,3 +182,5 @@ const userProfileCard = (img: string, name: string, langs: string, repos: string
         </div>
     </div>
 </div>`;
+
+export default userProfileCard;

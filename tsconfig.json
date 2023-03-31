@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
 //    "rootDir": "./src",
-//    "strict": true,
+    "strict": true,
 //    "noEmit": true,
 //    "isolatedModules": true,
-//    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "module": "commonjs",

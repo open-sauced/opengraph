@@ -7,7 +7,7 @@ const userLangs = (langs: string[], joinLiteral = "") => langs.map(lang => {
   return `
       <div style="
         width: ${Math.round(100 / langs.length)}%;
-        height: "10.5px";
+        height: 10%;
         background: ${color};
       "/>
     `;

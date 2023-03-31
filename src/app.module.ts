@@ -5,8 +5,7 @@ import { TerminusModule } from "@nestjs/terminus";
 import { LoggerModule } from "nestjs-pino";
 import { clc } from "@nestjs/common/utils/cli-colors.util";
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { SocialCardModule } from './social-card/social-card.module';
 import ApiConfig from "./config/api.config";
 
 @Module({
@@ -42,8 +41,9 @@ import ApiConfig from "./config/api.config";
     }),
     TerminusModule,
     HttpModule,
+    SocialCardModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
