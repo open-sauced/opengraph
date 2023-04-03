@@ -1,0 +1,690 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@open-sauced/opengraph.opensauced.pizza documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">@open-sauced/opengraph.opensauced.pizza documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Miscellaneous</li>
+  <li>Variables</li>
+</ol>
+
+<section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#ApiConfig" title="src/config/api.config.ts" ><b>ApiConfig</b>&nbsp;&nbsp;&nbsp;(src/.../api.config.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getUser" title="src/github/gql/get-user.ts" ><b>getUser</b>&nbsp;&nbsp;&nbsp;(src/.../get-user.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#GitHubConfig" title="src/config/github.config.ts" ><b>GitHubConfig</b>&nbsp;&nbsp;&nbsp;(src/.../github.config.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#repoIconWithName" title="src/social-card/templates/repo-icon-with-name.ts" ><b>repoIconWithName</b>&nbsp;&nbsp;&nbsp;(src/.../repo-icon-with-name.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#userLangs" title="src/social-card/templates/user-langs.ts" ><b>userLangs</b>&nbsp;&nbsp;&nbsp;(src/.../user-langs.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#userProfileCard" title="src/social-card/templates/user-profile-card.ts" ><b>userProfileCard</b>&nbsp;&nbsp;&nbsp;(src/.../user-profile-card.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#userProfileRepos" title="src/social-card/templates/user-profile-repos.ts" ><b>userProfileRepos</b>&nbsp;&nbsp;&nbsp;(src/.../user-profile-repos.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/config/api.config.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ApiConfig"></a>
+                    <span class="name">
+                        <span ><b>ApiConfig</b></span>
+                        <a href="#ApiConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>registerAs(&quot;api&quot;, () &#x3D;&gt; ({
+  codename: String(process.env.API_CODENAME ?? &quot;opengraph-local&quot;),
+  logging: process.env.NODE_ENV !&#x3D;&#x3D; &quot;production&quot; ? &quot;debug&quot; : &quot;info&quot;,
+  host: String(process.env.API_HOST ?? &quot;0.0.0.0&quot;),
+  port: String(process.env.API_PORT ?? &quot;3001&quot;),
+  domain: String(process.env.API_DOMAIN ?? &quot;opengraph.opensauced.pizza&quot;),
+  development: !process.env.CI,
+  memory_heap: Number(parseInt(process.env.MEMORY_HEAP ?? &quot;200&quot;, 10) * 1024 * 1024),
+  memory_rss: Number(parseInt(process.env.MEMORY_RSS ?? &quot;3000&quot;, 10) * 1024 * 1024),
+  disk_percentage: Number(parseFloat(process.env.DISK_PERCENGATE ?? &quot;0.7&quot;)),
+  disk_size: Number(parseInt(process.env.DISK_SIZE ?? &quot;100&quot;, 10) * 1024 * 1024 * 1024),
+}))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/github/gql/get-user.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getUser"></a>
+                    <span class="name">
+                        <span ><b>getUser</b></span>
+                        <a href="#getUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(username: string, dateSince: string) &#x3D;&gt; ({
+  query: &#x60;# Missing values
+# organizationVerifiedDomainEmails
+# pinnedItems
+# repositoriesContributedTo
+# starredRepositories
+# anything sponsors
+
+query ($username: String!, $dateSince: DateTime) {
+  user(login: $username) {
+    id,
+    avatarUrl,
+    bio,
+    bioHTML,
+    company,
+    companyHTML,
+    createdAt,
+    email,
+    hasSponsorsListing,
+    isBountyHunter,
+    isCampusExpert,
+    isDeveloperProgramMember,
+    isEmployee,
+    isGitHubStar,
+    isHireable,
+    isSiteAdmin,
+    location,
+    login,
+    monthlyEstimatedSponsorsIncomeInCents,
+    name,
+    url,
+    pronouns,
+    resourcePath,
+    totalSponsorshipAmountAsSponsorInCents,
+    websiteUrl,
+    twitterUsername,
+    organization(login: &quot;open-sauced&quot;) {
+      id,
+      avatarUrl,
+      name,
+      url,
+      updatedAt
+    },
+    organizations(first: 10, orderBy: {field: CREATED_AT, direction: ASC}) {
+      nodes {
+        id,
+        avatarUrl,
+        name,
+        url,
+        updatedAt
+      }
+    },
+    socialAccounts(first: 10) {
+      nodes {
+        displayName,
+        provider,
+        url
+      }
+    },
+    status {
+      id,
+      emoji,
+      message,
+      organization {
+        id
+      }
+    },
+    repositories(first: 100, orderBy: {field: PUSHED_AT, direction: DESC}) {
+      nodes {
+        name
+        primaryLanguage {
+          name
+        },
+        languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
+          edges {
+            node {
+              id,
+              name,
+              color
+            },
+            size
+          },
+          totalSize,
+          totalCount
+        },
+        pushedAt
+      }
+    },
+    topRepositories(first: 10, orderBy: {field: PUSHED_AT, direction: DESC}, since: $dateSince) {
+      nodes {
+        name,
+        owner {
+          avatarUrl
+        },
+        primaryLanguage {
+          name
+        },
+        pushedAt
+      }
+    }
+  }
+}&#x60;,
+  variables: {
+    username,
+    dateSince,
+  },
+})</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/config/github.config.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GitHubConfig"></a>
+                    <span class="name">
+                        <span ><b>GitHubConfig</b></span>
+                        <a href="#GitHubConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>registerAs(&quot;github&quot;, () &#x3D;&gt; ({
+  userPat: String(process.env.GITHUB_PAT_USER ?? &quot;&quot;),
+  prPat: String(process.env.GITHUB_PAT_PR ?? &quot;&quot;),
+  commitPat: String(process.env.GITHUB_PAT_COMMIT ?? &quot;&quot;),
+}))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/social-card/templates/repo-icon-with-name.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="repoIconWithName"></a>
+                    <span class="name">
+                        <span ><b>repoIconWithName</b></span>
+                        <a href="#repoIconWithName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(name: string, avatarUrl: string) &#x3D;&gt; &#x60;
+    &lt;div style&#x3D;&quot;
+      flex-direction: row;
+      align-items: center;
+      padding: 8px;
+      gap: 12px;
+      height: 48px;
+      background: #F8F9FA;
+      border: 1px solid #DFE3E6;
+      border-radius: 8px;
+    &quot;&gt;
+      &lt;div style&#x3D;&quot;
+          flex-direction: row;
+          align-items: center;
+          padding: 0px;
+          gap: 6px;
+          height: 32px;
+      &quot;&gt;
+          &lt;img src&#x3D;&quot;${avatarUrl}&quot; style&#x3D;&quot;
+              width: 32px;
+              height: 32px;
+              border-radius: 4px;
+          &quot;/&gt;
+          &lt;div style&#x3D;&quot;
+              flex-direction: row;
+              align-items: flex-start;
+              padding: 0px;
+              gap: 2px;
+              height: 32px;
+          &quot;&gt;
+              &lt;h2 style&#x3D;&quot;
+                  height: 32px;
+                  font-family: &#x27;Inter&#x27;;
+                  font-style: normal;
+                  font-weight: 500;
+                  font-size: 32px;
+                  line-height: 100%;
+                  color: #11181C;
+              &quot;&gt;
+                  ${name}
+              &lt;/h2&gt;
+          &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &#x60;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/social-card/templates/user-langs.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userLangs"></a>
+                    <span class="name">
+                        <span ><b>userLangs</b></span>
+                        <a href="#userLangs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(langs: string[], joinLiteral &#x3D; &quot;&quot;) &#x3D;&gt; langs.map(lang &#x3D;&gt; {
+  const colorKey &#x3D; Object.keys(colors).find(key &#x3D;&gt; key.toLowerCase() &#x3D;&#x3D;&#x3D; lang.toLowerCase());
+  const color &#x3D; colorKey ? colors[colorKey as keyof typeof colors].color ?? &quot;#000&quot; : &quot;#000&quot;;
+
+  return &#x60;
+      &lt;div style&#x3D;&quot;
+        width: ${Math.round(100 / langs.length)}%;
+        height: 10%;
+        background: ${color};
+      &quot;/&gt;
+    &#x60;;
+}).join(joinLiteral)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/social-card/templates/user-profile-card.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userProfileCard"></a>
+                    <span class="name">
+                        <span ><b>userProfileCard</b></span>
+                        <a href="#userProfileCard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(avatarUrl: string, name: string, langs: string, repos: string): string &#x3D;&gt; &#x60;
+  &lt;style&gt;
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+
+  }
+
+  div {
+    display: flex;
+  }
+&lt;/style&gt;
+
+&lt;div style&#x3D;&quot;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 48px 32px 32px;
+    gap: 31px;
+    position: relative;
+    width: 1200px;
+    height: 627px;
+    background: #FFFFFF;
+    border-radius: 16px;&quot;
+&gt;
+    &lt;div style&#x3D;&quot;
+
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 16px;
+        width: 1136px;
+        height: 134px;
+    &quot;&gt;
+        &lt;div style&#x3D;&quot;
+
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 16px;
+
+            width: 1136px;
+            height: 134px;
+        &quot;&gt;
+            &lt;img src&#x3D;&quot;${avatarUrl}&quot; style&#x3D;&quot;
+                box-sizing: border-box;
+                width: 132px;
+                height: 132px;
+                border: 2px solid #F8F9FA;
+                border-radius: 500px;
+            &quot;/&gt;
+
+            &lt;h1 style&#x3D;&quot;
+                width: 926px;
+                height: 134px;
+                font-family: &#x27;Inter&#x27;;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 96px;
+                line-height: 140%;
+                letter-spacing: -0.02em;
+                color: #11181C;
+            &quot;&gt;
+                ${name}
+            &lt;/h1&gt;
+            &lt;div style&#x3D;&quot;
+
+                flex-direction: row;
+                align-items: center;
+                padding: 0px;
+                gap: 8px;
+
+                width: 46px;
+                height: 46px;
+            &quot;&gt;
+                &lt;div style&#x3D;&quot;
+
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 0px;
+                    gap: 16px;
+
+                    width: 46px;
+                    height: 46px;
+                &quot;&gt;
+                    &lt;img src&#x3D;&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAK2SURBVEhLlVa/ixQxFE4yszsu7i7Lceihnui6/gIFuUP0FASxUMTiwGss7K9RQXvB2iuu0T9Ce1v/CbGysLO5QvHcU3Zm40vyMvNm5mVm72N5+ZLJe99L3mQ2cn/npMiUTqVOlSEzT1JprBZiLsVcCA02J2DNuIYRQ+wcIEIKJSo/MA7SGDMJqQOhFUiYWzwNz8sFXGwLSpG7ANq2bggWAsxPJS4l6EKAgKQjkdNA5PEC4AQIQpl5mTYxKMph8nFznSi1YcAW+SklIeJHx5vDcana18oh5OzG0VmdGB99tjvc+dR/9a5z877sJG7cgo9QPgepJRmSyjlQo5Xh64+yP0JXePJz7/fbF9m3r8FzQFbQjt7WSxodoEbL/e03QoWD8AJ0rZ7Hk7Xu9QfYIYhWJ9GZS9ipY9FzIGVv83l+KCqIz12hLhXUBdxulhBP1uML69ipIR5frrsguC0y34N8viNHHm3blkd0amxbfhVWIKRvndSx052LN7DPQfaHtuWjWIGaNh1INjZDu+8gk14wR1JkPoTsDbq3t7ATArymoQRaT3Jy96kaLGGnAeFNLtfAJZJ3u0n3zhPkYZgtCu9huQYutO921h4ulD4IRDHyGvItIvArSG49RtYIGUW2zvwiOAF7DtTyanz2Go60Ior4OvCfCovO1XvNb2cB+OSmM+QVkLfIxvIBoVXH3flshz74o/9OsVMBWYFdIFll+uWzrueltZ5nOkt1Cr+ZsdP9gw/vxZzbH4AU3B+Ov3jJwUp8fkNIlf34rn/t6Slk+k+kmQlnLlvCXLyAZ9ANXryaBMCCm40CuVvrAhkL1zqj4S961tYFuK9pCdzKXaHMxctzfp4BL+C9AqDBQoEL5AIkanEjPBT4vHIBEhNKjywnjLNxKA3zWbXVAL1c4+KhNY0rBKCkRCDEf33TAYphGyFWAAAAAElFTkSuQmCC&quot; width&#x3D;&quot;1px&quot; height&#x3D;&quot;1px&quot; style&#x3D;&quot;
+                    width: 46px;
+                    height: 46px;
+
+                    border-radius: 4px;
+                    &quot;/&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div style&#x3D;&quot;
+
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 8px;
+
+        width: 1136px;
+        height: 73px;
+    &quot;&gt;
+        &lt;div style&#x3D;&quot;
+
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 16px;
+
+            width: 1136px;
+            height: 48px;
+        &quot;&gt;
+            &lt;div style&#x3D;&quot;
+
+                flex-direction: row;
+                align-items: center;
+                padding: 0px;
+                gap: 8px;
+
+                width: 1136px;
+                height: 48px;
+            &quot;&gt;
+                ${repos}
+            &lt;/div&gt;
+
+        &lt;/div&gt;
+
+        &lt;div style&#x3D;&quot;
+
+            flex-direction: column;
+            align-items: center;
+            padding: 0px;
+
+            width: 1136px;
+            height: 17px;
+        &quot;&gt;
+            &lt;div style&#x3D;&quot;
+
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 0px;
+                gap: 8px;
+
+                width: 1136px;
+                height: 17px;
+            &quot;&gt;
+                &lt;div style&#x3D;&quot;
+
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 0px;
+                    gap: 8px;
+
+                    width: 1136px;
+                    height: 10.5px;
+                &quot;&gt;
+                    &lt;div style&#x3D;&quot;
+
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 0px;
+                        gap: 4px;
+
+                        width: 1136px;
+                        height: 10.5px;
+
+                        border-radius: 20px;
+                    &quot;&gt;
+                        ${langs}
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;&#x60;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/social-card/templates/user-profile-repos.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userProfileRepos"></a>
+                    <span class="name">
+                        <span ><b>userProfileRepos</b></span>
+                        <a href="#userProfileRepos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(repos: Repository[]): string &#x3D;&gt; {
+  const repoList &#x3D; repos.map(({ name, owner: { avatarUrl } }) &#x3D;&gt; repoIconWithName(&#x60;${name.substring(0, 15)}${name.length &gt; 15 ? &quot;...&quot; : &quot;&quot;}&#x60;, &#x60;${String(avatarUrl)}&amp;size&#x3D;40&#x60;));
+
+  return &#x60;${repoList.slice(0, 3).join(&quot;&quot;)}${repoList.length &gt; 3
+    ? &#x60;&lt;h2 style&#x3D;&quot;
+        width: 39px;
+        height: 37px;
+        font-family: &#x27;Inter&#x27;;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 115%;
+        letter-spacing: -0.02em;
+        color: #687076;
+      &quot;&gt;
+          +${repoList.length - 2}
+      &lt;/h2&gt;&#x60;
+    : &#x60;&#x60;}&#x60;;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
