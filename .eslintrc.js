@@ -12,17 +12,19 @@ module.exports = {
     "no-loops",
     "no-use-extend-native",
     "promise",
+    "@darraghor/nestjs-typed",
   ],
   extends: [
     "eslint:recommended",
     "plugin:no-use-extend-native/recommended",
     "plugin:promise/recommended",
     "plugin:import/recommended",
+    "plugin:import/typescript",
     "plugin:node/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:@typescript-eslint/strict",
-    "plugin:import/typescript",
+    "plugin:@darraghor/nestjs-typed/recommended",
   ],
   root: true,
   env: {
@@ -369,17 +371,23 @@ module.exports = {
     "@typescript-eslint/promise-function-async": "error",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-extraneous-class": "off",
-    "node/no-unpublished-import": ["error", {
-      "allowModules": ["satori"],
-    }],
+    "node/no-unpublished-import": ["error", { allowModules: ["satori"] }],
+    "import/no-unresolved": ["error", { ignore: ["satori-html"] }],
   },
   settings: {
     "node": {
       "allowModules": ["express"],
     },
     "import/resolver": {
-      "node": true,
-      "typescript": true,
+      "node": {
+        "extensions": [
+          ".js",
+          ".ts",
+        ],
+        "paths": [
+          "src"
+        ]
+      }
     },
     "import/extensions": [
       ".js",

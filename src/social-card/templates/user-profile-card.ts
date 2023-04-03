@@ -1,4 +1,4 @@
-const userProfileCard = (img: string, name: string, langs: string, repos: string): string => `
+const userProfileCard = (avatarUrl: string, name: string, langs: string, repos: string): string => `
   <style>
   * {
       margin: 0;
@@ -43,7 +43,7 @@ const userProfileCard = (img: string, name: string, langs: string, repos: string
             width: 1136px;
             height: 134px;
         ">
-            <img src="data:image/png;base64,${img}" width="100px" height="100px" style="
+            <img src="${avatarUrl}" style="
                 box-sizing: border-box;
                 width: 132px;
                 height: 132px;

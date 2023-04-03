@@ -1,14 +1,11 @@
 import repoIconWithName from "./repo-icon-with-name";
+import { Repository } from "@octokit/graphql-schema";
 
-const userProfileRepos = (repos: string[]): string => {
-  const repoList = repos.map(repo => {
-    const [repoOwner, repoName] = repo.split("/");
-    const repoIcon = `https://www.github.com/${repoOwner}.png?size=460`;
+const userProfileRepos = (repos: Repository[]): string => {
+  const repoList = repos.map(({ name, owner: { avatarUrl } }) => repoIconWithName(`${name.substring(0, 15)}${name.length > 15 ? "..." : ""}`, `${String(avatarUrl)}&size=40`));
 
-    return repoIconWithName(repoName, repoIcon);
-  })
-
-  return `${repoList.join("")}${repoList.length > 2 && `<h2 style="
+  return `${repoList.slice(0, 3).join("")}${repoList.length > 3
+    ? `<h2 style="
         width: 39px;
         height: 37px;
         font-family: 'Inter';
@@ -20,7 +17,8 @@ const userProfileRepos = (repos: string[]): string => {
         color: #687076;
       ">
           +${repoList.length - 2}
-      </h2>`}`;
-}
+      </h2>`
+    : ``}`;
+};
 
 export default userProfileRepos;

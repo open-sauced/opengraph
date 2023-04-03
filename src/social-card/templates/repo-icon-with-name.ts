@@ -1,4 +1,4 @@
-const repoIconWithName = (name: string, iconURL: string) => `
+const repoIconWithName = (name: string, avatarUrl: string) => `
     <div style="
       flex-direction: row;
       align-items: center;
@@ -16,7 +16,7 @@ const repoIconWithName = (name: string, iconURL: string) => `
           gap: 6px;
           height: 32px;
       ">
-          <img src="${iconURL}" width="1px" height="1px" style="
+          <img src="${avatarUrl}" style="
               width: 32px;
               height: 32px;
               border-radius: 4px;

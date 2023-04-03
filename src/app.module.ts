@@ -1,18 +1,20 @@
-import { Module, RequestMethod } from '@nestjs/common';
+import { Module, RequestMethod } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { HttpModule } from "@nestjs/axios";
 import { TerminusModule } from "@nestjs/terminus";
 import { LoggerModule } from "nestjs-pino";
 import { clc } from "@nestjs/common/utils/cli-colors.util";
 
-import { SocialCardModule } from './social-card/social-card.module';
+import { SocialCardModule } from "./social-card/social-card.module";
 import ApiConfig from "./config/api.config";
+import GitHubConfig from "./config/github.config";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       load: [
         ApiConfig,
+        GitHubConfig,
       ],
       isGlobal: true,
     }),

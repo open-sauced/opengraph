@@ -1,30 +1,27 @@
-import {Controller, Get, Header, Param, Req, Res, StreamableFile} from '@nestjs/common';
-import { ApiNotFoundResponse, ApiOkResponse, ApiOperation } from "@nestjs/swagger";
-import { createReadStream } from "node:fs";
-import { Readable } from 'stream';
+import { Controller, Get, Header, Param, StreamableFile } from "@nestjs/common";
+import { ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
 
 import { SocialCardService } from "./social-card.service";
 
-@Controller('users')
+@Controller("users")
+@ApiTags("User social cards")
 export class SocialCardController {
-  constructor(
-    private readonly socialCardService: SocialCardService
+  constructor (
+    private readonly socialCardService: SocialCardService,
   ) {}
 
   @Get("/:username")
-  @Header('Content-Type', 'image/png')
   @ApiOperation({
     operationId: "generateUserSocialCard",
     summary: "Gets latest cache aware social card link for :username or generates a new one",
   })
-  // @ApiOkResponse({ type: String })
+  @Header("Content-Type", "image/png")
+  @ApiOkResponse({ type: StreamableFile })
   @ApiNotFoundResponse({ description: "User not found" })
   async generateUserSocialCard (
     @Param("username") username: string,
   ): Promise<StreamableFile> {
     const image = await this.socialCardService.getUserCard(username);
-
-    console.log(image);
 
     return new StreamableFile(image);
   }

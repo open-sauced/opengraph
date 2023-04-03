@@ -1,6 +1,6 @@
 import { registerAs } from "@nestjs/config";
 
-export const ApiConfig = registerAs("api", () => ({
+const ApiConfig = registerAs("api", () => ({
   codename: String(process.env.API_CODENAME ?? "opengraph-local"),
   logging: process.env.NODE_ENV !== "production" ? "debug" : "info",
   host: String(process.env.API_HOST ?? "0.0.0.0"),
