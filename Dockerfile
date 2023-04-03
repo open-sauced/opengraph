@@ -40,6 +40,6 @@ RUN npm ci --omit=dev,optional,peer
 
 COPY --from=builder --chown=node:node /usr/src/app/dist ./dist
 
-EXPOSE 3004
+EXPOSE 3001
 
 CMD ["node", "dist/main"]

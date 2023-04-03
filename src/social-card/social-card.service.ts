@@ -36,6 +36,12 @@ export class SocialCardService {
   }
 
   async getUserCard (username: string): Promise<Buffer> {
+    const { remaining } = await this.githubService.rateLimit();
+
+    if (remaining < 1000) {
+      throw new Error("Rate limit exceeded");
+    }
+
     const { html } = await import("satori-html");
     const satori = (await import("satori")).default;
 
