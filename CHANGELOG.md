@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+### [1.0.2](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.0.1...v1.0.2) (2023-04-03)
+
+
+### 🐛 Bug Fixes
+
+* correct docker build ([b62c129](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/b62c12930ca927844689c723ca1c33942cb4868b))
+
 ### [1.0.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.0.0...v1.0.1) (2023-04-03)
 
 
