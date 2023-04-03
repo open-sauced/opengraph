@@ -12,16 +12,15 @@ export class SocialCardController {
   ) {}
 
   @Get("/:username")
+  @Header('Content-Type', 'image/png')
   @ApiOperation({
     operationId: "generateUserSocialCard",
     summary: "Gets latest cache aware social card link for :username or generates a new one",
   })
-  @ApiOkResponse({ type: String })
+  // @ApiOkResponse({ type: String })
   @ApiNotFoundResponse({ description: "User not found" })
   async generateUserSocialCard (
     @Param("username") username: string,
-    @Req() request: Request,
-    @Res() response: Response
   ): Promise<StreamableFile> {
     const image = await this.socialCardService.getUserCard(username);
 
