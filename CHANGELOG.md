@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+### [1.0.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.0.0...v1.0.1) (2023-04-03)
+
+
+### 🔁 Continuous Integration
+
+* fix container deployment path ([a58ec19](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/a58ec197e17f65736f2f7551c881c2da70d90e7a))
+
 ## 1.0.0 (2023-04-03)
 
 
