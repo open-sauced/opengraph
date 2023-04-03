@@ -103,6 +103,10 @@
                                     <span class="modifier">Async</span>
                                 <a href="#getUser" >getUser</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#rateLimit" >rateLimit</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -240,6 +244,45 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rateLimit"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>rateLimit</b></span>
+                        <a href="#rateLimit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>rateLimit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="32"
+                            class="link-to-prism">src/github/github.service.ts:32</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>unknown</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
             <section>
     
@@ -304,7 +347,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Inject, Injectable, Logger } from &quot;@nestjs/common&quot;;
 import { ConfigType } from &quot;@nestjs/config&quot;;
 import { graphql } from &quot;@octokit/graphql&quot;;
-import { User } from &quot;@octokit/graphql-schema&quot;;
+import { RateLimit, User } from &quot;@octokit/graphql-schema&quot;;
 
 import GithubConfig from &quot;../config/github.config&quot;;
 import getUser from &quot;./gql/get-user&quot;;
@@ -330,6 +373,19 @@ export class GithubService {
     const { user } &#x3D; await this.graphqlWithAuth&lt;{ user: User }&gt;(query, variables);
 
     return user;
+  }
+
+  async rateLimit () {
+    const { rateLimit } &#x3D; await this.graphqlWithAuth&lt;{ rateLimit: RateLimit }&gt;(&#x60;query {
+      rateLimit {
+        limit,
+        cost,
+        remaining,
+        resetAt
+      }
+    }&#x60;);
+
+    return rateLimit;
   }
 }
 </code></pre>
