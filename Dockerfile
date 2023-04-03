@@ -42,4 +42,4 @@ COPY --from=builder --chown=node:node /usr/src/app/dist ./dist
 
 EXPOSE 3004
 
-CMD ["node", "dist/src/main"]
+CMD ["node", "dist/main"]
