@@ -388,15 +388,15 @@ export class SocialCardService {
 
     const template &#x3D; html(userProfileCard(avatarUrl, name!, userLangs(langs, langTotal), userProfileRepos(repos)));
 
-    const robotoArrayBuffer &#x3D; await readFile(&quot;node_modules/@fontsource/roboto/files/roboto-latin-ext-400-normal.woff&quot;);
+    const interArrayBuffer &#x3D; await readFile(&quot;node_modules/@fontsource/inter/files/inter-all-400-normal.woff&quot;);
 
     const svg &#x3D; await satori(template, {
       width: 1200,
       height: 627,
       fonts: [
         {
-          name: &quot;Roboto&quot;,
-          data: robotoArrayBuffer,
+          name: &quot;Inter&quot;,
+          data: interArrayBuffer,
           weight: 400,
           style: &quot;normal&quot;,
         },
