@@ -14,7 +14,7 @@
         "@fastify/helmet": "^10.1.0",
         "@fastify/rate-limit": "^8.0.0",
         "@fastify/static": "^6.9.0",
-        "@fontsource/roboto": "^4.5.8",
+        "@fontsource/inter": "^4.5.15",
         "@nestjs/axios": "^2.0.0",
         "@nestjs/common": "^9.3.12",
         "@nestjs/config": "^2.3.1",
@@ -3179,10 +3179,10 @@
       "integrity": "sha512-59SgoZ3EXbkfSX7b63tsou/SDGzwUEK6MuB5sKqgVK1/XE0fxmpsOb9DQI8LXW3KfGnAjImCGhhEb7uPPAUVNA==",
       "dev": true
     },
-    "node_modules/@fontsource/roboto": {
-      "version": "4.5.8",
-      "resolved": "https://registry.npmjs.org/@fontsource/roboto/-/roboto-4.5.8.tgz",
-      "integrity": "sha512-CnD7zLItIzt86q4Sj3kZUiLcBk1dSk81qcqgMGaZe7SQ1P8hFNxhMl5AZthK1zrDM5m74VVhaOpuMGIL4gagaA=="
+    "node_modules/@fontsource/inter": {
+      "version": "4.5.15",
+      "resolved": "https://registry.npmjs.org/@fontsource/inter/-/inter-4.5.15.tgz",
+      "integrity": "sha512-FzleM9AxZQK2nqsTDtBiY0PMEVWvnKnuu2i09+p6DHvrHsuucoV2j0tmw+kAT3L4hvsLdAIDv6MdGehsPIdT+Q=="
     },
     "node_modules/@humanwhocodes/config-array": {
       "version": "0.11.8",
