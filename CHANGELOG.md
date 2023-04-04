@@ -5,6 +5,23 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.1.0](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.0.4...v1.1.0) (2023-04-04)
+
+
+### 📝 Documentation
+
+* correct readme with new style ([ccc8a96](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/ccc8a96399322265affdaefb65b2e96f557943ab))
+
+
+### 🤖 Build System
+
+* remove extraneous colors package ([4c7d29a](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/4c7d29aa9ad9a7fe79c30fb79ed3e57b971fa9a5))
+
+
+### 🍕 Features
+
+* add correct languages calculation and display ([977df75](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/977df7589d67e6987cd9cb4e6528a86f46470541))
+
 ### [1.0.4](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.0.3...v1.0.4) (2023-04-04)
 
 
