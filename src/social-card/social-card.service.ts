@@ -49,7 +49,8 @@ export class SocialCardService {
 
     const template = html(userProfileCard(avatarUrl, username, userLangs(langs), userProfileRepos(repos)));
 
-    const robotoArrayBuffer = await readFile("public/Roboto-Regular.ttf");
+    const robotoArrayBuffer = await readFile("node_modules/@fontsource/roboto/files/roboto-latin-ext-400-normal.woff");
+
     const svg = await satori(template, {
       width: 1200,
       height: 627,
