@@ -30,7 +30,7 @@ export class SocialCardService {
 
     return {
       langs: [],
-      repos: user.topRepositories.nodes as Repository[],
+      repos: user.topRepositories.nodes?.filter(repo => !repo?.isPrivate && repo?.owner.login !== username) as Repository[],
       avatarUrl: `${String(user.avatarUrl)}&size=150`,
     };
   }

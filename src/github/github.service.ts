@@ -39,6 +39,8 @@ export class GithubService {
       }
     }`);
 
+    this.logger.debug(`Rate limit: ${JSON.stringify(rateLimit)}`);
+
     return rateLimit;
   }
 }
