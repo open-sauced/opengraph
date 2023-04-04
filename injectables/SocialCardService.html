@@ -186,8 +186,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="61"
-                            class="link-to-prism">src/social-card/social-card.service.ts:61</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">src/social-card/social-card.service.ts:63</a></div>
                 </td>
             </tr>
 
@@ -321,7 +321,7 @@ import userLangs from &quot;./templates/user-langs&quot;;
 import userProfileRepos from &quot;./templates/user-profile-repos&quot;;
 import userProfileCard from &quot;./templates/user-profile-card&quot;;
 import { GithubService } from &quot;../github/github.service&quot;;
-import { Repository, Language } from &quot;@octokit/graphql-schema&quot;;
+import { Repository, Language, User } from &quot;@octokit/graphql-schema&quot;;
 
 @Injectable()
 export class SocialCardService {
@@ -331,6 +331,7 @@ export class SocialCardService {
   ) {}
 
   async getUserData (username: string): Promise&lt;{
+    name: User[&quot;name&quot;],
     langs: (Language &amp; {
       size: number,
     })[],
@@ -365,6 +366,7 @@ export class SocialCardService {
     });
 
     return {
+      name: user.name,
       langs: Array.from(Object.values(langs)),
       langTotal,
       repos: user.topRepositories.nodes?.filter(repo &#x3D;&gt; !repo?.isPrivate &amp;&amp; repo?.owner.login !&#x3D;&#x3D; username) as Repository[],
@@ -382,9 +384,9 @@ export class SocialCardService {
     const { html } &#x3D; await import(&quot;satori-html&quot;);
     const satori &#x3D; (await import(&quot;satori&quot;)).default;
 
-    const { avatarUrl, repos, langs, langTotal } &#x3D; await this.getUserData(username);
+    const { name, avatarUrl, repos, langs, langTotal } &#x3D; await this.getUserData(username);
 
-    const template &#x3D; html(userProfileCard(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos)));
+    const template &#x3D; html(userProfileCard(avatarUrl, name!, userLangs(langs, langTotal), userProfileRepos(repos)));
 
     const robotoArrayBuffer &#x3D; await readFile(&quot;node_modules/@fontsource/roboto/files/roboto-latin-ext-400-normal.woff&quot;);
 
