@@ -33,41 +33,32 @@
 
 <div align="center">
   <br>
-  <img alt="Open Sauced" src="https://i.ibb.co/7jPXt0Z/logo1-92f1a87f.png" width="300px">
-  <h1>🍕 Open Sauced Open Graph Generator 🍕</h1>
-  <strong>The path to your next Open Source contribution</strong>
-  <br>
-  <br>
-  <a href="https://www.digitalocean.com/?refcode=c65a90d0956d&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg" alt="DigitalOcean Referral Badge" /></a>
+
+<p>  <a href="https://opensauced.pizza"><img src="https://i.ibb.co/7jPXt0Z/logo1-92f1a87f.png" alt="Open Sauced" class="img-responsive"></a></p>
+<h1 id="🍕-open-sauced-opengraph-generator-🍕">🍕 Open Sauced OpenGraph Generator 🍕</h1>
+<blockquote>
+<p>The path to your next Open Source contribution</p>
+</blockquote>
+<p>  <a href="https://www.digitalocean.com/?refcode=c65a90d0956d&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg" alt="Powered by Digital Ocean" class="img-responsive"></a></p>
+<p>  <a href="https://github.com/open-sauced/opengraph.opensauced.pizza/pulse"><img src="https://img.shields.io/github/languages/code-size/open-sauced/opengraph.opensauced.pizza?style=flat" alt="Code Size" class="img-responsive"></a>
+  <a href="https://github.com/open-sauced/opengraph.opensauced.pizza/pulse"><img src="https://img.shields.io/github/commit-activity/w/open-sauced/opengraph.opensauced.pizza?style=flat" alt="Commits" class="img-responsive"></a>
+  <a href="https://github.com/open-sauced/opengraph.opensauced.pizza/issues"><img src="https://img.shields.io/github/issues/open-sauced/opengraph.opensauced.pizza.svg?style=flat" alt="Issues" class="img-responsive"></a>
+  <a href="https://github.com/open-sauced/opengraph.opensauced.pizza/releases"><img src="https://img.shields.io/github/v/release/open-sauced/opengraph.opensauced.pizza.svg?style=flat" alt="Releases" class="img-responsive"></a>
+  <a href="https://discord.gg/U2peSNf23P"><img src="https://img.shields.io/discord/714698561081704529.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2" alt="Discord" class="img-responsive"></a>
+  <a href="https://twitter.com/saucedopen"><img src="https://img.shields.io/twitter/follow/saucedopen?label=Follow&style=social" alt="Twitter" class="img-responsive"></a></p>
 </div>
-<br>
-<p align="center">
-  <img src="https://img.shields.io/github/languages/code-size/open-sauced/opengraph.opensauced.pizza" alt="GitHub code size in bytes">
-  <img src="https://img.shields.io/github/commit-activity/w/open-sauced/opengraph.opensauced.pizza" alt="GitHub commit activity">
-  <a href="https://github.com/open-sauced/opengraph.opensauced.pizza/issues">
-    <img src="https://img.shields.io/github/issues/open-sauced/opengraph.opensauced.pizza" alt="GitHub issues">
-  </a>
-  <a href="https://github.com/open-sauced/opengraph.opensauced.pizza/releases">
-    <img src="https://img.shields.io/github/v/release/open-sauced/opengraph.opensauced.pizza.svg?style=flat" alt="GitHub Release">
-  </a>
-  <a href="https://discord.gg/U2peSNf23P">
-    <img src="https://img.shields.io/discord/714698561081704529.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2" alt="Discord">
-  </a>
-  <a href="https://twitter.com/saucedopen">
-    <img src="https://img.shields.io/twitter/follow/saucedopen?label=Follow&style=social" alt="Twitter">
-  </a>
-</p>
 
 <h2 id="🚀-live-release-environments">🚀 Live release environments</h2>
 <ul>
-<li><a href="https://cloud.digitalocean.com/droplets/319848644">digital ocean</a></li>
+<li><a href="https://cloud.digitalocean.com/apps/41eb42f8-3ca9-4598-b9c7-4378868a5702">Digital Ocean</a></li>
+<li><a href="https://opengraph.opensauced.pizza">Open Sauced</a></li>
 </ul>
 <h2 id="📖-prerequisites">📖 Prerequisites</h2>
 <p>In order to run the project we need the following software binaries installed on our development machines:</p>
 <ul>
-<li><code>node&gt;=16.7.0</code></li>
-<li><code>npm&gt;=8.0.0</code></li>
-<li><code>docker&gt;=20.10.12</code></li>
+<li><code>node&gt;=18.15.0</code></li>
+<li><code>npm&gt;=9.6.3</code></li>
+<li><code>docker&gt;=20.10.23</code></li>
 </ul>
 <h2 id="🖥️-local-development">🖥️ Local development</h2>
 <p>To install the application:</p>
@@ -78,7 +69,10 @@
 <div><pre class="line-numbers"><code class="language-dotenv"># Global env
 API_HOST=0.0.0.0
 API_PORT=3003
-SERVICE_DOMAIN=opensauced.pizza</code></pre></div><h3 id="🎨-code-linting">🎨 Code linting</h3>
+SERVICE_DOMAIN=opensauced.pizza
+
+# GitHub private access tokens
+GITHUB_PAT_USER=ghp_************************************</code></pre></div><h3 id="🎨-code-linting">🎨 Code linting</h3>
 <p>To check the code and styles quality, use the following command:</p>
 <div><pre class="line-numbers"><code class="language-shell">npm run lint</code></pre></div><p>This will also display during development, but not break on errors.</p>
 <p>To fix the linting errors, use the following command:</p>
@@ -90,7 +84,7 @@ SERVICE_DOMAIN=opensauced.pizza</code></pre></div><h3 id="🎨-code-linting">�
 <div><pre class="line-numbers"><code class="language-shell">npm run types:auto-add</code></pre></div><h3 id="🚀-production-deployment">🚀 Production deployment</h3>
 <p>A production deployment is a complete build of the project, including the build of the static assets.</p>
 <div><pre class="line-numbers"><code class="language-shell">npm run build</code></pre></div><h2 id="🤝-contributing">🤝 Contributing</h2>
-<p>We encourage you to contribute to Open Sauced! Please check out the <a href="https://docs.opensauced.pizza/contributing/introduction-to-contributing/">Contributing guide</a> for guidelines about how to proceed.</p>
+<p>We encourage you to contribute to Open Sauced! Please check out the <a href="https://opengraph.opensauced.pizza/contributing/introduction-to-contributing/">Contributing guide</a> for guidelines about how to proceed.</p>
 <img align="right" src="https://i.ibb.co/CJfW18H/ship.gif" width="200"/>
 
 <h2 id="🍕-community">🍕 Community</h2>

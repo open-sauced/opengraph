@@ -210,7 +210,7 @@ query ($username: String!, $dateSince: DateTime) {
         primaryLanguage {
           name
         }
-        languages(first: 10, orderBy: { field: SIZE, direction: DESC }) {
+        languages(first: 100, orderBy: { field: SIZE, direction: DESC }) {
           edges {
             node {
               id
@@ -366,18 +366,14 @@ query ($username: String!, $dateSince: DateTime) {
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>(langs: string[], joinLiteral &#x3D; &quot;&quot;) &#x3D;&gt; langs.map(lang &#x3D;&gt; {
-  const colorKey &#x3D; Object.keys(colors).find(key &#x3D;&gt; key.toLowerCase() &#x3D;&#x3D;&#x3D; lang.toLowerCase());
-  const color &#x3D; colorKey ? colors[colorKey as keyof typeof colors].color ?? &quot;#000&quot; : &quot;#000&quot;;
-
-  return &#x60;
-      &lt;div style&#x3D;&quot;
-        width: ${Math.round(100 / langs.length)}%;
-        height: 10%;
-        background: ${color};
-      &quot;/&gt;
-    &#x60;;
-}).join(joinLiteral)</code>
+                        <i>Default value : </i><code>(langs: (Language &amp; {
+  size: number,
+})[], totalCount &#x3D; 0, joinLiteral &#x3D; &quot;&quot;) &#x3D;&gt; langs.map(({ color, size }) &#x3D;&gt; &#x60;
+    &lt;div style&#x3D;&quot;
+      width: ${totalCount &gt; 0 ? Math.round( size / totalCount * 100) : 100 / langs.length}%;
+      height: 11px;
+      background: ${color ?? &quot;#000&quot;};
+    &quot;/&gt;&#x60;).join(joinLiteral)</code>
                     </td>
                 </tr>
 
@@ -562,7 +558,7 @@ query ($username: String!, $dateSince: DateTime) {
                     gap: 8px;
 
                     width: 1136px;
-                    height: 10.5px;
+                    height: 11px;
                 &quot;&gt;
                     &lt;div style&#x3D;&quot;
 
@@ -573,7 +569,7 @@ query ($username: String!, $dateSince: DateTime) {
                         gap: 4px;
 
                         width: 1136px;
-                        height: 10.5px;
+                        height: 11px;
 
                         border-radius: 20px;
                     &quot;&gt;

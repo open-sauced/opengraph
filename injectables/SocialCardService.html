@@ -186,8 +186,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="38"
-                            class="link-to-prism">src/social-card/social-card.service.ts:38</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="61"
+                            class="link-to-prism">src/social-card/social-card.service.ts:61</a></div>
                 </td>
             </tr>
 
@@ -321,7 +321,7 @@ import userLangs from &quot;./templates/user-langs&quot;;
 import userProfileRepos from &quot;./templates/user-profile-repos&quot;;
 import userProfileCard from &quot;./templates/user-profile-card&quot;;
 import { GithubService } from &quot;../github/github.service&quot;;
-import { Repository } from &quot;@octokit/graphql-schema&quot;;
+import { Repository, Language } from &quot;@octokit/graphql-schema&quot;;
 
 @Injectable()
 export class SocialCardService {
@@ -331,19 +331,42 @@ export class SocialCardService {
   ) {}
 
   async getUserData (username: string): Promise&lt;{
-    langs: string[],
+    langs: (Language &amp; {
+      size: number,
+    })[],
+    langTotal: number,
     repos: Repository[],
     avatarUrl: string,
   }&gt; {
+    const langs: Record&lt;string, Language &amp; {
+      size: number,
+    }&gt; &#x3D; {};
+    const today &#x3D; (new Date);
+    const today30daysAgo &#x3D; new Date((new Date).setDate(today.getDate() - 30));
     const user &#x3D; await this.githubService.getUser(username);
+    const langRepos &#x3D; user.repositories.nodes?.filter(repo &#x3D;&gt; new Date(String(repo?.pushedAt)) &gt; today30daysAgo) as Repository[];
+    let langTotal &#x3D; 0;
 
-    /*
-     * console.log(user);
-     * console.log(user.repositories.nodes);
-     */
+    langRepos.map(repo &#x3D;&gt; {
+      repo.languages?.edges?.map(edge &#x3D;&gt; {
+        if (edge?.node.id) {
+          langTotal +&#x3D; edge.size;
+
+          if (!Object.keys(langs).includes(edge.node.id)) {
+            langs[edge.node.id] &#x3D; {
+              ...edge.node,
+              size: edge.size,
+            };
+          } else {
+            langs[edge.node.id].size +&#x3D; edge.size;
+          }
+        }
+      });
+    });
 
     return {
-      langs: [],
+      langs: Array.from(Object.values(langs)),
+      langTotal,
       repos: user.topRepositories.nodes?.filter(repo &#x3D;&gt; !repo?.isPrivate &amp;&amp; repo?.owner.login !&#x3D;&#x3D; username) as Repository[],
       avatarUrl: &#x60;${String(user.avatarUrl)}&amp;size&#x3D;150&#x60;,
     };
@@ -359,9 +382,9 @@ export class SocialCardService {
     const { html } &#x3D; await import(&quot;satori-html&quot;);
     const satori &#x3D; (await import(&quot;satori&quot;)).default;
 
-    const { avatarUrl, repos, langs } &#x3D; await this.getUserData(username);
+    const { avatarUrl, repos, langs, langTotal } &#x3D; await this.getUserData(username);
 
-    const template &#x3D; html(userProfileCard(avatarUrl, username, userLangs(langs), userProfileRepos(repos)));
+    const template &#x3D; html(userProfileCard(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos)));
 
     const robotoArrayBuffer &#x3D; await readFile(&quot;node_modules/@fontsource/roboto/files/roboto-latin-ext-400-normal.woff&quot;);
 
