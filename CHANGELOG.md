@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.0-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.1.2...v1.2.0-beta.1) (2023-04-04)
+
+
+### 🍕 Features
+
+* add boilerplate s3-client sdk code connected to digital ocean spaces ([a4a71e3](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/a4a71e349579e86be65ce201f2ec941177a1e3de))
+
 ### [1.1.2](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.1.1...v1.1.2) (2023-04-04)
 
 
