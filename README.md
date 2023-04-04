@@ -1,40 +1,32 @@
 <div align="center">
   <br>
-  <img alt="Open Sauced" src="https://i.ibb.co/7jPXt0Z/logo1-92f1a87f.png" width="300px">
-  <h1>🍕 Open Sauced Open Graph Generator 🍕</h1>
-  <strong>The path to your next Open Source contribution</strong>
-  <br>
-  <br>
-  <a href="https://www.digitalocean.com/?refcode=c65a90d0956d&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg" alt="DigitalOcean Referral Badge" /></a>
+
+  [![Open Sauced](https://i.ibb.co/7jPXt0Z/logo1-92f1a87f.png)](https://opensauced.pizza)
+
+  # 🍕 Open Sauced OpenGraph Generator 🍕
+  > The path to your next Open Source contribution
+
+  [![Powered by Digital Ocean](https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg)](https://www.digitalocean.com/?refcode=c65a90d0956d&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
+
+  [![Code Size](https://img.shields.io/github/languages/code-size/open-sauced/opengraph.opensauced.pizza?style=flat)](https://github.com/open-sauced/opengraph.opensauced.pizza/pulse)
+  [![Commits](https://img.shields.io/github/commit-activity/w/open-sauced/opengraph.opensauced.pizza?style=flat)](https://github.com/open-sauced/opengraph.opensauced.pizza/pulse)
+  [![Issues](https://img.shields.io/github/issues/open-sauced/opengraph.opensauced.pizza.svg?style=flat)](https://github.com/open-sauced/opengraph.opensauced.pizza/issues)
+  [![Releases](https://img.shields.io/github/v/release/open-sauced/opengraph.opensauced.pizza.svg?style=flat)](https://github.com/open-sauced/opengraph.opensauced.pizza/releases)
+  [![Discord](https://img.shields.io/discord/714698561081704529.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/U2peSNf23P)
+  [![Twitter](https://img.shields.io/twitter/follow/saucedopen?label=Follow&style=social)](https://twitter.com/saucedopen)
 </div>
-<br>
-<p align="center">
-  <img src="https://img.shields.io/github/languages/code-size/open-sauced/opengraph.opensauced.pizza" alt="GitHub code size in bytes">
-  <img src="https://img.shields.io/github/commit-activity/w/open-sauced/opengraph.opensauced.pizza" alt="GitHub commit activity">
-  <a href="https://github.com/open-sauced/opengraph.opensauced.pizza/issues">
-    <img src="https://img.shields.io/github/issues/open-sauced/opengraph.opensauced.pizza" alt="GitHub issues">
-  </a>
-  <a href="https://github.com/open-sauced/opengraph.opensauced.pizza/releases">
-    <img src="https://img.shields.io/github/v/release/open-sauced/opengraph.opensauced.pizza.svg?style=flat" alt="GitHub Release">
-  </a>
-  <a href="https://discord.gg/U2peSNf23P">
-    <img src="https://img.shields.io/discord/714698561081704529.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2" alt="Discord">
-  </a>
-  <a href="https://twitter.com/saucedopen">
-    <img src="https://img.shields.io/twitter/follow/saucedopen?label=Follow&style=social" alt="Twitter">
-  </a>
-</p>
 
 ## 🚀 Live release environments
 
-- [digital ocean](https://cloud.digitalocean.com/droplets/319848644)
+- [Digital Ocean](https://cloud.digitalocean.com/apps/41eb42f8-3ca9-4598-b9c7-4378868a5702)
+- [Open Sauced](https://opengraph.opensauced.pizza)
 
 ## 📖 Prerequisites
 
 In order to run the project we need the following software binaries installed on our development machines:
-- `node>=16.7.0`
-- `npm>=8.0.0`
-- `docker>=20.10.12`
+- `node>=18.15.0`
+- `npm>=9.6.3`
+- `docker>=20.10.23`
 
 ## 🖥️ Local development
 
@@ -61,6 +53,9 @@ Boilerplate, changed mostly locally:
 API_HOST=0.0.0.0
 API_PORT=3003
 SERVICE_DOMAIN=opensauced.pizza
+
+# GitHub private access tokens
+GITHUB_PAT_USER=ghp_************************************
 ```
 
 ### 🎨 Code linting
@@ -107,7 +102,7 @@ npm run build
 
 ## 🤝 Contributing
 
-We encourage you to contribute to Open Sauced! Please check out the [Contributing guide](https://docs.opensauced.pizza/contributing/introduction-to-contributing/) for guidelines about how to proceed.
+We encourage you to contribute to Open Sauced! Please check out the [Contributing guide](https://opengraph.opensauced.pizza/contributing/introduction-to-contributing/) for guidelines about how to proceed.
 
 <img align="right" src="https://i.ibb.co/CJfW18H/ship.gif" width="200"/>
 
