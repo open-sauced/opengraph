@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+### [1.0.3](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.0.2...v1.0.3) (2023-04-04)
+
+
+### 🐛 Bug Fixes
+
+* remove static assets, get gfonts roboto versions ([dd096ca](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/dd096caba732f9ccdc11d1b280cd18cf442327cb))
+
 ### [1.0.2](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.0.1...v1.0.2) (2023-04-03)
 
 
