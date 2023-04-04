@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.0-beta.2](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.1...v1.2.0-beta.2) (2023-04-04)
+
+
+### 🔁 Continuous Integration
+
+* correct live release url in github actions deployment ([4a434e6](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/4a434e675198be1ee3ec0000a85a02dccf1b080e))
+
 ## [1.2.0-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.1.2...v1.2.0-beta.1) (2023-04-04)
 
 
