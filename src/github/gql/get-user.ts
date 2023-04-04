@@ -80,7 +80,7 @@ query ($username: String!, $dateSince: DateTime) {
         primaryLanguage {
           name
         }
-        languages(first: 10, orderBy: { field: SIZE, direction: DESC }) {
+        languages(first: 100, orderBy: { field: SIZE, direction: DESC }) {
           edges {
             node {
               id

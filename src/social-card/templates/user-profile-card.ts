@@ -160,7 +160,7 @@ const userProfileCard = (avatarUrl: string, name: string, langs: string, repos: 
                     gap: 8px;
 
                     width: 1136px;
-                    height: 10.5px;
+                    height: 11px;
                 ">
                     <div style="
 
@@ -171,7 +171,7 @@ const userProfileCard = (avatarUrl: string, name: string, langs: string, repos: 
                         gap: 4px;
 
                         width: 1136px;
-                        height: 10.5px;
+                        height: 11px;
 
                         border-radius: 20px;
                     ">

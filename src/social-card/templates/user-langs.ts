@@ -1,16 +1,12 @@
-import colors from "github-colors/colors.json";
+import { Language } from "@octokit/graphql-schema";
 
-const userLangs = (langs: string[], joinLiteral = "") => langs.map(lang => {
-  const colorKey = Object.keys(colors).find(key => key.toLowerCase() === lang.toLowerCase());
-  const color = colorKey ? colors[colorKey as keyof typeof colors].color ?? "#000" : "#000";
-
-  return `
-      <div style="
-        width: ${Math.round(100 / langs.length)}%;
-        height: 10%;
-        background: ${color};
-      "/>
-    `;
-}).join(joinLiteral);
+const userLangs = (langs: (Language & {
+  size: number,
+})[], totalCount = 0, joinLiteral = "") => langs.map(({ color, size }) => `
+    <div style="
+      width: ${totalCount > 0 ? Math.round( size / totalCount * 100) : 100 / langs.length}%;
+      height: 11px;
+      background: ${color ?? "#000"};
+    "/>`).join(joinLiteral);
 
 export default userLangs;
