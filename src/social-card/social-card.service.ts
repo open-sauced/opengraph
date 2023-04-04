@@ -7,7 +7,7 @@ import userLangs from "./templates/user-langs";
 import userProfileRepos from "./templates/user-profile-repos";
 import userProfileCard from "./templates/user-profile-card";
 import { GithubService } from "../github/github.service";
-import { Repository, Language } from "@octokit/graphql-schema";
+import { Repository, Language, User } from "@octokit/graphql-schema";
 
 @Injectable()
 export class SocialCardService {
@@ -17,6 +17,7 @@ export class SocialCardService {
   ) {}
 
   async getUserData (username: string): Promise<{
+    name: User["name"],
     langs: (Language & {
       size: number,
     })[],
@@ -51,6 +52,7 @@ export class SocialCardService {
     });
 
     return {
+      name: user.name,
       langs: Array.from(Object.values(langs)),
       langTotal,
       repos: user.topRepositories.nodes?.filter(repo => !repo?.isPrivate && repo?.owner.login !== username) as Repository[],
@@ -68,9 +70,9 @@ export class SocialCardService {
     const { html } = await import("satori-html");
     const satori = (await import("satori")).default;
 
-    const { avatarUrl, repos, langs, langTotal } = await this.getUserData(username);
+    const { name, avatarUrl, repos, langs, langTotal } = await this.getUserData(username);
 
-    const template = html(userProfileCard(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos)));
+    const template = html(userProfileCard(avatarUrl, name!, userLangs(langs, langTotal), userProfileRepos(repos)));
 
     const robotoArrayBuffer = await readFile("node_modules/@fontsource/roboto/files/roboto-latin-ext-400-normal.woff");
 
