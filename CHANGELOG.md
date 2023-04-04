@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+### [1.0.4](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.0.3...v1.0.4) (2023-04-04)
+
+
+### 🐛 Bug Fixes
+
+* correct top repositories distribution and name concatenation ([24bfb15](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/24bfb159bbe9c43e631432c69189f0ffba0c7c11))
+
 ### [1.0.3](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.0.2...v1.0.3) (2023-04-04)
 
 
