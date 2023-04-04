@@ -28,7 +28,6 @@
         "@resvg/resvg-js": "^2.4.1",
         "class-transformer": "^0.5.1",
         "class-validator": "^0.14.0",
-        "github-colors": "github:ozh/github-colors",
         "nestjs-pino": "^3.1.2",
         "octokit": "^2.0.14",
         "pino-http": "^8.3.3",
@@ -9792,11 +9791,6 @@
       "funding": {
         "url": "https://github.com/privatenumber/get-tsconfig?sponsor=1"
       }
-    },
-    "node_modules/github-colors": {
-      "version": "1.0.0",
-      "resolved": "git+ssh://git@github.com/ozh/github-colors.git#c6c9444a53d3c3cfd0be9a18a152d8d53e8d3b4f",
-      "license": "WTFPL"
     },
     "node_modules/glob": {
       "version": "7.2.3",

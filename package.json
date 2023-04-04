@@ -60,7 +60,6 @@
     "@resvg/resvg-js": "^2.4.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
-    "github-colors": "github:ozh/github-colors",
     "nestjs-pino": "^3.1.2",
     "octokit": "^2.0.14",
     "pino-http": "^8.3.3",
