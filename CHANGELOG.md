@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+### [1.1.2](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.1.1...v1.1.2) (2023-04-04)
+
+
+### 🐛 Bug Fixes
+
+* correct font usage from roboto to design (inter) ([4748b98](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/4748b98a99b50514c135ff4bf6f1b2de10f8939e))
+
 ### [1.1.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.1.0...v1.1.1) (2023-04-04)
 
 
