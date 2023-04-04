@@ -344,7 +344,7 @@ export class SocialCardService {
 
     return {
       langs: [],
-      repos: user.topRepositories.nodes as Repository[],
+      repos: user.topRepositories.nodes?.filter(repo &#x3D;&gt; !repo?.isPrivate &amp;&amp; repo?.owner.login !&#x3D;&#x3D; username) as Repository[],
       avatarUrl: &#x60;${String(user.avatarUrl)}&amp;size&#x3D;150&#x60;,
     };
   }

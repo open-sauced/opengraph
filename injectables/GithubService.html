@@ -385,6 +385,8 @@ export class GithubService {
       }
     }&#x60;);
 
+    this.logger.debug(&#x60;Rate limit: ${JSON.stringify(rateLimit)}&#x60;);
+
     return rateLimit;
   }
 }

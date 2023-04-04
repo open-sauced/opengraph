@@ -147,93 +147,99 @@
 
 query ($username: String!, $dateSince: DateTime) {
   user(login: $username) {
-    id,
-    avatarUrl,
-    bio,
-    bioHTML,
-    company,
-    companyHTML,
-    createdAt,
-    email,
-    hasSponsorsListing,
-    isBountyHunter,
-    isCampusExpert,
-    isDeveloperProgramMember,
-    isEmployee,
-    isGitHubStar,
-    isHireable,
-    isSiteAdmin,
-    location,
-    login,
-    monthlyEstimatedSponsorsIncomeInCents,
-    name,
-    url,
-    pronouns,
-    resourcePath,
-    totalSponsorshipAmountAsSponsorInCents,
-    websiteUrl,
-    twitterUsername,
+    id
+    avatarUrl
+    bio
+    bioHTML
+    company
+    companyHTML
+    createdAt
+    email
+    hasSponsorsListing
+    isBountyHunter
+    isCampusExpert
+    isDeveloperProgramMember
+    isEmployee
+    isGitHubStar
+    isHireable
+    isSiteAdmin
+    location
+    login
+    monthlyEstimatedSponsorsIncomeInCents
+    name
+    url
+    pronouns
+    resourcePath
+    totalSponsorshipAmountAsSponsorInCents
+    websiteUrl
+    twitterUsername
     organization(login: &quot;open-sauced&quot;) {
-      id,
-      avatarUrl,
-      name,
-      url,
+      id
+      avatarUrl
+      name
+      url
       updatedAt
-    },
-    organizations(first: 10, orderBy: {field: CREATED_AT, direction: ASC}) {
+    }
+    organizations(first: 10, orderBy: { field: CREATED_AT, direction: ASC }) {
       nodes {
-        id,
-        avatarUrl,
-        name,
-        url,
+        id
+        avatarUrl
+        name
+        url
         updatedAt
       }
-    },
+    }
     socialAccounts(first: 10) {
       nodes {
-        displayName,
-        provider,
+        displayName
+        provider
         url
       }
-    },
+    }
     status {
-      id,
-      emoji,
-      message,
+      id
+      emoji
+      message
       organization {
         id
       }
-    },
-    repositories(first: 100, orderBy: {field: PUSHED_AT, direction: DESC}) {
+    }
+    repositories(first: 100, orderBy: { field: PUSHED_AT, direction: DESC }) {
       nodes {
         name
         primaryLanguage {
           name
-        },
-        languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
+        }
+        languages(first: 10, orderBy: { field: SIZE, direction: DESC }) {
           edges {
             node {
-              id,
-              name,
+              id
+              name
               color
-            },
+            }
             size
-          },
-          totalSize,
+          }
+          totalSize
           totalCount
-        },
+        }
         pushedAt
       }
-    },
-    topRepositories(first: 10, orderBy: {field: PUSHED_AT, direction: DESC}, since: $dateSince) {
+    }
+    topRepositories(
+      first: 100
+      orderBy: { field: PUSHED_AT, direction: DESC }
+      since: $dateSince
+    ) {
       nodes {
-        name,
+        name
         owner {
+          login
           avatarUrl
-        },
+        }
+        isPrivate
         primaryLanguage {
           name
-        },
+        }
         pushedAt
       }
     }
@@ -601,9 +607,10 @@ query ($username: String!, $dateSince: DateTime) {
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>(repos: Repository[]): string &#x3D;&gt; {
-  const repoList &#x3D; repos.map(({ name, owner: { avatarUrl } }) &#x3D;&gt; repoIconWithName(&#x60;${name.substring(0, 15)}${name.length &gt; 15 ? &quot;...&quot; : &quot;&quot;}&#x60;, &#x60;${String(avatarUrl)}&amp;size&#x3D;40&#x60;));
+  const repoList &#x3D; repos.map(({ name, owner: { avatarUrl } }) &#x3D;&gt;
+    repoIconWithName(&#x60;${name.substring(0, 15).replace(/\.+$/, &quot;&quot;)}${name.length &gt; 15 ? &quot;...&quot; : &quot;&quot;}&#x60;, &#x60;${String(avatarUrl)}&amp;size&#x3D;40&#x60;));
 
-  return &#x60;${repoList.slice(0, 3).join(&quot;&quot;)}${repoList.length &gt; 3
+  return &#x60;${repoList.slice(0, 4).join(&quot;&quot;)}${repoList.length &gt; 4
     ? &#x60;&lt;h2 style&#x3D;&quot;
         width: 39px;
         height: 37px;
