@@ -1,19 +1,21 @@
 import { Injectable } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
-import { readFile } from "node:fs/promises";
 import { Resvg } from "@resvg/resvg-js";
+import { Repository, Language, User } from "@octokit/graphql-schema";
+import { readFile } from "node:fs/promises";
 
 import userLangs from "./templates/user-langs";
 import userProfileRepos from "./templates/user-profile-repos";
 import userProfileCard from "./templates/user-profile-card";
 import { GithubService } from "../github/github.service";
-import { Repository, Language, User } from "@octokit/graphql-schema";
+import { S3FileStorageService } from "../s3-file-storage/s3-file-storage.service";
 
 @Injectable()
 export class SocialCardService {
   constructor (
     private readonly httpService: HttpService,
     private readonly githubService: GithubService,
+    private readonly s3FileStorageService: S3FileStorageService,
   ) {}
 
   async getUserData (username: string): Promise<{
