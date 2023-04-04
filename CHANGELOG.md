@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+### [1.1.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.1.0...v1.1.1) (2023-04-04)
+
+
+### 🐛 Bug Fixes
+
+* correct user name being displayed as login ([19043fc](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/19043fc359597bfa31f9e1bdc864c1a18a486fc1))
+
 ## [1.1.0](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.0.4...v1.1.0) (2023-04-04)
 
 
