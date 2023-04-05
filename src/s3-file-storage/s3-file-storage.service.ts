@@ -8,7 +8,7 @@ import DigitalOceanConfig from "../config/digital-ocean.config";
 
 @Injectable()
 export class S3FileStorageService {
-  private s3Client: S3Client;
+  private readonly s3Client: S3Client;
 
   constructor (
     @Inject(DigitalOceanConfig.KEY)
@@ -25,6 +25,10 @@ export class S3FileStorageService {
     });
   }
 
+  generateFileUrl (hash: string): string {
+    return `https://${this.config.bucketName}.${this.config.endpoint.replace(/https?:\/\//, "")}/${hash}`;
+  }
+
   async fileExists (hash: string): Promise<boolean> {
     try {
       await this.s3Client.send(
@@ -35,10 +39,8 @@ export class S3FileStorageService {
       );
       return true;
     } catch (error) {
-      console.error(error);
-
       if (error instanceof Error) {
-        if (error.name === "ResourceNotFoundException") {
+        if (error.name === "NotFound") {
           return false;
         }
       }
@@ -61,7 +63,7 @@ export class S3FileStorageService {
       console.error(error);
 
       if (error instanceof Error) {
-        if (error.name === "ResourceNotFoundException") {
+        if (error.name === "NotFound") {
           return null;
         }
       }
@@ -81,6 +83,7 @@ export class S3FileStorageService {
         Key: hash,
         Body: fileContent,
         ContentType: contentType,
+        ACL: "public-read",
       }),
     );
   }

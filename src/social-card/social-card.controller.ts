@@ -1,4 +1,4 @@
-import { Controller, Get, Header, Param, StreamableFile } from "@nestjs/common";
+import { Controller, Get, Header, Param, Redirect, StreamableFile } from "@nestjs/common";
 import { ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
 
 import { SocialCardService } from "./social-card.service";
@@ -18,11 +18,12 @@ export class SocialCardController {
   @Header("Content-Type", "image/png")
   @ApiOkResponse({ type: StreamableFile })
   @ApiNotFoundResponse({ description: "User not found" })
+  @Redirect()
   async generateUserSocialCard (
     @Param("username") username: string,
-  ): Promise<StreamableFile> {
-    const image = await this.socialCardService.getUserCard(username);
+  ): Promise<{ url: string }> {
+    const url = await this.socialCardService.getUserCard(username);
 
-    return new StreamableFile(image);
+    return { url };
   }
 }
