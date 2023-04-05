@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.0-beta.3](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.2...v1.2.0-beta.3) (2023-04-05)
+
+
+### 🍕 Features
+
+* implement digital ocean spaces s3 client storage and cache images 3 days ([792992e](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/792992e8ad8849a8e1c10178b84e0caa4d023b1b))
+
 ## [1.2.0-beta.2](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.1...v1.2.0-beta.2) (2023-04-04)
 
 
