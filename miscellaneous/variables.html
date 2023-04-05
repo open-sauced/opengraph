@@ -64,6 +64,9 @@
                             <a href="#ApiConfig" title="src/config/api.config.ts" ><b>ApiConfig</b>&nbsp;&nbsp;&nbsp;(src/.../api.config.ts)</a>
                         </li>
                         <li>
+                            <a href="#DigitalOceanConfig" title="src/config/digital-ocean.config.ts" ><b>DigitalOceanConfig</b>&nbsp;&nbsp;&nbsp;(src/.../digital-ocean.config.ts)</a>
+                        </li>
+                        <li>
                             <a href="#getUser" title="src/github/gql/get-user.ts" ><b>getUser</b>&nbsp;&nbsp;&nbsp;(src/.../get-user.ts)</a>
                         </li>
                         <li>
@@ -122,6 +125,35 @@
         </tbody>
     </table>
 </section>
+    <h3>src/config/digital-ocean.config.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DigitalOceanConfig"></a>
+                    <span class="name">
+                        <span ><b>DigitalOceanConfig</b></span>
+                        <a href="#DigitalOceanConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>registerAs(&quot;digitalOcean&quot;, () &#x3D;&gt; ({
+  endpoint: String(process.env.DO_SPACES_ENDPOINT ?? &quot;https://sfo3.digitaloceanspaces.com&quot;),
+  region: String(process.env.DO_SPACES_REGION ?? &quot;us-east-1&quot;),
+  accessKeyId: String(process.env.DO_SPACES_ACCESS_KEY_ID ?? &quot;&quot;),
+  secretAccessKey: String(process.env.DO_SPACES_SECRET_ACCESS_KEY ?? &quot;&quot;),
+  bucketName: String(process.env.DO_SPACES_BUCKET_NAME ?? &quot;opengraph-dev&quot;),
+}))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
     <h3>src/github/gql/get-user.ts</h3>
     <section>
     <h3></h3>    <table class="table table-sm table-bordered">
@@ -148,6 +180,7 @@
 query ($username: String!, $dateSince: DateTime) {
   user(login: $username) {
     id
+    databaseId
     avatarUrl
     bio
     bioHTML

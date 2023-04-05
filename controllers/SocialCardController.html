@@ -127,14 +127,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;/:username&#x27;)<br />@ApiOperation({operationId: &#x27;generateUserSocialCard&#x27;, summary: &#x27;Gets latest cache aware social card link for :username or generates a new one&#x27;})<br />@Header(&#x27;Content-Type&#x27;, &#x27;image/png&#x27;)<br />@ApiOkResponse({type: StreamableFile})<br />@ApiNotFoundResponse({description: &#x27;User not found&#x27;})<br /></code>
+                    <code>@Get(&#x27;/:username&#x27;)<br />@ApiOperation({operationId: &#x27;generateUserSocialCard&#x27;, summary: &#x27;Gets latest cache aware social card link for :username or generates a new one&#x27;})<br />@Header(&#x27;Content-Type&#x27;, &#x27;image/png&#x27;)<br />@ApiOkResponse({type: StreamableFile})<br />@ApiNotFoundResponse({description: &#x27;User not found&#x27;})<br />@Redirect()<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="21"
-                            class="link-to-prism">src/social-card/social-card.controller.ts:21</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="22"
+                            class="link-to-prism">src/social-card/social-card.controller.ts:22</a></div>
                 </td>
             </tr>
 
@@ -172,7 +172,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;StreamableFile&gt;</code>
+                        <b>Returns : </b>    <code>Promise&lt;literal type&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -186,7 +186,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Controller, Get, Header, Param, StreamableFile } from &quot;@nestjs/common&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Controller, Get, Header, Param, Redirect, StreamableFile } from &quot;@nestjs/common&quot;;
 import { ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from &quot;@nestjs/swagger&quot;;
 
 import { SocialCardService } from &quot;./social-card.service&quot;;
@@ -206,12 +206,13 @@ export class SocialCardController {
   @Header(&quot;Content-Type&quot;, &quot;image/png&quot;)
   @ApiOkResponse({ type: StreamableFile })
   @ApiNotFoundResponse({ description: &quot;User not found&quot; })
+  @Redirect()
   async generateUserSocialCard (
     @Param(&quot;username&quot;) username: string,
-  ): Promise&lt;StreamableFile&gt; {
-    const image &#x3D; await this.socialCardService.getUserCard(username);
+  ): Promise&lt;{ url: string }&gt; {
+    const url &#x3D; await this.socialCardService.getUserCard(username);
 
-    return new StreamableFile(image);
+    return { url };
   }
 }
 </code></pre>

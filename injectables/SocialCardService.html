@@ -69,6 +69,22 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#logger" >logger</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -104,12 +120,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(httpService: HttpService, githubService: <a href="../injectables/GithubService.html" target="_self">GithubService</a>)</code>
+<code>constructor(httpService: HttpService, githubService: <a href="../injectables/GithubService.html" target="_self">GithubService</a>, s3FileStorageService: <a href="../injectables/S3FileStorageService.html" target="_self">S3FileStorageService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/social-card/social-card.service.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/social-card/social-card.service.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -143,6 +159,18 @@
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/GithubService.html" target="_self" >GithubService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>s3FileStorageService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/S3FileStorageService.html" target="_self" >S3FileStorageService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -186,8 +214,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="63"
-                            class="link-to-prism">src/social-card/social-card.service.ts:63</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="69"
+                            class="link-to-prism">src/social-card/social-card.service.ts:69</a></div>
                 </td>
             </tr>
 
@@ -225,7 +253,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;Buffer&gt;</code>
+                        <b>Returns : </b>    <code>Promise&lt;string&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -257,8 +285,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">src/social-card/social-card.service.ts:19</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">src/social-card/social-card.service.ts:23</a></div>
                 </td>
             </tr>
 
@@ -307,30 +335,68 @@
         </tbody>
     </table>
 </section>
+            <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logger"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>logger</b></span>
+                        <a href="#logger"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Logger(this.constructor.name)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/social-card/social-card.service.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &quot;@nestjs/common&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Logger } from &quot;@nestjs/common&quot;;
 import { HttpService } from &quot;@nestjs/axios&quot;;
-import { readFile } from &quot;node:fs/promises&quot;;
 import { Resvg } from &quot;@resvg/resvg-js&quot;;
+import { Repository, Language, User } from &quot;@octokit/graphql-schema&quot;;
+import { readFile } from &quot;node:fs/promises&quot;;
 
 import userLangs from &quot;./templates/user-langs&quot;;
 import userProfileRepos from &quot;./templates/user-profile-repos&quot;;
 import userProfileCard from &quot;./templates/user-profile-card&quot;;
 import { GithubService } from &quot;../github/github.service&quot;;
-import { Repository, Language, User } from &quot;@octokit/graphql-schema&quot;;
+import { S3FileStorageService } from &quot;../s3-file-storage/s3-file-storage.service&quot;;
 
 @Injectable()
 export class SocialCardService {
+  private readonly logger &#x3D; new Logger(this.constructor.name);
+
   constructor (
     private readonly httpService: HttpService,
     private readonly githubService: GithubService,
+    private readonly s3FileStorageService: S3FileStorageService,
   ) {}
 
   async getUserData (username: string): Promise&lt;{
+    id: User[&quot;databaseId&quot;],
     name: User[&quot;name&quot;],
     langs: (Language &amp; {
       size: number,
@@ -366,6 +432,7 @@ export class SocialCardService {
     });
 
     return {
+      id: user.databaseId,
       name: user.name,
       langs: Array.from(Object.values(langs)),
       langTotal,
@@ -374,7 +441,7 @@ export class SocialCardService {
     };
   }
 
-  async getUserCard (username: string): Promise&lt;Buffer&gt; {
+  async getUserCard (username: string): Promise&lt;string&gt; {
     const { remaining } &#x3D; await this.githubService.rateLimit();
 
     if (remaining &lt; 1000) {
@@ -384,7 +451,22 @@ export class SocialCardService {
     const { html } &#x3D; await import(&quot;satori-html&quot;);
     const satori &#x3D; (await import(&quot;satori&quot;)).default;
 
-    const { name, avatarUrl, repos, langs, langTotal } &#x3D; await this.getUserData(username);
+    const { id, name, avatarUrl, repos, langs, langTotal } &#x3D; await this.getUserData(username);
+    const hash &#x3D; &#x60;users/${String(id)}.png&#x60;;
+    const fileUrl &#x3D; this.s3FileStorageService.generateFileUrl(hash);
+    const hasFile &#x3D; await this.s3FileStorageService.fileExists(hash);
+    const today &#x3D; (new Date);
+    const today3daysAgo &#x3D; new Date((new Date).setDate(today.getDate() - 3));
+
+    if (hasFile) {
+      // route to s3
+      const lastModified &#x3D; await this.s3FileStorageService.getFileLastModified(hash);
+
+      if (lastModified &amp;&amp; lastModified &gt; today3daysAgo) {
+        this.logger.debug(&#x60;User ${username} exists in S3 with lastModified: ${lastModified.toISOString()} higher than 3 days ago, redirecting&#x60;);
+        return fileUrl;
+      }
+    }
 
     const template &#x3D; html(userProfileCard(avatarUrl, name!, userLangs(langs, langTotal), userProfileRepos(repos)));
 
@@ -409,7 +491,11 @@ export class SocialCardService {
 
     const pngBuffer &#x3D; pngData.asPng();
 
-    return pngBuffer;
+    await this.s3FileStorageService.uploadFile(pngBuffer, hash, &quot;image/png&quot;);
+
+    this.logger.debug(&#x60;User ${username} did not exist in S3, generated image and uploaded to S3, redirecting&#x60;);
+
+    return fileUrl;
   }
 }
 </code></pre>
