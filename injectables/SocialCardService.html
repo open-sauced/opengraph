@@ -453,7 +453,7 @@ export class SocialCardService {
 
     const { id, name, avatarUrl, repos, langs, langTotal } &#x3D; await this.getUserData(username);
     const hash &#x3D; &#x60;users/${String(id)}.png&#x60;;
-    const fileUrl &#x3D; this.s3FileStorageService.generateFileUrl(hash);
+    const fileUrl &#x3D; &#x60;${this.s3FileStorageService.getCdnEndpoint()}${hash}&#x60;;
     const hasFile &#x3D; await this.s3FileStorageService.fileExists(hash);
     const today &#x3D; (new Date);
     const today3daysAgo &#x3D; new Date((new Date).setDate(today.getDate() - 3));

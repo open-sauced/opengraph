@@ -78,6 +78,14 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getCdnEndpoint" >getCdnEndpoint</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getOriginEndpoint" >getOriginEndpoint</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
                                 <a href="#s3Client" >s3Client</a>
@@ -97,12 +105,6 @@
                             <li>
                                     <span class="modifier">Async</span>
                                 <a href="#fileExists" >fileExists</a>
-                            </li>
-                            <li>
-                                <a href="#generateFileUrl" >generateFileUrl</a>
-                            </li>
-                            <li>
-                                <a href="#generateHash" >generateHash</a>
                             </li>
                             <li>
                                     <span class="modifier">Async</span>
@@ -135,7 +137,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/s3-file-storage/s3-file-storage.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/s3-file-storage/s3-file-storage.service.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -200,8 +202,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">src/s3-file-storage/s3-file-storage.service.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="33"
+                            class="link-to-prism">src/s3-file-storage/s3-file-storage.service.ts:33</a></div>
                 </td>
             </tr>
 
@@ -253,144 +255,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="generateFileUrl"></a>
-                    <span class="name">
-                        <span ><b>generateFileUrl</b></span>
-                        <a href="#generateFileUrl"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>generateFileUrl(hash: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">src/s3-file-storage/s3-file-storage.service.ts:28</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>hash</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="generateHash"></a>
-                    <span class="name">
-                        <span ><b>generateHash</b></span>
-                        <a href="#generateHash"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>generateHash(content: Buffer)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="91"
-                            class="link-to-prism">src/s3-file-storage/s3-file-storage.service.ts:91</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>content</td>
-                                    <td>
-                                            <code>Buffer</code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="getFileLastModified"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
@@ -409,8 +273,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="52"
-                            class="link-to-prism">src/s3-file-storage/s3-file-storage.service.ts:52</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">src/s3-file-storage/s3-file-storage.service.ts:53</a></div>
                 </td>
             </tr>
 
@@ -480,8 +344,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="75"
-                            class="link-to-prism">src/s3-file-storage/s3-file-storage.service.ts:75</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="76"
+                            class="link-to-prism">src/s3-file-storage/s3-file-storage.service.ts:76</a></div>
                 </td>
             </tr>
 
@@ -563,6 +427,58 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getCdnEndpoint"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getCdnEndpoint</b></span>
+                        <a href="#getCdnEndpoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/s3-file-storage/s3-file-storage.service.ts:14</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getOriginEndpoint"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getOriginEndpoint</b></span>
+                        <a href="#getOriginEndpoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {...}</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/s3-file-storage/s3-file-storage.service.ts:12</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="s3Client"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
@@ -580,7 +496,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/s3-file-storage/s3-file-storage.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/s3-file-storage/s3-file-storage.service.ts:10</a></div>
                         </td>
                     </tr>
 
@@ -596,7 +512,6 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Inject } from &quot;@nestjs/common&quot;;
 import { ConfigType } from &quot;@nestjs/config&quot;;
 import { S3, HeadObjectCommand, PutObjectCommand, S3Client } from &quot;@aws-sdk/client-s3&quot;;
-import { createHash } from &quot;node:crypto&quot;;
 import { Readable } from &quot;node:stream&quot;;
 
 import DigitalOceanConfig from &quot;../config/digital-ocean.config&quot;;
@@ -605,23 +520,25 @@ import DigitalOceanConfig from &quot;../config/digital-ocean.config&quot;;
 export class S3FileStorageService {
   private readonly s3Client: S3Client;
 
+  public getOriginEndpoint &#x3D; (): string &#x3D;&gt; &#x60;${this.config.protocol}://${this.config.bucketName}.${this.config.region}.${this.config.endpoint}/&#x60;;
+
+  public getCdnEndpoint &#x3D; (): string &#x3D;&gt; (this.config.cdnDisabled
+    ? this.getOriginEndpoint()
+    : &#x60;${this.config.protocol}://${this.config.cdnCustomDomain !&#x3D;&#x3D; &quot;&quot; ? this.config.cdnCustomDomain : &#x60;${this.config.bucketName}.${this.config.region}.cdn.${this.config.endpoint}&#x60;}/&#x60;);
+
   constructor (
     @Inject(DigitalOceanConfig.KEY)
     private readonly config: ConfigType&lt;typeof DigitalOceanConfig&gt;,
   ) {
     this.s3Client &#x3D; new S3({
       forcePathStyle: false,
-      endpoint: config.endpoint,
-      region: config.region,
+      endpoint: &#x60;${config.protocol}://${config.region}.${config.endpoint}&#x60;,
+      region: &#x60;us-east-1&#x60;,
       credentials: {
         accessKeyId: config.accessKeyId,
         secretAccessKey: config.secretAccessKey,
       },
     });
-  }
-
-  generateFileUrl (hash: string): string {
-    return &#x60;https://${this.config.bucketName}.${this.config.endpoint.replace(/https?:\/\//, &quot;&quot;)}/${hash}&#x60;;
   }
 
   async fileExists (hash: string): Promise&lt;boolean&gt; {
@@ -681,11 +598,6 @@ export class S3FileStorageService {
         ACL: &quot;public-read&quot;,
       }),
     );
-  }
-
-  generateHash (content: Buffer): string {
-    return createHash(&quot;sha256&quot;).update(content)
-      .digest(&quot;hex&quot;);
   }
 }
 </code></pre>

@@ -141,11 +141,14 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>registerAs(&quot;digitalOcean&quot;, () &#x3D;&gt; ({
-  endpoint: String(process.env.DO_SPACES_ENDPOINT ?? &quot;https://sfo3.digitaloceanspaces.com&quot;),
-  region: String(process.env.DO_SPACES_REGION ?? &quot;us-east-1&quot;),
   accessKeyId: String(process.env.DO_SPACES_ACCESS_KEY_ID ?? &quot;&quot;),
   secretAccessKey: String(process.env.DO_SPACES_SECRET_ACCESS_KEY ?? &quot;&quot;),
+  protocol: String(process.env.DO_SPACES_PROTOCOL ?? &quot;https&quot;),
+  endpoint: String(process.env.DO_SPACES_ENDPOINT ?? &quot;digitaloceanspaces.com&quot;),
+  region: String(process.env.DO_SPACES_REGION ?? &quot;sfo3&quot;),
   bucketName: String(process.env.DO_SPACES_BUCKET_NAME ?? &quot;opengraph-dev&quot;),
+  cdnCustomDomain: String(process.env.DO_SPACES_SUBDOMAIN ?? &quot;&quot;),
+  cdnDisabled: !!process.env.DO_SPACES_CDN_DISABLED,
 }))</code>
                     </td>
                 </tr>
