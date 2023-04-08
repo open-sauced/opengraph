@@ -78,7 +78,7 @@ export class SocialCardService {
 
     const { id, name, avatarUrl, repos, langs, langTotal } = await this.getUserData(username);
     const hash = `users/${String(id)}.png`;
-    const fileUrl = this.s3FileStorageService.generateFileUrl(hash);
+    const fileUrl = `${this.s3FileStorageService.getCdnEndpoint()}${hash}`;
     const hasFile = await this.s3FileStorageService.fileExists(hash);
     const today = (new Date);
     const today3daysAgo = new Date((new Date).setDate(today.getDate() - 3));

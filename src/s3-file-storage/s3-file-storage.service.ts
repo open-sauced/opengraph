@@ -1,7 +1,6 @@
 import { Injectable, Inject } from "@nestjs/common";
 import { ConfigType } from "@nestjs/config";
 import { S3, HeadObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import { createHash } from "node:crypto";
 import { Readable } from "node:stream";
 
 import DigitalOceanConfig from "../config/digital-ocean.config";
@@ -10,23 +9,25 @@ import DigitalOceanConfig from "../config/digital-ocean.config";
 export class S3FileStorageService {
   private readonly s3Client: S3Client;
 
+  public getOriginEndpoint = (): string => `${this.config.protocol}://${this.config.bucketName}.${this.config.region}.${this.config.endpoint}/`;
+
+  public getCdnEndpoint = (): string => (this.config.cdnDisabled
+    ? this.getOriginEndpoint()
+    : `${this.config.protocol}://${this.config.cdnCustomDomain !== "" ? this.config.cdnCustomDomain : `${this.config.bucketName}.${this.config.region}.cdn.${this.config.endpoint}`}/`);
+
   constructor (
     @Inject(DigitalOceanConfig.KEY)
     private readonly config: ConfigType<typeof DigitalOceanConfig>,
   ) {
     this.s3Client = new S3({
       forcePathStyle: false,
-      endpoint: config.endpoint,
-      region: config.region,
+      endpoint: `${config.protocol}://${config.region}.${config.endpoint}`,
+      region: `us-east-1`,
       credentials: {
         accessKeyId: config.accessKeyId,
         secretAccessKey: config.secretAccessKey,
       },
     });
-  }
-
-  generateFileUrl (hash: string): string {
-    return `https://${this.config.bucketName}.${this.config.endpoint.replace(/https?:\/\//, "")}/${hash}`;
   }
 
   async fileExists (hash: string): Promise<boolean> {
@@ -86,10 +87,5 @@ export class S3FileStorageService {
         ACL: "public-read",
       }),
     );
-  }
-
-  generateHash (content: Buffer): string {
-    return createHash("sha256").update(content)
-      .digest("hex");
   }
 }
