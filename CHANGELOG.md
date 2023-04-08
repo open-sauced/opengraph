@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.0-beta.4](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.3...v1.2.0-beta.4) (2023-04-08)
+
+
+### 🍕 Features
+
+* add custom cdn endpoint configuration for s3 bucket on digital ocean ([077e473](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/077e473ba9ec01d88d383f202427f06398047652)), closes [#18](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/18)
+
 ## [1.2.0-beta.3](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.2...v1.2.0-beta.3) (2023-04-05)
 
 
