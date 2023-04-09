@@ -18,15 +18,22 @@
 
 ## 🚀 Live release environments
 
-- [Digital Ocean](https://cloud.digitalocean.com/apps/41eb42f8-3ca9-4598-b9c7-4378868a5702)
-- [Open Sauced](https://opengraph.opensauced.pizza)
+### Production ([main](https://github.com/open-sauced/opengraph.opensauced.pizza/tree/main))
+
+- [opengraph@digital-ocean.app](https://cloud.digitalocean.com/apps/41eb42f8-3ca9-4598-b9c7-4378868a5702)
+- [opengraph.opensauced](https://opengraph.opensauced.pizza)
+
+### Beta ([beta](https://github.com/open-sauced/opengraph.opensauced.pizza/tree/beta))
+
+- [opengraph-beta@digital-ocean.app](https://cloud.digitalocean.com/apps/7fd2cd42-4df7-4204-af8b-0e7ec252c324/overview)
+- [beta.opengraph.opensauced](https://beta.opengraph.opensauced.pizza)
 
 ## 📖 Prerequisites
 
 In order to run the project we need the following software binaries installed on our development machines:
-- `node>=18.15.0`
-- `npm>=9.6.3`
-- `docker>=20.10.23`
+- [x] `node>=18.15.0`
+- [x] `npm>=9.6.3`
+- [ ] `docker>=20.10.23`
 
 ## 🖥️ Local development
 
@@ -46,16 +53,51 @@ npm run start:dev
 
 Some environment variables are required to run the application. You can find them in the `.env.example` file. While most of them are optional, some are required to run the application.
 
+One can reverse engineer the [named configs](./src/config) but some need a little explanation.
+
 Boilerplate, changed mostly locally:
 
 ```dotenv
-# Global env
-API_HOST=0.0.0.0
-API_PORT=3003
-SERVICE_DOMAIN=opensauced.pizza
-
 # GitHub private access tokens
 GITHUB_PAT_USER=ghp_************************************
+
+# DigitalOcean Spaces through aws-sdk configuration
+DO_SPACES_ACCESS_KEY_ID=********************
+DO_SPACES_SECRET_ACCESS_KEY=*******************************************
+```
+
+Ping @open-sauced/maintainers to get the dev CDN keys for the `DO_SPACES_*` variables.
+
+Other Digital Ocean S3 variables are sensibly set to default for local development, here are the defauls:
+
+```dotenv
+DO_SPACES_ENDPOINT=digitaloceanspaces.com
+DO_SPACES_REGION=sfo3
+DO_SPACES_BUCKET_NAME=opengraph-dev
+```
+
+It is also advised to set the following variables to `true` to avoid using the cached CDN during development:
+
+```dotenv
+DO_SPACES_CDN_DISABLED=true
+```
+
+If using a custom domain, you can set the following variable to the domain name:
+
+```dotenv
+DO_SPACES_SUBDOMAIN=beta.opengraph-cdn.opensauced.pizza
+```
+
+Other API defaults you can change are not required in local development, but can sometimes appear configured differently for production:
+
+```dotenv
+API_HOST=0.0.0.0
+API_PORT=3005
+API_DOMAIN=opengraph.opensauced.pizza
+MEMORY_HEAP=200
+MEMORY_RSS=3000
+DISK_PERCENTAGE=0.7
+DISK_SIZE=100
 ```
 
 ### 🎨 Code linting
