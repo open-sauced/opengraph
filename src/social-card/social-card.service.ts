@@ -114,7 +114,7 @@ export class SocialCardService {
     const hash = `users/${String(id)}.png`;
     const fileUrl = `${this.s3FileStorageService.getCdnEndpoint()}${hash}`;
     const hasFile = await this.s3FileStorageService.fileExists(hash);
-    const today3daysAgo = new Date((new Date).setDate((new Date).getDate() - 0.001));
+    const today3daysAgo = new Date((new Date).setDate((new Date).getDate() - 3));
 
     if (hasFile) {
       // route to s3
