@@ -5,6 +5,19 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.0-beta.8](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.7...v1.2.0-beta.8) (2023-04-09)
+
+
+### 🍕 Features
+
+* implement no-content verification strategy ([6efe0e6](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/6efe0e67bb61dc2d0d7aab74744019441b6e777e))
+
+
+### 🐛 Bug Fixes
+
+* correct languages displaying less than 0.5% ([bee0e6e](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/bee0e6e0cf202296c1b137a499bfc48ed481db1f))
+* correct zero contribution top repos language distribution ([7d82c0d](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/7d82c0d0ae279694eb47dd523797f0eea1cb9c9f))
+
 ## [1.2.0-beta.7](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.6...v1.2.0-beta.7) (2023-04-09)
 
 
