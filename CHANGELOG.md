@@ -5,6 +5,15 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.0-beta.6](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.5...v1.2.0-beta.6) (2023-04-09)
+
+
+### 🐛 Bug Fixes
+
+* correct all tailwind classes except gaps ([fe44711](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/fe447116ea17755e389e5d8942ced0e721ce2145)), closes [#7](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/7)
+* correct user languages sizing issues ([5846c42](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/5846c42fc2531b1e085ce1c6e982ac44e2ffd556))
+* correct username display instead of full name ([1454cbb](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/1454cbbd235565a0625c2d051d8c5f2e2115c15a)), closes [#11](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/11)
+
 ## [1.2.0-beta.5](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.4...v1.2.0-beta.5) (2023-04-09)
 
 
