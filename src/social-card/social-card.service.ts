@@ -9,6 +9,7 @@ import userProfileRepos from "./templates/user-profile-repos";
 import userProfileCard from "./templates/user-profile-card";
 import { GithubService } from "../github/github.service";
 import { S3FileStorageService } from "../s3-file-storage/s3-file-storage.service";
+import tailwindConfig from "./templates/tailwind.config";
 
 @Injectable()
 export class SocialCardService {
@@ -108,6 +109,7 @@ export class SocialCardService {
           style: "normal",
         },
       ],
+      tailwindConfig,
     });
 
     const resvg = new Resvg(svg, { background: "rgba(238, 235, 230, .9)" });
