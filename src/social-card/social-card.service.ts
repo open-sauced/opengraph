@@ -77,7 +77,7 @@ export class SocialCardService {
     const { html } = await import("satori-html");
     const satori = (await import("satori")).default;
 
-    const { id, name, avatarUrl, repos, langs, langTotal } = await this.getUserData(username);
+    const { id, avatarUrl, repos, langs, langTotal } = await this.getUserData(username);
     const hash = `users/${String(id)}.png`;
     const fileUrl = `${this.s3FileStorageService.getCdnEndpoint()}${hash}`;
     const hasFile = await this.s3FileStorageService.fileExists(hash);
@@ -94,7 +94,7 @@ export class SocialCardService {
       }
     }
 
-    const template = html(userProfileCard(avatarUrl, name!, userLangs(langs, langTotal), userProfileRepos(repos)));
+    const template = html(userProfileCard(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos)));
 
     const interArrayBuffer = await readFile("node_modules/@fontsource/inter/files/inter-all-400-normal.woff");
 
