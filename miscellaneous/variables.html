@@ -76,6 +76,9 @@
                             <a href="#repoIconWithName" title="src/social-card/templates/repo-icon-with-name.ts" ><b>repoIconWithName</b>&nbsp;&nbsp;&nbsp;(src/.../repo-icon-with-name.ts)</a>
                         </li>
                         <li>
+                            <a href="#tailwindConfig" title="src/social-card/templates/tailwind.config.ts" ><b>tailwindConfig</b>&nbsp;&nbsp;&nbsp;(src/.../tailwind.config.ts)</a>
+                        </li>
+                        <li>
                             <a href="#userLangs" title="src/social-card/templates/user-langs.ts" ><b>userLangs</b>&nbsp;&nbsp;&nbsp;(src/.../user-langs.ts)</a>
                         </li>
                         <li>
@@ -336,50 +339,257 @@ query ($username: String!, $dateSince: DateTime) {
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>(name: string, avatarUrl: string) &#x3D;&gt; &#x60;
-    &lt;div style&#x3D;&quot;
-      flex-direction: row;
-      align-items: center;
-      padding: 8px;
-      gap: 12px;
-      height: 48px;
-      background: #F8F9FA;
-      border: 1px solid #DFE3E6;
-      border-radius: 8px;
-    &quot;&gt;
-      &lt;div style&#x3D;&quot;
-          flex-direction: row;
-          align-items: center;
-          padding: 0px;
-          gap: 6px;
-          height: 32px;
-      &quot;&gt;
-          &lt;img src&#x3D;&quot;${avatarUrl}&quot; style&#x3D;&quot;
-              width: 32px;
-              height: 32px;
-              border-radius: 4px;
-          &quot;/&gt;
-          &lt;div style&#x3D;&quot;
-              flex-direction: row;
-              align-items: flex-start;
-              padding: 0px;
-              gap: 2px;
-              height: 32px;
-          &quot;&gt;
-              &lt;h2 style&#x3D;&quot;
-                  height: 32px;
-                  font-family: &#x27;Inter&#x27;;
-                  font-style: normal;
-                  font-weight: 500;
-                  font-size: 32px;
-                  line-height: 100%;
-                  color: #11181C;
-              &quot;&gt;
-                  ${name}
-              &lt;/h2&gt;
-          &lt;/div&gt;
+  &lt;div tw&#x3D;&quot;border border-zinc-200 rounded-lg bg-gray-50 h-48px p-8px&quot; style&#x3D;&quot;gap: 12px&quot;&gt;
+    &lt;div tw&#x3D;&quot;h-32px&quot; style&#x3D;&quot;gap: 6px&quot;&gt;
+      &lt;img tw&#x3D;&quot;w-32px h-32px rounded&quot; src&#x3D;&quot;${avatarUrl}&quot;/&gt;
+      &lt;div tw&#x3D;&quot;h-32px&quot; style&#x3D;&quot;gap: 2px&quot;&gt;
+        &lt;h2 tw&#x3D;&quot;m-0 not-italic font-medium text-32px leading-32px text-zinc-900&quot;&gt;
+          ${name}
+        &lt;/h2&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-  &#x60;</code>
+  &lt;/div&gt;
+&#x60;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/social-card/templates/tailwind.config.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tailwindConfig"></a>
+                    <span class="name">
+                        <span ><b>tailwindConfig</b></span>
+                        <a href="#tailwindConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  theme: {
+    extend: {
+      screens: {
+        xs: &quot;425px&quot;,
+
+        // &#x3D;&gt; @media (min-width: 425px) { ... }
+
+        &quot;2xl&quot;: &quot;1440px&quot;,
+
+        // &#x3D;&gt; @media (min-width: 1440px) { ... }
+      },
+      blur: { &quot;4xl&quot;: &quot;5rem&quot; },
+      spacing: {
+        &quot;6px&quot;: &quot;6px&quot;,
+        &quot;8px&quot;: &quot;8px&quot;,
+        &quot;12px&quot;: &quot;12px&quot;,
+        &quot;16px&quot;: &quot;16px&quot;,
+        &quot;32px&quot;: &quot;32px&quot;,
+        &quot;48px&quot;: &quot;48px&quot;,
+      },
+      colors: {
+        sauced: { orange: &quot;hsla(19, 100%, 50%, 1)&quot; },
+        gradient: {
+          &quot;dark-two&quot;: &quot;hsl(26, 54%, 15%)&quot;,
+          &quot;dark-one&quot;: &quot;hsl(23, 75%, 5%)&quot;,
+          &quot;orange-one&quot;: &quot;	hsl(33, 100%, 50%)&quot;,
+          &quot;orange-two&quot;: &quot;	hsl(19, 100%, 50%)&quot;,
+        },
+        light: {
+          slate: {
+            1: &quot;hsl(206, 30.0%, 98.8%)&quot;,
+            2: &quot;hsl(210, 16.7%, 97.6%)&quot;,
+            3: &quot;hsl(209, 13.3%, 95.3%)&quot;,
+            4: &quot;hsl(209, 12.2%, 93.2%)&quot;,
+            5: &quot;hsl(208, 11.7%, 91.1%)&quot;,
+            6: &quot;hsl(208, 11.3%, 88.9%)&quot;,
+            7: &quot;hsl(207, 11.1%, 85.9%)&quot;,
+            8: &quot;hsl(205, 10.7%, 78.0%)&quot;,
+            9: &quot;hsl(206, 6.0%, 56.1%)&quot;,
+            10: &quot;hsl(206, 5.8%, 52.3%)&quot;,
+            11: &quot;hsl(206, 6.0%, 43.5%)&quot;,
+            12: &quot;hsl(206, 24.0%, 9.0%)&quot;,
+          },
+          &quot;slate-opacity&quot;: {
+            1: &quot;hsla(210, 92.6%, 26.5%, 0.016)&quot;,
+            2: &quot;hsla(210, 87.7%, 16.0%, 0.028)&quot;,
+            3: &quot;hsla(210, 98.8%, 14.4%, 0.055)&quot;,
+            4: &quot;hsla(210, 94.1%, 11.1%, 0.075)&quot;,
+            5: &quot;hsla(216, 91.1%, 10.9%, 0.099)&quot;,
+            6: &quot;hsla(206, 96.4%, 11.3%, 0.126)&quot;,
+            7: &quot;hsla(210, 99.1%, 10.1%, 0.157)&quot;,
+            8: &quot;hsla(205, 96.5%, 10.0%, 0.244)&quot;,
+            9: &quot;hsla(206, 98.8%, 5.9%, 0.467)&quot;,
+            10: &quot;hsla(206, 99.6%, 5.4%, 0.506)&quot;,
+            11: &quot;hsla(206, 97.0%, 4.8%, 0.593)&quot;,
+            12: &quot;hsla(202, 97.0%, 2.4%, 0.934)&quot;,
+          },
+          orange: {
+            1: &quot;hsl(24, 70.0%, 99.0%)&quot;,
+            2: &quot;hsl(24, 83.3%, 97.6%)&quot;,
+            3: &quot;hsl(24, 100%, 95.3%)&quot;,
+            4: &quot;hsl(25, 100%, 92.2%)&quot;,
+            5: &quot;hsl(25, 100%, 88.2%)&quot;,
+            6: &quot;hsl(25, 100%, 82.8%)&quot;,
+            7: &quot;hsl(24, 100%, 75.3%)&quot;,
+            8: &quot;hsl(24, 94.5%, 64.3%)&quot;,
+            9: &quot;hsl(24, 94.0%, 50.0%)&quot;,
+            10: &quot;hsl(24, 100%, 46.5%)&quot;,
+            11: &quot;hsl(24, 100%, 37.0%)&quot;,
+            12: &quot;hsl(15, 60.0%, 17.0%)&quot;,
+          },
+          blue: {
+            1: &quot;hsl(206, 100%, 99.2%)&quot;,
+            2: &quot;hsl(210, 100%, 98.0%)&quot;,
+            3: &quot;hsl(209, 100%, 96.5%)&quot;,
+            4: &quot;hsl(210, 98.8%, 94.0%)&quot;,
+            5: &quot;hsl(209, 95.0%, 90.1%)&quot;,
+            6: &quot;hsl(209, 81.2%, 84.5%)&quot;,
+            7: &quot;hsl(208, 77.5%, 76.9%)&quot;,
+            8: &quot;hsl(206, 81.9%, 65.3%)&quot;,
+            9: &quot;hsl(206, 100%, 50.0%)&quot;,
+            10: &quot;hsl(208, 100%, 47.3%)&quot;,
+            11: &quot;hsl(211, 100%, 43.2%)&quot;,
+            12: &quot;hsl(211, 100%, 15.0%)&quot;,
+          },
+          red: {
+            1: &quot;hsl(359, 100%, 99.4%)&quot;,
+            2: &quot;hsl(359, 100%, 98.6%)&quot;,
+            3: &quot;hsl(360, 100%, 96.8%)&quot;,
+            4: &quot;hsl(360, 97.9%, 94.8%)&quot;,
+            5: &quot;hsl(360, 90.2%, 91.9%)&quot;,
+            6: &quot;hsl(360, 81.7%, 87.8%)&quot;,
+            7: &quot;hsl(359, 74.2%, 81.7%)&quot;,
+            8: &quot;hsl(359, 69.5%, 74.3%)&quot;,
+            9: &quot;hsl(358, 75.0%, 59.0%)&quot;,
+            10: &quot;hsl(358, 69.4%, 55.2%)&quot;,
+            11: &quot;hsl(358, 65.0%, 48.7%)&quot;,
+            12: &quot;hsl(354, 50.0%, 14.6%)&quot;,
+          },
+          grass: {
+            1: &quot;hsl(116, 50.0%, 98.9%)&quot;,
+            2: &quot;hsl(120, 60.0%, 97.1%)&quot;,
+            3: &quot;hsl(120, 53.6%, 94.8%)&quot;,
+            4: &quot;hsl(121, 47.5%, 91.4%)&quot;,
+            5: &quot;hsl(122, 42.6%, 86.5%)&quot;,
+            6: &quot;hsl(124, 39.0%, 79.7%)&quot;,
+            7: &quot;hsl(126, 37.1%, 70.2%)&quot;,
+            8: &quot;hsl(131, 38.1%, 56.3%)&quot;,
+            9: &quot;hsl(131, 41.0%, 46.5%)&quot;,
+            10: &quot;hsl(132, 43.1%, 42.2%)&quot;,
+            11: &quot;hsl(133, 50.0%, 32.5%)&quot;,
+            12: &quot;hsl(130, 30.0%, 14.9%)&quot;,
+          },
+        },
+        dark: {
+          slate: {
+            1: &quot;hsl(200, 7.0%, 8.8%)&quot;,
+            2: &quot;hsl(195, 7.1%, 11.0%)&quot;,
+            3: &quot;hsl(197, 6.8%, 13.6%)&quot;,
+            4: &quot;hsl(198, 6.6%, 15.8%)&quot;,
+            5: &quot;hsl(199, 6.4%, 17.9%)&quot;,
+            6: &quot;hsl(201, 6.2%, 20.5%)&quot;,
+            7: &quot;hsl(203, 6.0%, 24.3%)&quot;,
+            8: &quot;hsl(207, 5.6%, 31.6%)&quot;,
+            9: &quot;hsl(206, 6.0%, 43.9%)&quot;,
+            10: &quot;hsl(206, 5.2%, 49.5%)&quot;,
+            11: &quot;hsl(206, 6.0%, 63.0%)&quot;,
+            12: &quot;hsl(210, 6.0%, 93.0%)&quot;,
+          },
+          &quot;slate-opacity&quot;: {
+            1: &quot;hsla(0, 0%, 0%, 0)&quot;,
+            2: &quot;hsla(181, 98.9%, 91.8%, 0.026)&quot;,
+            3: &quot;hsla(182, 86.7%, 91.4%, 0.057)&quot;,
+            4: &quot;hsla(209, 86.7%, 93.9%, 0.083)&quot;,
+            5: &quot;hsla(200, 90.3%, 93.4%, 0.109)&quot;,
+            6: &quot;hsla(209, 95.3%, 93.5%, 0.139)&quot;,
+            7: &quot;hsla(204, 98.5%, 93.9%, 0.182)&quot;,
+            8: &quot;hsla(209, 94.0%, 94.7%, 0.265)&quot;,
+            9: &quot;hsla(207, 97.3%, 94.0%, 0.412)&quot;,
+            10: &quot;hsla(209, 99.4%, 95.2%, 0.472)&quot;,
+            11: &quot;hsla(208, 98.7%, 96.8%, 0.615)&quot;,
+            12: &quot;hsla(211, 86.7%, 99.6%, 0.927)&quot;,
+          },
+          orange: {
+            1: &quot;hsl(30, 70.0%, 7.2%)&quot;,
+            2: &quot;hsl(28, 100%, 8.4%)&quot;,
+            3: &quot;hsl(26, 91.1%, 11.6%)&quot;,
+            4: &quot;hsl(25, 88.3%, 14.1%)&quot;,
+            5: &quot;hsl(24, 87.6%, 16.6%)&quot;,
+            6: &quot;hsl(24, 88.6%, 19.8%)&quot;,
+            7: &quot;hsl(24, 92.4%, 24.0%)&quot;,
+            8: &quot;hsl(25, 100%, 29.0%)&quot;,
+            9: &quot;hsl(24, 94.0%, 50.0%)&quot;,
+            10: &quot;hsl(24, 100%, 58.5%)&quot;,
+            11: &quot;hsl(24, 100%, 62.2%)&quot;,
+            12: &quot;hsl(24, 97.0%, 93.2%)&quot;,
+          },
+          blue: {
+            1: &quot;hsl(212, 35.0%, 9.2%)&quot;,
+            2: &quot;hsl(216, 50.0%, 11.8%)&quot;,
+            3: &quot;hsl(214, 59.4%, 15.3%)&quot;,
+            4: &quot;hsl(214, 65.8%, 17.9%)&quot;,
+            5: &quot;hsl(213, 71.2%, 20.2%)&quot;,
+            6: &quot;hsl(212, 77.4%, 23.1%)&quot;,
+            7: &quot;hsl(211, 85.1%, 27.4%)&quot;,
+            8: &quot;hsl(211, 89.7%, 34.1%)&quot;,
+            9: &quot;hsl(206, 100%, 50.0%)&quot;,
+            10: &quot;hsl(209, 100%, 60.6%)&quot;,
+            11: &quot;hsl(210, 100%, 66.1%)&quot;,
+            12: &quot;hsl(206, 98.0%, 95.8%)&quot;,
+          },
+          red: {
+            1: &quot;hsl(353, 23.0%, 9.8%)&quot;,
+            2: &quot;hsl(357, 34.4%, 12.0%)&quot;,
+            3: &quot;hsl(356, 43.4%, 16.4%)&quot;,
+            4: &quot;hsl(356, 47.6%, 19.2%)&quot;,
+            5: &quot;hsl(356, 51.1%, 21.9%)&quot;,
+            6: &quot;hsl(356, 55.2%, 25.9%)&quot;,
+            7: &quot;hsl(357, 60.2%, 31.8%)&quot;,
+            8: &quot;hsl(358, 65.0%, 40.4%)&quot;,
+            9: &quot;hsl(358, 75.0%, 59.0%)&quot;,
+            10: &quot;hsl(358, 85.3%, 64.0%)&quot;,
+            11: &quot;hsl(358, 100%, 69.5%)&quot;,
+            12: &quot;hsl(351, 89.0%, 96.0%)&quot;,
+          },
+          grass: {
+            1: &quot;hsl(146, 30.0%, 7.4%)&quot;,
+            2: &quot;hsl(136, 33.3%, 8.8%)&quot;,
+            3: &quot;hsl(137, 36.0%, 11.4%)&quot;,
+            4: &quot;hsl(137, 37.6%, 13.7%)&quot;,
+            5: &quot;hsl(136, 38.7%, 16.0%)&quot;,
+            6: &quot;hsl(135, 39.6%, 19.1%)&quot;,
+            7: &quot;hsl(134, 40.3%, 23.8%)&quot;,
+            8: &quot;hsl(131, 40.1%, 30.8%)&quot;,
+            9: &quot;hsl(131, 41.0%, 46.5%)&quot;,
+            10: &quot;hsl(131, 39.0%, 52.1%)&quot;,
+            11: &quot;hsl(131, 43.0%, 57.2%)&quot;,
+            12: &quot;hsl(137, 72.0%, 94.0%)&quot;,
+          },
+        },
+      },
+      boxShadow: {
+        login: &quot;0px 64px 100px -80px #FF5F13, 0px 16px 56px rgba(181, 107, 72, 0.19)&quot;,
+        superlative: &quot;0px 22px 24px -8px rgba(0, 0, 0, 0.05), 0px 4px 8px rgba(0, 0, 0, 0.1)&quot;,
+        paginate: &quot;0px 1px 2px rgba(237, 95, 0, 0.05), 0px 1px 1px rgba(237, 95, 0, 0.05)&quot;,
+        input: &quot;0px 1px 2px rgba(17, 24, 28, 0.05), 0px 1px 1px rgba(17, 24, 28, 0.05)&quot;,
+      },
+      backgroundImage: { &quot;gradient-radial&quot;: &quot;radial-gradient(var(--tw-gradient-stops))&quot; },
+    },
+  },
+}</code>
                     </td>
                 </tr>
 
@@ -433,14 +643,7 @@ query ($username: String!, $dateSince: DateTime) {
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>(avatarUrl: string, name: string, langs: string, repos: string): string &#x3D;&gt; &#x60;
-  &lt;style&gt;
-  * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-
-  }
-
+&lt;style&gt;
   div {
     display: flex;
   }

@@ -125,7 +125,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/social-card/social-card.service.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/social-card/social-card.service.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -214,8 +214,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="69"
-                            class="link-to-prism">src/social-card/social-card.service.ts:69</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="70"
+                            class="link-to-prism">src/social-card/social-card.service.ts:70</a></div>
                 </td>
             </tr>
 
@@ -285,8 +285,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/social-card/social-card.service.ts:23</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="24"
+                            class="link-to-prism">src/social-card/social-card.service.ts:24</a></div>
                 </td>
             </tr>
 
@@ -360,7 +360,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/social-card/social-card.service.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/social-card/social-card.service.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -384,6 +384,7 @@ import userProfileRepos from &quot;./templates/user-profile-repos&quot;;
 import userProfileCard from &quot;./templates/user-profile-card&quot;;
 import { GithubService } from &quot;../github/github.service&quot;;
 import { S3FileStorageService } from &quot;../s3-file-storage/s3-file-storage.service&quot;;
+import tailwindConfig from &quot;./templates/tailwind.config&quot;;
 
 @Injectable()
 export class SocialCardService {
@@ -434,7 +435,7 @@ export class SocialCardService {
     return {
       id: user.databaseId,
       name: user.name,
-      langs: Array.from(Object.values(langs)),
+      langs: Array.from(Object.values(langs)).sort((a, b) &#x3D;&gt; b.size - a.size),
       langTotal,
       repos: user.topRepositories.nodes?.filter(repo &#x3D;&gt; !repo?.isPrivate &amp;&amp; repo?.owner.login !&#x3D;&#x3D; username) as Repository[],
       avatarUrl: &#x60;${String(user.avatarUrl)}&amp;size&#x3D;150&#x60;,
@@ -483,6 +484,7 @@ export class SocialCardService {
           style: &quot;normal&quot;,
         },
       ],
+      tailwindConfig,
     });
 
     const resvg &#x3D; new Resvg(svg, { background: &quot;rgba(238, 235, 230, .9)&quot; });
