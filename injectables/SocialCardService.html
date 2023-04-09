@@ -96,6 +96,10 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Async</span>
+                                <a href="#checkRequiresUpdate" >checkRequiresUpdate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
                                 <a href="#getUserCard" >getUserCard</a>
                             </li>
                             <li>
@@ -125,7 +129,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/social-card/social-card.service.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/social-card/social-card.service.ts:23</a></div>
                             </td>
                         </tr>
 
@@ -196,6 +200,77 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="checkRequiresUpdate"></a>
+                    <span class="name">
+                        <span class="modifier">Async</span>
+                        <span ><b>checkRequiresUpdate</b></span>
+                        <a href="#checkRequiresUpdate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>checkRequiresUpdate(username: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="77"
+                            class="link-to-prism">src/social-card/social-card.service.ts:77</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>username</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/RequiresUpdateMeta.html" target="_self" >Promise&lt;RequiresUpdateMeta&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getUserCard"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
@@ -214,8 +289,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="70"
-                            class="link-to-prism">src/social-card/social-card.service.ts:70</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="103"
+                            class="link-to-prism">src/social-card/social-card.service.ts:103</a></div>
                 </td>
             </tr>
 
@@ -285,8 +360,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">src/social-card/social-card.service.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="31"
+                            class="link-to-prism">src/social-card/social-card.service.ts:31</a></div>
                 </td>
             </tr>
 
@@ -360,7 +435,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/social-card/social-card.service.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/social-card/social-card.service.ts:23</a></div>
                         </td>
                     </tr>
 
@@ -385,6 +460,13 @@ import userProfileCard from &quot;./templates/user-profile-card&quot;;
 import { GithubService } from &quot;../github/github.service&quot;;
 import { S3FileStorageService } from &quot;../s3-file-storage/s3-file-storage.service&quot;;
 import tailwindConfig from &quot;./templates/tailwind.config&quot;;
+
+interface RequiresUpdateMeta {
+  fileUrl: string,
+  hasFile: boolean;
+  needsUpdate: boolean;
+  lastModified: Date | null,
+}
 
 @Injectable()
 export class SocialCardService {
@@ -442,6 +524,32 @@ export class SocialCardService {
     };
   }
 
+  async checkRequiresUpdate (username: string): Promise&lt;RequiresUpdateMeta&gt; {
+    const hash &#x3D; &#x60;users/${String(username)}.png&#x60;;
+    const fileUrl &#x3D; &#x60;${this.s3FileStorageService.getCdnEndpoint()}${hash}&#x60;;
+    const hasFile &#x3D; await this.s3FileStorageService.fileExists(hash);
+    const today3daysAgo &#x3D; new Date((new Date).setDate((new Date).getDate() - 0.001));
+    const returnVal: RequiresUpdateMeta &#x3D; {
+      fileUrl,
+      hasFile,
+      needsUpdate: true,
+      lastModified: null,
+    };
+
+    if (hasFile) {
+      const lastModified &#x3D; await this.s3FileStorageService.getFileLastModified(hash);
+
+      returnVal.lastModified &#x3D; lastModified;
+
+      if (lastModified &amp;&amp; lastModified &gt; today3daysAgo) {
+        this.logger.debug(&#x60;User ${username} exists in S3 with lastModified: ${lastModified.toISOString()} less than 3 days ago, redirecting to ${fileUrl}&#x60;);
+        returnVal.needsUpdate &#x3D; true;
+      }
+    }
+
+    return returnVal;
+  }
+
   async getUserCard (username: string): Promise&lt;string&gt; {
     const { remaining } &#x3D; await this.githubService.rateLimit();
 
@@ -456,15 +564,14 @@ export class SocialCardService {
     const hash &#x3D; &#x60;users/${String(id)}.png&#x60;;
     const fileUrl &#x3D; &#x60;${this.s3FileStorageService.getCdnEndpoint()}${hash}&#x60;;
     const hasFile &#x3D; await this.s3FileStorageService.fileExists(hash);
-    const today &#x3D; (new Date);
-    const today3daysAgo &#x3D; new Date((new Date).setDate(today.getDate() - 3));
+    const today3daysAgo &#x3D; new Date((new Date).setDate((new Date).getDate() - 3));
 
     if (hasFile) {
       // route to s3
       const lastModified &#x3D; await this.s3FileStorageService.getFileLastModified(hash);
 
       if (lastModified &amp;&amp; lastModified &gt; today3daysAgo) {
-        this.logger.debug(&#x60;User ${username} exists in S3 with lastModified: ${lastModified.toISOString()} higher than 3 days ago, redirecting&#x60;);
+        this.logger.debug(&#x60;User ${username} exists in S3 with lastModified: ${lastModified.toISOString()} less than 3 days ago, redirecting&#x60;);
         return fileUrl;
       }
     }
@@ -493,7 +600,7 @@ export class SocialCardService {
 
     const pngBuffer &#x3D; pngData.asPng();
 
-    await this.s3FileStorageService.uploadFile(pngBuffer, hash, &quot;image/png&quot;);
+    await this.s3FileStorageService.uploadFile(pngBuffer, hash, &quot;image/png&quot;, { &quot;x-amz-meta-user-id&quot;: String(id) });
 
     this.logger.debug(&#x60;User ${username} did not exist in S3, generated image and uploaded to S3, redirecting&#x60;);
 

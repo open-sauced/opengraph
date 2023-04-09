@@ -337,15 +337,15 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>uploadFile(fileContent: Buffer | Readable, hash: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, contentType: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>uploadFile(fileContent: Buffer | Readable, hash: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, contentType: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, metadata?: Record<string | string>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="76"
-                            class="link-to-prism">src/s3-file-storage/s3-file-storage.service.ts:76</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="74"
+                            class="link-to-prism">src/s3-file-storage/s3-file-storage.service.ts:74</a></div>
                 </td>
             </tr>
 
@@ -397,6 +397,18 @@
 
                                     <td>
                                         No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>metadata</td>
+                                    <td>
+                                            <code>Record&lt;string | string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
                                     </td>
 
 
@@ -572,8 +584,6 @@ export class S3FileStorageService {
 
       return response.LastModified ?? null;
     } catch (error) {
-      console.error(error);
-
       if (error instanceof Error) {
         if (error.name &#x3D;&#x3D;&#x3D; &quot;NotFound&quot;) {
           return null;
@@ -588,6 +598,7 @@ export class S3FileStorageService {
     fileContent: Buffer | Readable,
     hash: string,
     contentType: string,
+    metadata?: Record&lt;string, string&gt;,
   ): Promise&lt;void&gt; {
     await this.s3Client.send(
       new PutObjectCommand({
@@ -596,6 +607,7 @@ export class S3FileStorageService {
         Body: fileContent,
         ContentType: contentType,
         ACL: &quot;public-read&quot;,
+        Metadata: metadata,
       }),
     );
   }

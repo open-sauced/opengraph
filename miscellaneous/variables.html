@@ -616,14 +616,18 @@ query ($username: String!, $dateSince: DateTime) {
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>(langs: (Language &amp; { size: number })[], totalCount &#x3D; 0, joinLiteral &#x3D; &quot;&quot;) &#x3D;&gt;
-  langs
-    .map(({ color, size }) &#x3D;&gt; {
-      const realPercent &#x3D; size / totalCount * 100;
+                        <i>Default value : </i><code>(langs: (Language &amp; { size: number })[], totalCount &#x3D; 0, joinLiteral &#x3D; &quot;&quot;) &#x3D;&gt; {
+  const filteredLangs &#x3D; langs
+    .filter(({ size }) &#x3D;&gt; size &gt; 0 &amp;&amp; !((size / totalCount) * 100 &lt; 0.5));
 
-      return &#x60;&lt;div tw&#x3D;&quot;h-12px ${color ? &#x60;bg-[${color}]&#x60; : &quot;bg-black&quot;}&quot; style&#x3D;&quot;width: ${totalCount &gt; 0 ? realPercent : 100 / langs.length}%&quot;/&gt;&#x60;;
+  return filteredLangs
+    .map(({ color, size }) &#x3D;&gt; {
+      const realPercent &#x3D; Math.round(size / totalCount * 100);
+
+      return &#x60;&lt;div tw&#x3D;&quot;h-12px ${color ? &#x60;bg-[${color}]&#x60; : &quot;bg-black&quot;}&quot; style&#x3D;&quot;width: ${totalCount &gt; 0 ? realPercent : 100 / filteredLangs.length}%&quot;/&gt;&#x60;;
     })
-    .join(joinLiteral)</code>
+    .join(joinLiteral);
+}</code>
                     </td>
                 </tr>
 
