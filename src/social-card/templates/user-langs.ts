@@ -8,7 +8,7 @@ const userLangs = (langs: (Language & { size: number })[], totalCount = 0, joinL
     .map(({ color, size }) => {
       const realPercent = Math.round(size / totalCount * 100);
 
-      return `<div tw="h-12px ${color ? `bg-[${color}]` : "bg-black"}" style="width: ${totalCount > 0 ? realPercent : 100 / langs.length}%"/>`;
+      return `<div tw="h-12px ${color ? `bg-[${color}]` : "bg-black"}" style="width: ${totalCount > 0 ? realPercent : 100 / filteredLangs.length}%"/>`;
     })
     .join(joinLiteral);
 };
