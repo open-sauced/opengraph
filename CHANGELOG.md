@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.0-beta.7](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.6...v1.2.0-beta.7) (2023-04-09)
+
+
+### 📝 Documentation
+
+* update live environments lins and document local development ([08cead1](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/08cead19189d14ff4d01a23584400c284818a091))
+
 ## [1.2.0-beta.6](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.5...v1.2.0-beta.6) (2023-04-09)
 
 
