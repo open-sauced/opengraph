@@ -61,8 +61,6 @@ export class S3FileStorageService {
 
       return response.LastModified ?? null;
     } catch (error) {
-      console.error(error);
-
       if (error instanceof Error) {
         if (error.name === "NotFound") {
           return null;
@@ -77,6 +75,7 @@ export class S3FileStorageService {
     fileContent: Buffer | Readable,
     hash: string,
     contentType: string,
+    metadata?: Record<string, string>,
   ): Promise<void> {
     await this.s3Client.send(
       new PutObjectCommand({
@@ -85,6 +84,7 @@ export class S3FileStorageService {
         Body: fileContent,
         ContentType: contentType,
         ACL: "public-read",
+        Metadata: metadata,
       }),
     );
   }

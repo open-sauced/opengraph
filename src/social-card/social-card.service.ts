@@ -11,6 +11,13 @@ import { GithubService } from "../github/github.service";
 import { S3FileStorageService } from "../s3-file-storage/s3-file-storage.service";
 import tailwindConfig from "./templates/tailwind.config";
 
+interface RequiresUpdateMeta {
+  fileUrl: string,
+  hasFile: boolean;
+  needsUpdate: boolean;
+  lastModified: Date | null,
+}
+
 @Injectable()
 export class SocialCardService {
   private readonly logger = new Logger(this.constructor.name);
@@ -67,6 +74,32 @@ export class SocialCardService {
     };
   }
 
+  async checkRequiresUpdate (username: string): Promise<RequiresUpdateMeta> {
+    const hash = `users/${String(username)}.png`;
+    const fileUrl = `${this.s3FileStorageService.getCdnEndpoint()}${hash}`;
+    const hasFile = await this.s3FileStorageService.fileExists(hash);
+    const today3daysAgo = new Date((new Date).setDate((new Date).getDate() - 0.001));
+    const returnVal: RequiresUpdateMeta = {
+      fileUrl,
+      hasFile,
+      needsUpdate: true,
+      lastModified: null,
+    };
+
+    if (hasFile) {
+      const lastModified = await this.s3FileStorageService.getFileLastModified(hash);
+
+      returnVal.lastModified = lastModified;
+
+      if (lastModified && lastModified > today3daysAgo) {
+        this.logger.debug(`User ${username} exists in S3 with lastModified: ${lastModified.toISOString()} less than 3 days ago, redirecting to ${fileUrl}`);
+        returnVal.needsUpdate = true;
+      }
+    }
+
+    return returnVal;
+  }
+
   async getUserCard (username: string): Promise<string> {
     const { remaining } = await this.githubService.rateLimit();
 
@@ -81,15 +114,14 @@ export class SocialCardService {
     const hash = `users/${String(id)}.png`;
     const fileUrl = `${this.s3FileStorageService.getCdnEndpoint()}${hash}`;
     const hasFile = await this.s3FileStorageService.fileExists(hash);
-    const today = (new Date);
-    const today3daysAgo = new Date((new Date).setDate(today.getDate() - 3));
+    const today3daysAgo = new Date((new Date).setDate((new Date).getDate() - 0.001));
 
     if (hasFile) {
       // route to s3
       const lastModified = await this.s3FileStorageService.getFileLastModified(hash);
 
       if (lastModified && lastModified > today3daysAgo) {
-        this.logger.debug(`User ${username} exists in S3 with lastModified: ${lastModified.toISOString()} higher than 3 days ago, redirecting`);
+        this.logger.debug(`User ${username} exists in S3 with lastModified: ${lastModified.toISOString()} less than 3 days ago, redirecting`);
         return fileUrl;
       }
     }
@@ -118,7 +150,7 @@ export class SocialCardService {
 
     const pngBuffer = pngData.asPng();
 
-    await this.s3FileStorageService.uploadFile(pngBuffer, hash, "image/png");
+    await this.s3FileStorageService.uploadFile(pngBuffer, hash, "image/png", { "x-amz-meta-user-id": String(id) });
 
     this.logger.debug(`User ${username} did not exist in S3, generated image and uploaded to S3, redirecting`);
 

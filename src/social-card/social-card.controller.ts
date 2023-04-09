@@ -1,5 +1,12 @@
-import { Controller, Get, Header, Param, Redirect, StreamableFile } from "@nestjs/common";
-import { ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
+import { Controller, Get, Head, Header, HttpStatus, Param, Redirect, Res, StreamableFile } from "@nestjs/common";
+import {
+  ApiNoContentResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiOperation, ApiResponse,
+  ApiTags,
+} from "@nestjs/swagger";
+import { FastifyReply } from "fastify";
 
 import { SocialCardService } from "./social-card.service";
 
@@ -10,20 +17,40 @@ export class SocialCardController {
     private readonly socialCardService: SocialCardService,
   ) {}
 
+  @Head("/:username")
+  @ApiNoContentResponse({ description: "User social card image is up to date", status: HttpStatus.NO_CONTENT })
+  @ApiResponse({ description: "User social card image needs regeneration", status: HttpStatus.NOT_MODIFIED })
+  @ApiNotFoundResponse({ description: "User social card image not found", status: HttpStatus.NOT_FOUND })
+  async checkUserSocialCard (
+    @Param("username") username: string,
+      @Res() res: FastifyReply,
+  ): Promise<void> {
+    const { fileUrl, hasFile, needsUpdate, lastModified } = await this.socialCardService.checkRequiresUpdate(username);
+
+    return res
+      .headers({
+        "x-amz-meta-last-modified": lastModified?.toISOString() ?? "",
+        "x-amz-meta-location": fileUrl,
+      })
+      .status(hasFile ? needsUpdate ? HttpStatus.NOT_MODIFIED : HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND)
+      .send();
+  }
+
   @Get("/:username")
   @ApiOperation({
     operationId: "generateUserSocialCard",
     summary: "Gets latest cache aware social card link for :username or generates a new one",
   })
   @Header("Content-Type", "image/png")
-  @ApiOkResponse({ type: StreamableFile })
+  @ApiOkResponse({ type: StreamableFile, description: "Social card image" })
   @ApiNotFoundResponse({ description: "User not found" })
   @Redirect()
   async generateUserSocialCard (
     @Param("username") username: string,
-  ): Promise<{ url: string }> {
+      @Res() res: FastifyReply,
+  ): Promise<void> {
     const url = await this.socialCardService.getUserCard(username);
 
-    return { url };
+    return res.status(302).redirect(url);
   }
 }
