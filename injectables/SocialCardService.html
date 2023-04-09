@@ -452,7 +452,7 @@ export class SocialCardService {
     const { html } &#x3D; await import(&quot;satori-html&quot;);
     const satori &#x3D; (await import(&quot;satori&quot;)).default;
 
-    const { id, name, avatarUrl, repos, langs, langTotal } &#x3D; await this.getUserData(username);
+    const { id, avatarUrl, repos, langs, langTotal } &#x3D; await this.getUserData(username);
     const hash &#x3D; &#x60;users/${String(id)}.png&#x60;;
     const fileUrl &#x3D; &#x60;${this.s3FileStorageService.getCdnEndpoint()}${hash}&#x60;;
     const hasFile &#x3D; await this.s3FileStorageService.fileExists(hash);
@@ -469,7 +469,7 @@ export class SocialCardService {
       }
     }
 
-    const template &#x3D; html(userProfileCard(avatarUrl, name!, userLangs(langs, langTotal), userProfileRepos(repos)));
+    const template &#x3D; html(userProfileCard(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos)));
 
     const interArrayBuffer &#x3D; await readFile(&quot;node_modules/@fontsource/inter/files/inter-all-400-normal.woff&quot;);
 
