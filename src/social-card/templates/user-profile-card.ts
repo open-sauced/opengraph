@@ -1,12 +1,5 @@
 const userProfileCard = (avatarUrl: string, name: string, langs: string, repos: string): string => `
-  <style>
-  * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-
-  }
-
+<style>
   div {
     display: flex;
   }
