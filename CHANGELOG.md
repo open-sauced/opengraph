@@ -5,6 +5,18 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.0-beta.5](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.4...v1.2.0-beta.5) (2023-04-09)
+
+
+### 🎨 Styles
+
+* add tailwind proof of concept ([8594508](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/8594508a07a103fe6e209b1895c7c803e171eecb))
+
+
+### 🐛 Bug Fixes
+
+* correct yoga layout double styling, remove repo icon extrenaous classes ([d84015b](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/d84015bf1264397d9ac6ff18b7c5344f237708ff))
+
 ## [1.2.0-beta.4](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.3...v1.2.0-beta.4) (2023-04-08)
 
 
