@@ -1,4 +1,4 @@
-import { Controller, Get, Head, Header, HttpStatus, Param, Redirect, Res, StreamableFile } from "@nestjs/common";
+import { Controller, Get, Header, HttpStatus, Param, Redirect, Res, StreamableFile } from "@nestjs/common";
 import {
   ApiForbiddenResponse,
   ApiNoContentResponse,
@@ -18,25 +18,6 @@ export class SocialCardController {
     private readonly socialCardService: SocialCardService,
   ) {}
 
-  @Head("/:username")
-  @ApiNoContentResponse({ description: "User social card image is up to date", status: HttpStatus.NO_CONTENT })
-  @ApiResponse({ description: "User social card image needs regeneration", status: HttpStatus.NOT_MODIFIED })
-  @ApiNotFoundResponse({ description: "User social card image not found", status: HttpStatus.NOT_FOUND })
-  async checkUserSocialCard (
-    @Param("username") username: string,
-      @Res() res: FastifyReply,
-  ): Promise<void> {
-    const { fileUrl, hasFile, needsUpdate, lastModified } = await this.socialCardService.checkRequiresUpdate(username);
-
-    return res
-      .headers({
-        "x-amz-meta-last-modified": lastModified?.toISOString() ?? "",
-        "x-amz-meta-location": fileUrl,
-      })
-      .status(hasFile ? needsUpdate ? HttpStatus.NOT_MODIFIED : HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND)
-      .send();
-  }
-
   @Get("/:username")
   @ApiOperation({
     operationId: "generateUserSocialCard",
@@ -49,7 +30,7 @@ export class SocialCardController {
   @Redirect()
   async generateUserSocialCard (
     @Param("username") username: string,
-      @Res() res: FastifyReply,
+      @Res({ passthrough: true }) res: FastifyReply,
   ): Promise<void> {
     const { fileUrl, hasFile, needsUpdate } = await this.socialCardService.checkRequiresUpdate(username);
 
@@ -60,5 +41,28 @@ export class SocialCardController {
     const url = await this.socialCardService.getUserCard(username);
 
     return res.status(HttpStatus.FOUND).redirect(url);
+  }
+
+  @Get("/:username/metadata")
+  @ApiOperation({
+    operationId: "getUserSocialCardMetadata",
+    summary: "Gets latest cache aware social card metadata for :username",
+  })
+  @ApiNoContentResponse({ description: "User social card image is up to date", status: HttpStatus.NO_CONTENT })
+  @ApiResponse({ description: "User social card image needs regeneration", status: HttpStatus.NOT_MODIFIED })
+  @ApiNotFoundResponse({ description: "User social card image not found", status: HttpStatus.NOT_FOUND })
+  async checkUserSocialCard (
+    @Param("username") username: string,
+      @Res({ passthrough: true }) res: FastifyReply,
+  ): Promise<void> {
+    const { fileUrl, hasFile, needsUpdate, lastModified } = await this.socialCardService.checkRequiresUpdate(username);
+
+    return res
+      .headers({
+        "x-amz-meta-last-modified": lastModified?.toISOString() ?? "",
+        "x-amz-meta-location": fileUrl,
+      })
+      .status(hasFile ? needsUpdate ? HttpStatus.NOT_MODIFIED : HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND)
+      .send();
   }
 }
