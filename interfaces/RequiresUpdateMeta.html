@@ -261,11 +261,11 @@ import { Resvg } from &quot;@resvg/resvg-js&quot;;
 import { Repository, Language, User } from &quot;@octokit/graphql-schema&quot;;
 import { readFile } from &quot;node:fs/promises&quot;;
 
+import { GithubService } from &quot;../github/github.service&quot;;
+import { S3FileStorageService } from &quot;../s3-file-storage/s3-file-storage.service&quot;;
 import userLangs from &quot;./templates/user-langs&quot;;
 import userProfileRepos from &quot;./templates/user-profile-repos&quot;;
 import userProfileCard from &quot;./templates/user-profile-card&quot;;
-import { GithubService } from &quot;../github/github.service&quot;;
-import { S3FileStorageService } from &quot;../s3-file-storage/s3-file-storage.service&quot;;
 import tailwindConfig from &quot;./templates/tailwind.config&quot;;
 
 interface RequiresUpdateMeta {
