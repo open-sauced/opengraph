@@ -448,7 +448,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Logger } from &quot;@nestjs/common&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ForbiddenException, Injectable, Logger, NotFoundException } from &quot;@nestjs/common&quot;;
 import { HttpService } from &quot;@nestjs/axios&quot;;
 import { Resvg } from &quot;@resvg/resvg-js&quot;;
 import { Repository, Language, User } from &quot;@octokit/graphql-schema&quot;;
@@ -528,7 +528,7 @@ export class SocialCardService {
     const hash &#x3D; &#x60;users/${String(username)}.png&#x60;;
     const fileUrl &#x3D; &#x60;${this.s3FileStorageService.getCdnEndpoint()}${hash}&#x60;;
     const hasFile &#x3D; await this.s3FileStorageService.fileExists(hash);
-    const today3daysAgo &#x3D; new Date((new Date).setDate((new Date).getDate() - 0.001));
+    const today3daysAgo &#x3D; new Date((new Date).setDate((new Date).getDate() - 3));
     const returnVal: RequiresUpdateMeta &#x3D; {
       fileUrl,
       hasFile,
@@ -543,7 +543,7 @@ export class SocialCardService {
 
       if (lastModified &amp;&amp; lastModified &gt; today3daysAgo) {
         this.logger.debug(&#x60;User ${username} exists in S3 with lastModified: ${lastModified.toISOString()} less than 3 days ago, redirecting to ${fileUrl}&#x60;);
-        returnVal.needsUpdate &#x3D; true;
+        returnVal.needsUpdate &#x3D; false;
       }
     }
 
@@ -554,57 +554,51 @@ export class SocialCardService {
     const { remaining } &#x3D; await this.githubService.rateLimit();
 
     if (remaining &lt; 1000) {
-      throw new Error(&quot;Rate limit exceeded&quot;);
+      throw new ForbiddenException(&quot;Rate limit exceeded&quot;);
     }
 
     const { html } &#x3D; await import(&quot;satori-html&quot;);
     const satori &#x3D; (await import(&quot;satori&quot;)).default;
 
-    const { id, avatarUrl, repos, langs, langTotal } &#x3D; await this.getUserData(username);
-    const hash &#x3D; &#x60;users/${String(id)}.png&#x60;;
-    const fileUrl &#x3D; &#x60;${this.s3FileStorageService.getCdnEndpoint()}${hash}&#x60;;
-    const hasFile &#x3D; await this.s3FileStorageService.fileExists(hash);
-    const today3daysAgo &#x3D; new Date((new Date).setDate((new Date).getDate() - 3));
+    try {
+      const { id, avatarUrl, repos, langs, langTotal } &#x3D; await this.getUserData(username);
+      const hash &#x3D; &#x60;users/${String(username)}.png&#x60;;
+      const fileUrl &#x3D; &#x60;${this.s3FileStorageService.getCdnEndpoint()}${hash}&#x60;;
 
-    if (hasFile) {
-      // route to s3
-      const lastModified &#x3D; await this.s3FileStorageService.getFileLastModified(hash);
+      const template &#x3D; html(userProfileCard(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos)));
 
-      if (lastModified &amp;&amp; lastModified &gt; today3daysAgo) {
-        this.logger.debug(&#x60;User ${username} exists in S3 with lastModified: ${lastModified.toISOString()} less than 3 days ago, redirecting&#x60;);
-        return fileUrl;
-      }
+      const interArrayBuffer &#x3D; await readFile(&quot;node_modules/@fontsource/inter/files/inter-all-400-normal.woff&quot;);
+
+      const svg &#x3D; await satori(template, {
+        width: 1200,
+        height: 627,
+        fonts: [
+          {
+            name: &quot;Inter&quot;,
+            data: interArrayBuffer,
+            weight: 400,
+            style: &quot;normal&quot;,
+          },
+        ],
+        tailwindConfig,
+      });
+
+      const resvg &#x3D; new Resvg(svg, { background: &quot;rgba(238, 235, 230, .9)&quot; });
+
+      const pngData &#x3D; resvg.render();
+
+      const pngBuffer &#x3D; pngData.asPng();
+
+      await this.s3FileStorageService.uploadFile(pngBuffer, hash, &quot;image/png&quot;, { &quot;x-amz-meta-user-id&quot;: String(id) });
+
+      this.logger.debug(&#x60;User ${username} did not exist in S3, generated image and uploaded to S3, redirecting&#x60;);
+
+      return fileUrl;
+    } catch (e) {
+      this.logger.error(&#x60;Error generating user card for ${username}&#x60;, e);
+
+      throw (new NotFoundException);
     }
-
-    const template &#x3D; html(userProfileCard(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos)));
-
-    const interArrayBuffer &#x3D; await readFile(&quot;node_modules/@fontsource/inter/files/inter-all-400-normal.woff&quot;);
-
-    const svg &#x3D; await satori(template, {
-      width: 1200,
-      height: 627,
-      fonts: [
-        {
-          name: &quot;Inter&quot;,
-          data: interArrayBuffer,
-          weight: 400,
-          style: &quot;normal&quot;,
-        },
-      ],
-      tailwindConfig,
-    });
-
-    const resvg &#x3D; new Resvg(svg, { background: &quot;rgba(238, 235, 230, .9)&quot; });
-
-    const pngData &#x3D; resvg.render();
-
-    const pngBuffer &#x3D; pngData.asPng();
-
-    await this.s3FileStorageService.uploadFile(pngBuffer, hash, &quot;image/png&quot;, { &quot;x-amz-meta-user-id&quot;: String(id) });
-
-    this.logger.debug(&#x60;User ${username} did not exist in S3, generated image and uploaded to S3, redirecting&#x60;);
-
-    return fileUrl;
   }
 }
 </code></pre>

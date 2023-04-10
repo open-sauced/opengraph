@@ -137,8 +137,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="24"
-                            class="link-to-prism">src/social-card/social-card.controller.ts:24</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/social-card/social-card.controller.ts:25</a></div>
                 </td>
             </tr>
 
@@ -221,14 +221,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Get(&#x27;/:username&#x27;)<br />@ApiOperation({operationId: &#x27;generateUserSocialCard&#x27;, summary: &#x27;Gets latest cache aware social card link for :username or generates a new one&#x27;})<br />@Header(&#x27;Content-Type&#x27;, &#x27;image/png&#x27;)<br />@ApiOkResponse({type: StreamableFile, description: &#x27;Social card image&#x27;})<br />@ApiNotFoundResponse({description: &#x27;User not found&#x27;})<br />@Redirect()<br /></code>
+                    <code>@Get(&#x27;/:username&#x27;)<br />@ApiOperation({operationId: &#x27;generateUserSocialCard&#x27;, summary: &#x27;Gets latest cache aware social card link for :username or generates a new one&#x27;})<br />@Header(&#x27;Content-Type&#x27;, &#x27;image/png&#x27;)<br />@ApiOkResponse({type: StreamableFile, description: &#x27;Social card image&#x27;})<br />@ApiNotFoundResponse({description: &#x27;User not found&#x27;})<br />@ApiForbiddenResponse({description: &#x27;Rate limit exceeded&#x27;})<br />@Redirect()<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="48"
-                            class="link-to-prism">src/social-card/social-card.controller.ts:48</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="50"
+                            class="link-to-prism">src/social-card/social-card.controller.ts:50</a></div>
                 </td>
             </tr>
 
@@ -294,6 +294,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Controller, Get, Head, Header, HttpStatus, Param, Redirect, Res, StreamableFile } from &quot;@nestjs/common&quot;;
 import {
+  ApiForbiddenResponse,
   ApiNoContentResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
@@ -338,14 +339,21 @@ export class SocialCardController {
   @Header(&quot;Content-Type&quot;, &quot;image/png&quot;)
   @ApiOkResponse({ type: StreamableFile, description: &quot;Social card image&quot; })
   @ApiNotFoundResponse({ description: &quot;User not found&quot; })
+  @ApiForbiddenResponse({ description: &quot;Rate limit exceeded&quot; })
   @Redirect()
   async generateUserSocialCard (
     @Param(&quot;username&quot;) username: string,
       @Res() res: FastifyReply,
   ): Promise&lt;void&gt; {
+    const { fileUrl, hasFile, needsUpdate } &#x3D; await this.socialCardService.checkRequiresUpdate(username);
+
+    if (hasFile &amp;&amp; !needsUpdate) {
+      return res.status(HttpStatus.FOUND).redirect(fileUrl);
+    }
+
     const url &#x3D; await this.socialCardService.getUserCard(username);
 
-    return res.status(302).redirect(url);
+    return res.status(HttpStatus.FOUND).redirect(url);
   }
 }
 </code></pre>
