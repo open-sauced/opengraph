@@ -5,6 +5,18 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.0-beta.9](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.8...v1.2.0-beta.9) (2023-04-10)
+
+
+### 🍕 Features
+
+* optimize image loading and return errors ([7c6f199](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/7c6f1995bb2922bfd9cd9e26230afd079e2e6342)), closes [#17](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/17)
+
+
+### 🤖 Build System
+
+* update dependencies and ts5 ([715e349](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/715e349e1c398a37d35553e9a907742452b67601))
+
 ## [1.2.0-beta.8](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.7...v1.2.0-beta.8) (2023-04-09)
 
 
