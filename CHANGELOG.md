@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.2.0-beta.10](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.9...v1.2.0-beta.10) (2023-04-10)
+
+
+### 🐛 Bug Fixes
+
+* correct app spec GET automatic rewrites of HEAD ([3047cec](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/3047cec62aff770abb4fe97d736c18790e406fa8))
+
 ## [1.2.0-beta.9](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.8...v1.2.0-beta.9) (2023-04-10)
 
 
