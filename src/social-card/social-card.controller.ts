@@ -1,5 +1,6 @@
 import { Controller, Get, Head, Header, HttpStatus, Param, Redirect, Res, StreamableFile } from "@nestjs/common";
 import {
+  ApiForbiddenResponse,
   ApiNoContentResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
@@ -44,13 +45,20 @@ export class SocialCardController {
   @Header("Content-Type", "image/png")
   @ApiOkResponse({ type: StreamableFile, description: "Social card image" })
   @ApiNotFoundResponse({ description: "User not found" })
+  @ApiForbiddenResponse({ description: "Rate limit exceeded" })
   @Redirect()
   async generateUserSocialCard (
     @Param("username") username: string,
       @Res() res: FastifyReply,
   ): Promise<void> {
+    const { fileUrl, hasFile, needsUpdate } = await this.socialCardService.checkRequiresUpdate(username);
+
+    if (hasFile && !needsUpdate) {
+      return res.status(HttpStatus.FOUND).redirect(fileUrl);
+    }
+
     const url = await this.socialCardService.getUserCard(username);
 
-    return res.status(302).redirect(url);
+    return res.status(HttpStatus.FOUND).redirect(url);
   }
 }

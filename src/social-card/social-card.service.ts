@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { ForbiddenException, Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
 import { Resvg } from "@resvg/resvg-js";
 import { Repository, Language, User } from "@octokit/graphql-schema";
@@ -78,7 +78,7 @@ export class SocialCardService {
     const hash = `users/${String(username)}.png`;
     const fileUrl = `${this.s3FileStorageService.getCdnEndpoint()}${hash}`;
     const hasFile = await this.s3FileStorageService.fileExists(hash);
-    const today3daysAgo = new Date((new Date).setDate((new Date).getDate() - 0.001));
+    const today3daysAgo = new Date((new Date).setDate((new Date).getDate() - 3));
     const returnVal: RequiresUpdateMeta = {
       fileUrl,
       hasFile,
@@ -93,7 +93,7 @@ export class SocialCardService {
 
       if (lastModified && lastModified > today3daysAgo) {
         this.logger.debug(`User ${username} exists in S3 with lastModified: ${lastModified.toISOString()} less than 3 days ago, redirecting to ${fileUrl}`);
-        returnVal.needsUpdate = true;
+        returnVal.needsUpdate = false;
       }
     }
 
@@ -104,56 +104,50 @@ export class SocialCardService {
     const { remaining } = await this.githubService.rateLimit();
 
     if (remaining < 1000) {
-      throw new Error("Rate limit exceeded");
+      throw new ForbiddenException("Rate limit exceeded");
     }
 
     const { html } = await import("satori-html");
     const satori = (await import("satori")).default;
 
-    const { id, avatarUrl, repos, langs, langTotal } = await this.getUserData(username);
-    const hash = `users/${String(id)}.png`;
-    const fileUrl = `${this.s3FileStorageService.getCdnEndpoint()}${hash}`;
-    const hasFile = await this.s3FileStorageService.fileExists(hash);
-    const today3daysAgo = new Date((new Date).setDate((new Date).getDate() - 3));
+    try {
+      const { id, avatarUrl, repos, langs, langTotal } = await this.getUserData(username);
+      const hash = `users/${String(username)}.png`;
+      const fileUrl = `${this.s3FileStorageService.getCdnEndpoint()}${hash}`;
 
-    if (hasFile) {
-      // route to s3
-      const lastModified = await this.s3FileStorageService.getFileLastModified(hash);
+      const template = html(userProfileCard(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos)));
 
-      if (lastModified && lastModified > today3daysAgo) {
-        this.logger.debug(`User ${username} exists in S3 with lastModified: ${lastModified.toISOString()} less than 3 days ago, redirecting`);
-        return fileUrl;
-      }
+      const interArrayBuffer = await readFile("node_modules/@fontsource/inter/files/inter-all-400-normal.woff");
+
+      const svg = await satori(template, {
+        width: 1200,
+        height: 627,
+        fonts: [
+          {
+            name: "Inter",
+            data: interArrayBuffer,
+            weight: 400,
+            style: "normal",
+          },
+        ],
+        tailwindConfig,
+      });
+
+      const resvg = new Resvg(svg, { background: "rgba(238, 235, 230, .9)" });
+
+      const pngData = resvg.render();
+
+      const pngBuffer = pngData.asPng();
+
+      await this.s3FileStorageService.uploadFile(pngBuffer, hash, "image/png", { "x-amz-meta-user-id": String(id) });
+
+      this.logger.debug(`User ${username} did not exist in S3, generated image and uploaded to S3, redirecting`);
+
+      return fileUrl;
+    } catch (e) {
+      this.logger.error(`Error generating user card for ${username}`, e);
+
+      throw (new NotFoundException);
     }
-
-    const template = html(userProfileCard(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos)));
-
-    const interArrayBuffer = await readFile("node_modules/@fontsource/inter/files/inter-all-400-normal.woff");
-
-    const svg = await satori(template, {
-      width: 1200,
-      height: 627,
-      fonts: [
-        {
-          name: "Inter",
-          data: interArrayBuffer,
-          weight: 400,
-          style: "normal",
-        },
-      ],
-      tailwindConfig,
-    });
-
-    const resvg = new Resvg(svg, { background: "rgba(238, 235, 230, .9)" });
-
-    const pngData = resvg.render();
-
-    const pngBuffer = pngData.asPng();
-
-    await this.s3FileStorageService.uploadFile(pngBuffer, hash, "image/png", { "x-amz-meta-user-id": String(id) });
-
-    this.logger.debug(`User ${username} did not exist in S3, generated image and uploaded to S3, redirecting`);
-
-    return fileUrl;
   }
 }
