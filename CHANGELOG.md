@@ -5,6 +5,17 @@
 
 > All notable changes to this project will be documented in this file
 
+## [2.0.0-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.10...v2.0.0-beta.1) (2023-04-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* id changed to :username in earlier commits, this is catching it up
+
+### 🐛 Bug Fixes
+
+* correct server generation environment ([68d0202](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/68d0202be3575d40a78de2b8bfe90b2bd4339b6c))
+
 ## [1.2.0-beta.10](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.9...v1.2.0-beta.10) (2023-04-10)
 
 
