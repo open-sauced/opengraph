@@ -131,14 +131,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Head(&#x27;/:username&#x27;)<br />@ApiNoContentResponse({description: &#x27;User social card image is up to date&#x27;, status: undefined})<br />@ApiResponse({description: &#x27;User social card image needs regeneration&#x27;, status: undefined})<br />@ApiNotFoundResponse({description: &#x27;User social card image not found&#x27;, status: undefined})<br /></code>
+                    <code>@Get(&#x27;/:username/metadata&#x27;)<br />@ApiOperation({operationId: &#x27;getUserSocialCardMetadata&#x27;, summary: &#x27;Gets latest cache aware social card metadata for :username&#x27;})<br />@ApiNoContentResponse({description: &#x27;User social card image is up to date&#x27;, status: undefined})<br />@ApiResponse({description: &#x27;User social card image needs regeneration&#x27;, status: undefined})<br />@ApiNotFoundResponse({description: &#x27;User social card image not found&#x27;, status: undefined})<br /></code>
                 </td>
             </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">src/social-card/social-card.controller.ts:25</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="54"
+                            class="link-to-prism">src/social-card/social-card.controller.ts:54</a></div>
                 </td>
             </tr>
 
@@ -227,8 +227,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="50"
-                            class="link-to-prism">src/social-card/social-card.controller.ts:50</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="31"
+                            class="link-to-prism">src/social-card/social-card.controller.ts:31</a></div>
                 </td>
             </tr>
 
@@ -292,7 +292,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Controller, Get, Head, Header, HttpStatus, Param, Redirect, Res, StreamableFile } from &quot;@nestjs/common&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Controller, Get, Header, HttpStatus, Param, Redirect, Res, StreamableFile } from &quot;@nestjs/common&quot;;
 import {
   ApiForbiddenResponse,
   ApiNoContentResponse,
@@ -312,25 +312,6 @@ export class SocialCardController {
     private readonly socialCardService: SocialCardService,
   ) {}
 
-  @Head(&quot;/:username&quot;)
-  @ApiNoContentResponse({ description: &quot;User social card image is up to date&quot;, status: HttpStatus.NO_CONTENT })
-  @ApiResponse({ description: &quot;User social card image needs regeneration&quot;, status: HttpStatus.NOT_MODIFIED })
-  @ApiNotFoundResponse({ description: &quot;User social card image not found&quot;, status: HttpStatus.NOT_FOUND })
-  async checkUserSocialCard (
-    @Param(&quot;username&quot;) username: string,
-      @Res() res: FastifyReply,
-  ): Promise&lt;void&gt; {
-    const { fileUrl, hasFile, needsUpdate, lastModified } &#x3D; await this.socialCardService.checkRequiresUpdate(username);
-
-    return res
-      .headers({
-        &quot;x-amz-meta-last-modified&quot;: lastModified?.toISOString() ?? &quot;&quot;,
-        &quot;x-amz-meta-location&quot;: fileUrl,
-      })
-      .status(hasFile ? needsUpdate ? HttpStatus.NOT_MODIFIED : HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND)
-      .send();
-  }
-
   @Get(&quot;/:username&quot;)
   @ApiOperation({
     operationId: &quot;generateUserSocialCard&quot;,
@@ -343,7 +324,7 @@ export class SocialCardController {
   @Redirect()
   async generateUserSocialCard (
     @Param(&quot;username&quot;) username: string,
-      @Res() res: FastifyReply,
+      @Res({ passthrough: true }) res: FastifyReply,
   ): Promise&lt;void&gt; {
     const { fileUrl, hasFile, needsUpdate } &#x3D; await this.socialCardService.checkRequiresUpdate(username);
 
@@ -354,6 +335,29 @@ export class SocialCardController {
     const url &#x3D; await this.socialCardService.getUserCard(username);
 
     return res.status(HttpStatus.FOUND).redirect(url);
+  }
+
+  @Get(&quot;/:username/metadata&quot;)
+  @ApiOperation({
+    operationId: &quot;getUserSocialCardMetadata&quot;,
+    summary: &quot;Gets latest cache aware social card metadata for :username&quot;,
+  })
+  @ApiNoContentResponse({ description: &quot;User social card image is up to date&quot;, status: HttpStatus.NO_CONTENT })
+  @ApiResponse({ description: &quot;User social card image needs regeneration&quot;, status: HttpStatus.NOT_MODIFIED })
+  @ApiNotFoundResponse({ description: &quot;User social card image not found&quot;, status: HttpStatus.NOT_FOUND })
+  async checkUserSocialCard (
+    @Param(&quot;username&quot;) username: string,
+      @Res({ passthrough: true }) res: FastifyReply,
+  ): Promise&lt;void&gt; {
+    const { fileUrl, hasFile, needsUpdate, lastModified } &#x3D; await this.socialCardService.checkRequiresUpdate(username);
+
+    return res
+      .headers({
+        &quot;x-amz-meta-last-modified&quot;: lastModified?.toISOString() ?? &quot;&quot;,
+        &quot;x-amz-meta-location&quot;: fileUrl,
+      })
+      .status(hasFile ? needsUpdate ? HttpStatus.NOT_MODIFIED : HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND)
+      .send();
   }
 }
 </code></pre>
