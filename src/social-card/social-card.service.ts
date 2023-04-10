@@ -4,11 +4,11 @@ import { Resvg } from "@resvg/resvg-js";
 import { Repository, Language, User } from "@octokit/graphql-schema";
 import { readFile } from "node:fs/promises";
 
+import { GithubService } from "../github/github.service";
+import { S3FileStorageService } from "../s3-file-storage/s3-file-storage.service";
 import userLangs from "./templates/user-langs";
 import userProfileRepos from "./templates/user-profile-repos";
 import userProfileCard from "./templates/user-profile-card";
-import { GithubService } from "../github/github.service";
-import { S3FileStorageService } from "../s3-file-storage/s3-file-storage.service";
 import tailwindConfig from "./templates/tailwind.config";
 
 interface RequiresUpdateMeta {
