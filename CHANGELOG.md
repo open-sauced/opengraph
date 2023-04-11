@@ -5,6 +5,119 @@
 
 > All notable changes to this project will be documented in this file
 
+## [2.0.0-beta.3](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2023-04-11)
+
+
+### 🤖 Build System
+
+* update graphql types ([f7db713](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/f7db7134de08b50998ce994f615b151bed35244f))
+
+## [2.0.0-beta.2](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2023-04-11)
+
+
+### 🐛 Bug Fixes
+
+* correct dark logo render and make it static ([dc9f3a4](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/dc9f3a4eb8292b7f94108932e469209c67b33405))
+
+## [2.0.0-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.10...v2.0.0-beta.1) (2023-04-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* id changed to :username in earlier commits, this is catching it up
+
+### 🐛 Bug Fixes
+
+* correct server generation environment ([68d0202](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/68d0202be3575d40a78de2b8bfe90b2bd4339b6c))
+
+## [1.2.0-beta.10](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.9...v1.2.0-beta.10) (2023-04-10)
+
+
+### 🐛 Bug Fixes
+
+* correct app spec GET automatic rewrites of HEAD ([3047cec](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/3047cec62aff770abb4fe97d736c18790e406fa8))
+
+## [1.2.0-beta.9](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.8...v1.2.0-beta.9) (2023-04-10)
+
+
+### 🍕 Features
+
+* optimize image loading and return errors ([7c6f199](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/7c6f1995bb2922bfd9cd9e26230afd079e2e6342)), closes [#17](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/17)
+
+
+### 🤖 Build System
+
+* update dependencies and ts5 ([715e349](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/715e349e1c398a37d35553e9a907742452b67601))
+
+## [1.2.0-beta.8](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.7...v1.2.0-beta.8) (2023-04-09)
+
+
+### 🍕 Features
+
+* implement no-content verification strategy ([6efe0e6](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/6efe0e67bb61dc2d0d7aab74744019441b6e777e))
+
+
+### 🐛 Bug Fixes
+
+* correct languages displaying less than 0.5% ([bee0e6e](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/bee0e6e0cf202296c1b137a499bfc48ed481db1f))
+* correct zero contribution top repos language distribution ([7d82c0d](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/7d82c0d0ae279694eb47dd523797f0eea1cb9c9f))
+
+## [1.2.0-beta.7](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.6...v1.2.0-beta.7) (2023-04-09)
+
+
+### 📝 Documentation
+
+* update live environments lins and document local development ([08cead1](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/08cead19189d14ff4d01a23584400c284818a091))
+
+## [1.2.0-beta.6](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.5...v1.2.0-beta.6) (2023-04-09)
+
+
+### 🐛 Bug Fixes
+
+* correct all tailwind classes except gaps ([fe44711](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/fe447116ea17755e389e5d8942ced0e721ce2145)), closes [#7](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/7)
+* correct user languages sizing issues ([5846c42](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/5846c42fc2531b1e085ce1c6e982ac44e2ffd556))
+* correct username display instead of full name ([1454cbb](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/1454cbbd235565a0625c2d051d8c5f2e2115c15a)), closes [#11](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/11)
+
+## [1.2.0-beta.5](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.4...v1.2.0-beta.5) (2023-04-09)
+
+
+### 🎨 Styles
+
+* add tailwind proof of concept ([8594508](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/8594508a07a103fe6e209b1895c7c803e171eecb))
+
+
+### 🐛 Bug Fixes
+
+* correct yoga layout double styling, remove repo icon extrenaous classes ([d84015b](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/d84015bf1264397d9ac6ff18b7c5344f237708ff))
+
+## [1.2.0-beta.4](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.3...v1.2.0-beta.4) (2023-04-08)
+
+
+### 🍕 Features
+
+* add custom cdn endpoint configuration for s3 bucket on digital ocean ([077e473](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/077e473ba9ec01d88d383f202427f06398047652)), closes [#18](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/18)
+
+## [1.2.0-beta.3](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.2...v1.2.0-beta.3) (2023-04-05)
+
+
+### 🍕 Features
+
+* implement digital ocean spaces s3 client storage and cache images 3 days ([792992e](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/792992e8ad8849a8e1c10178b84e0caa4d023b1b))
+
+## [1.2.0-beta.2](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.1...v1.2.0-beta.2) (2023-04-04)
+
+
+### 🔁 Continuous Integration
+
+* correct live release url in github actions deployment ([4a434e6](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/4a434e675198be1ee3ec0000a85a02dccf1b080e))
+
+## [1.2.0-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.1.2...v1.2.0-beta.1) (2023-04-04)
+
+
+### 🍕 Features
+
+* add boilerplate s3-client sdk code connected to digital ocean spaces ([a4a71e3](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/a4a71e349579e86be65ce201f2ec941177a1e3de))
+
 ### [1.1.2](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.1.1...v1.1.2) (2023-04-04)
 
 

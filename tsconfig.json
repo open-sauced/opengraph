@@ -7,7 +7,7 @@
     "moduleResolution": "node16",
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "module": "commonjs",
+    "module": "node16",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,

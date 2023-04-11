@@ -18,6 +18,7 @@ const getUser = (username: string, dateSince: string) => ({
 query ($username: String!, $dateSince: DateTime) {
   user(login: $username) {
     id
+    databaseId
     avatarUrl
     bio
     bioHTML

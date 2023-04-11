@@ -99,7 +99,7 @@ jobs:
   release:
     environment:
       name: ${{ needs.setup.outputs.DEPLOY_ENVIRONMENT }}
-      url: https://${{ needs.setup.outputs.DEPLOY_SUBDOMAIN }}opengraph.opensauced.pizza/docs
+      url: https://github.com/${{ github.repository }}/releases/tag/${{ steps.semantic-release.outputs.release-tag }}
     outputs:
       release-tag: ${{ steps.semantic-release.outputs.release-tag }}
     name: Semantic release

@@ -5,9 +5,11 @@ import { TerminusModule } from "@nestjs/terminus";
 import { LoggerModule } from "nestjs-pino";
 import { clc } from "@nestjs/common/utils/cli-colors.util";
 
-import { SocialCardModule } from "./social-card/social-card.module";
 import ApiConfig from "./config/api.config";
 import GitHubConfig from "./config/github.config";
+import DigitalOceanConfig from "./config/digital-ocean.config";
+import { SocialCardModule } from "./social-card/social-card.module";
+import { S3FileStorageModule } from "./s3-file-storage/s3-file-storage.module";
 
 @Module({
   imports: [
@@ -15,6 +17,7 @@ import GitHubConfig from "./config/github.config";
       load: [
         ApiConfig,
         GitHubConfig,
+        DigitalOceanConfig,
       ],
       isGlobal: true,
     }),
@@ -44,6 +47,7 @@ import GitHubConfig from "./config/github.config";
     TerminusModule,
     HttpModule,
     SocialCardModule,
+    S3FileStorageModule,
   ],
   controllers: [],
   providers: [],
