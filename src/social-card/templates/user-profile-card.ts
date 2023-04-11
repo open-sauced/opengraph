@@ -13,7 +13,7 @@ const userProfileCard = (avatarUrl: string, name: string, langs: string, repos: 
         ${name}
       </h1>
 
-      <img tw="w-48px h-48px border border-sauced-orange rounded" src="https://raw.githubusercontent.com/open-sauced/assets/main/svgs/slice-Black-Gradient.svg"/>
+      <img tw="w-48px h-48px border border-white rounded" src="https://raw.githubusercontent.com/open-sauced/assets/d9a0d5a317036084aa3f5f4e20cdfbe58dc37377/svgs/slice-Orange-Gradient.svg"/>
     </div>
 
     <div tw="flex-col" style="gap: 8px;">
