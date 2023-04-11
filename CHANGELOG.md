@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+## [2.0.0-beta.2](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2023-04-11)
+
+
+### 🐛 Bug Fixes
+
+* correct dark logo render and make it static ([dc9f3a4](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/dc9f3a4eb8292b7f94108932e469209c67b33405))
+
 ## [2.0.0-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.2.0-beta.10...v2.0.0-beta.1) (2023-04-10)
 
 
