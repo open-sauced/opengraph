@@ -25,7 +25,7 @@
         "@nestjs/swagger": "^6.3.0",
         "@nestjs/terminus": "^9.2.2",
         "@octokit/graphql": "^5.0.5",
-        "@octokit/graphql-schema": "^13.10.0",
+        "@octokit/graphql-schema": "^14.0.0",
         "@resvg/resvg-js": "^2.4.1",
         "class-transformer": "^0.5.1",
         "class-validator": "^0.14.0",
@@ -38,7 +38,7 @@
         "rxjs": "^7.8.0",
         "satori": "^0.4.7",
         "satori-html": "^0.3.2",
-        "semver": "^7.3.8",
+        "semver": "^7.4.0",
         "string-to-react": "^1.0.2"
       },
       "devDependencies": {
@@ -5693,9 +5693,9 @@
       }
     },
     "node_modules/@octokit/graphql-schema": {
-      "version": "13.10.0",
-      "resolved": "https://registry.npmjs.org/@octokit/graphql-schema/-/graphql-schema-13.10.0.tgz",
-      "integrity": "sha512-D9ci/oCYOIea/AFmWUxD67aMaoMw392Nu4sxaO+kW+w/aeDeyECpGuztzXASyCn53ROPTweAg1fk7Payzmu5xQ==",
+      "version": "14.0.0",
+      "resolved": "https://registry.npmjs.org/@octokit/graphql-schema/-/graphql-schema-14.0.0.tgz",
+      "integrity": "sha512-U+K9QtIBt6citkoHdcEnXiOPyaicaYazvb5EL6ZFbheFNpZCqeB4gHWVx3OPZlQIuLvgCJXFEzMrSrQw41iQSQ==",
       "dependencies": {
         "graphql": "^16.0.0",
         "graphql-tag": "^2.10.3"
@@ -15195,9 +15195,9 @@
       "integrity": "sha512-6aU+Rwsezw7VR8/nyvKTx8QpWH9FrcYiXXlqC4z5d5XQBDRqtbfsRjnwGyqbi3gddNtWHuEk9OANUotL26qKUw=="
     },
     "node_modules/semver": {
-      "version": "7.3.8",
-      "resolved": "https://registry.npmjs.org/semver/-/semver-7.3.8.tgz",
-      "integrity": "sha512-NB1ctGL5rlHrPJtFDVIVzTyQylMLu9N9VICA6HSFJo8MCGVTMW6gfpicwKmmK/dAjTOrqu5l63JJOpDSrAis3A==",
+      "version": "7.4.0",
+      "resolved": "https://registry.npmjs.org/semver/-/semver-7.4.0.tgz",
+      "integrity": "sha512-RgOxM8Mw+7Zus0+zcLEUn8+JfoLpj/huFTItQy2hsM4khuC1HYRDp0cU482Ewn/Fcy6bCjufD8vAj7voC66KQw==",
       "dependencies": {
         "lru-cache": "^6.0.0"
       },
