@@ -274,3 +274,4 @@ Temporary Items
 ### Project specific
 dist
 .env
+local-scripts/output
