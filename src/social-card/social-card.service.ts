@@ -28,7 +28,7 @@ export class SocialCardService {
     private readonly s3FileStorageService: S3FileStorageService,
   ) {}
 
-  async getUserData (username: string): Promise<{
+  private async getUserData (username: string): Promise<{
     id: User["databaseId"],
     name: User["name"],
     langs: (Language & {
