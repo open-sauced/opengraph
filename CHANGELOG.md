@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+### [2.0.1-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.0.0...v2.0.1-beta.1) (2023-04-19)
+
+
+### 🐛 Bug Fixes
+
+* correct username file system caching issues ([076ace0](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/076ace0b4cc856643de29cb4ef3f4e5df189c510)), closes [#24](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/24)
+
 ## [2.0.0](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v1.1.2...v2.0.0) (2023-04-11)
 
 
