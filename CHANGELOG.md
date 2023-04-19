@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+### [2.0.1-beta.2](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.0.1-beta.1...v2.0.1-beta.2) (2023-04-19)
+
+
+### 🐛 Bug Fixes
+
+* correctly lowercase username display in social card ([fc9211c](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/fc9211c46e106db042b87605ee003f6ef6a3cd86))
+
 ### [2.0.1-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.0.0...v2.0.1-beta.1) (2023-04-19)
 
 
