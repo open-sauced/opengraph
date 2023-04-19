@@ -32,13 +32,14 @@ export class SocialCardController {
     @Param("username") username: string,
       @Res({ passthrough: true }) res: FastifyReply,
   ): Promise<void> {
-    const { fileUrl, hasFile, needsUpdate } = await this.socialCardService.checkRequiresUpdate(username);
+    const sanitizedUsername = username.toLowerCase();
+    const { fileUrl, hasFile, needsUpdate } = await this.socialCardService.checkRequiresUpdate(sanitizedUsername);
 
     if (hasFile && !needsUpdate) {
       return res.status(HttpStatus.FOUND).redirect(fileUrl);
     }
 
-    const url = await this.socialCardService.getUserCard(username);
+    const url = await this.socialCardService.getUserCard(sanitizedUsername);
 
     return res.status(HttpStatus.FOUND).redirect(url);
   }
@@ -55,7 +56,8 @@ export class SocialCardController {
     @Param("username") username: string,
       @Res({ passthrough: true }) res: FastifyReply,
   ): Promise<void> {
-    const { fileUrl, hasFile, needsUpdate, lastModified } = await this.socialCardService.checkRequiresUpdate(username);
+    const sanitizedUsername = username.toLowerCase();
+    const { fileUrl, hasFile, needsUpdate, lastModified } = await this.socialCardService.checkRequiresUpdate(sanitizedUsername);
 
     return res
       .headers({
