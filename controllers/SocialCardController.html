@@ -137,8 +137,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="54"
-                            class="link-to-prism">src/social-card/social-card.controller.ts:54</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">src/social-card/social-card.controller.ts:55</a></div>
                 </td>
             </tr>
 
@@ -326,7 +326,8 @@ export class SocialCardController {
     @Param(&quot;username&quot;) username: string,
       @Res({ passthrough: true }) res: FastifyReply,
   ): Promise&lt;void&gt; {
-    const { fileUrl, hasFile, needsUpdate } &#x3D; await this.socialCardService.checkRequiresUpdate(username);
+    const sanitizedUsername &#x3D; username.toLowerCase();
+    const { fileUrl, hasFile, needsUpdate } &#x3D; await this.socialCardService.checkRequiresUpdate(sanitizedUsername);
 
     if (hasFile &amp;&amp; !needsUpdate) {
       return res.status(HttpStatus.FOUND).redirect(fileUrl);
@@ -349,7 +350,8 @@ export class SocialCardController {
     @Param(&quot;username&quot;) username: string,
       @Res({ passthrough: true }) res: FastifyReply,
   ): Promise&lt;void&gt; {
-    const { fileUrl, hasFile, needsUpdate, lastModified } &#x3D; await this.socialCardService.checkRequiresUpdate(username);
+    const sanitizedUsername &#x3D; username.toLowerCase();
+    const { fileUrl, hasFile, needsUpdate, lastModified } &#x3D; await this.socialCardService.checkRequiresUpdate(sanitizedUsername);
 
     return res
       .headers({
