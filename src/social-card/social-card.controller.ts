@@ -39,7 +39,7 @@ export class SocialCardController {
       return res.status(HttpStatus.FOUND).redirect(fileUrl);
     }
 
-    const url = await this.socialCardService.getUserCard(username);
+    const url = await this.socialCardService.getUserCard(sanitizedUsername);
 
     return res.status(HttpStatus.FOUND).redirect(url);
   }
