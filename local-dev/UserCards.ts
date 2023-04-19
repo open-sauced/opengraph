@@ -11,9 +11,14 @@ import { S3FileStorageService } from 'src/s3-file-storage/s3-file-storage.servic
 import { existsSync } from 'node:fs';
 import { mkdir, writeFile } from 'fs/promises'
 
-const folderPath = 'local-scripts/output';
 
-async function test()  {
+const testUsernames = [
+  'bdougie', 'deadreyo', 'defunkt', '0-vortex'
+]
+
+const folderPath = 'local-dev/output';
+
+async function testUserCards()  {
   const moduleFixture: TestingModule = await Test.createTestingModule({
     imports: [AppModule],
   }).compile();
@@ -22,12 +27,19 @@ async function test()  {
   await app.init();
 
   const instance = app.get(SocialCardService);
-  const { svg } = await instance.generateCardBuffer('bdougie');
 
-  if(!existsSync(folderPath)) {
-    await mkdir(folderPath);
-  }
-  await writeFile(`${folderPath}/${'bdougie'}.svg`, svg);
+  const promises = testUsernames.map(async (username) => {
+    const { svg } = await instance.generateCardBuffer(username);
+
+    if(!existsSync(folderPath)) {
+      await mkdir(folderPath);
+    }
+    await writeFile(`${folderPath}/${username}.svg`, svg);
+  })
+
+  // generating sequential: 10.5 seconds, parallel: 4.5 seconds
+  await Promise.all(promises);
+
 }
 
-test();
+testUserCards();
