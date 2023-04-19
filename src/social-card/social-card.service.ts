@@ -83,7 +83,7 @@ export class SocialCardService {
     const { html } = await import("satori-html");
     const satori = (await import("satori")).default;
 
-    const { id, avatarUrl, repos, langs, langTotal } = userData? userData : await this.getUserData(username);
+    const { avatarUrl, repos, langs, langTotal } = userData ? userData : await this.getUserData(username);
 
     const template = html(userProfileCard(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos)));
 

@@ -38,6 +38,7 @@
     "test:cov": "npm run test --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "npm run test --config test/jest-e2e.json",
+    "local-dev:usercards": "npx ts-node local-dev/UserCards",
     "docs": "npx compodoc -p tsconfig.json --hideGenerator --disableDependencies -d ./dist/documentation ./src",
     "docs:serve": "npm run docs -- --serve"
   },
