@@ -49,6 +49,18 @@ To start a local copy of the app on port `3001`:
 npm run start:dev
 ```
 
+### Local dev scripts
+
+There are a few scripts that can be used to generate and test the social cards locally without having to deploy to the CDN. This is the way to go when developing & testing the interface for the social cards.
+
+#### Generating user profile cards:
+
+```shell
+npm run local-dev:usercards
+```
+
+> Generates user cards for all users in the test array inside `test/local-dev/UserCards.ts` and outputs them in `dist/local-dev/` for testing.
+
 ### 📝 Environment variables
 
 Some environment variables are required to run the application. You can find them in the `.env.example` file. While most of them are optional, some are required to run the application.
