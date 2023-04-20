@@ -1,6 +1,6 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { AppModule } from "../src/app.module";
-import { SocialCardService } from "../src/social-card/social-card.service";
+import { AppModule } from "../../src/app.module";
+import { SocialCardService } from "../../src/social-card/social-card.service";
 import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "fs/promises";
 
@@ -9,7 +9,7 @@ const testUsernames = [
   "bdougie", "deadreyo", "defunkt", "0-vortex",
 ];
 
-const folderPath = "local-dev/output";
+const folderPath = "dist/local-dev";
 
 async function testUserCards () {
   const moduleFixture: TestingModule = await Test.createTestingModule({ imports: [AppModule] }).compile();
