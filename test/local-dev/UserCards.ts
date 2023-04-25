@@ -9,7 +9,7 @@ const testUsernames = [
   "bdougie", "deadreyo", "defunkt", "0-vortex",
 ];
 
-const folderPath = "dist/local-dev";
+const folderPath = "dist";
 
 async function testUserCards () {
   const moduleFixture: TestingModule = await Test.createTestingModule({ imports: [AppModule] }).compile();
