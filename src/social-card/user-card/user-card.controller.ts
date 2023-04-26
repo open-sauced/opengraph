@@ -8,14 +8,15 @@ import {
   ApiTags,
 } from "@nestjs/swagger";
 import { FastifyReply } from "fastify";
+import { HighlightCardService } from "../highlight-card/highlight-card.service";
 
-import { SocialCardService } from "./social-card.service";
+import { UserCardService } from "./user-card.service";
 
 @Controller("users")
 @ApiTags("User social cards")
-export class SocialCardController {
+export class UserCardController {
   constructor (
-    private readonly socialCardService: SocialCardService,
+    private readonly userCardService: UserCardService
   ) {}
 
   @Get("/:username")
@@ -33,13 +34,13 @@ export class SocialCardController {
       @Res({ passthrough: true }) res: FastifyReply,
   ): Promise<void> {
     const sanitizedUsername = username.toLowerCase();
-    const { fileUrl, hasFile, needsUpdate } = await this.socialCardService.checkRequiresUpdate(sanitizedUsername);
+    const { fileUrl, hasFile, needsUpdate } = await this.userCardService.checkRequiresUpdate(sanitizedUsername);
 
     if (hasFile && !needsUpdate) {
       return res.status(HttpStatus.FOUND).redirect(fileUrl);
     }
 
-    const url = await this.socialCardService.getUserCard(sanitizedUsername);
+    const url = await this.userCardService.getUserCard(sanitizedUsername);
 
     return res.status(HttpStatus.FOUND).redirect(url);
   }
@@ -57,7 +58,7 @@ export class SocialCardController {
       @Res({ passthrough: true }) res: FastifyReply,
   ): Promise<void> {
     const sanitizedUsername = username.toLowerCase();
-    const { fileUrl, hasFile, needsUpdate, lastModified } = await this.socialCardService.checkRequiresUpdate(sanitizedUsername);
+    const { fileUrl, hasFile, needsUpdate, lastModified } = await this.userCardService.checkRequiresUpdate(sanitizedUsername);
 
     return res
       .headers({

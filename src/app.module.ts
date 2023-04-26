@@ -8,7 +8,7 @@ import { clc } from "@nestjs/common/utils/cli-colors.util";
 import ApiConfig from "./config/api.config";
 import GitHubConfig from "./config/github.config";
 import DigitalOceanConfig from "./config/digital-ocean.config";
-import { SocialCardModule } from "./social-card/social-card.module";
+import { UserCardModule } from "./social-card/user-card/user-card.module";
 import { S3FileStorageModule } from "./s3-file-storage/s3-file-storage.module";
 
 @Module({
@@ -46,7 +46,7 @@ import { S3FileStorageModule } from "./s3-file-storage/s3-file-storage.module";
     }),
     TerminusModule,
     HttpModule,
-    SocialCardModule,
+    UserCardModule,
     S3FileStorageModule,
   ],
   controllers: [],

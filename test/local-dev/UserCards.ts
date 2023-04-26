@@ -1,6 +1,6 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { AppModule } from "../../src/app.module";
-import { SocialCardService } from "../../src/social-card/social-card.service";
+import { UserCardService } from "../../src/social-card/user-card/user-card.service";
 import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "fs/promises";
 
@@ -18,7 +18,7 @@ async function testUserCards () {
 
   await app.init();
 
-  const instance = app.get(SocialCardService);
+  const instance = app.get(UserCardService);
 
   const promises = testUsernames.map(async username => {
     const { svg } = await instance.generateCardBuffer(username);
