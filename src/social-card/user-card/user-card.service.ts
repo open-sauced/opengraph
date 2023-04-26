@@ -7,8 +7,8 @@ import fs from "node:fs/promises";
 
 import { GithubService } from "../../github/github.service";
 import { S3FileStorageService } from "../../s3-file-storage/s3-file-storage.service";
-import userLangs from "../templates/user-langs";
-import userProfileRepos from "../templates/user-profile-repos";
+import userLangs from "../templates/shared/user-langs";
+import userProfileRepos from "../templates/shared/user-repos";
 import userProfileCard from "../templates/user-profile-card";
 import tailwindConfig from "../templates/tailwind.config";
 
