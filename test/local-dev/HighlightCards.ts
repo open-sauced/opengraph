@@ -2,7 +2,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { AppModule } from "../../src/app.module";
 import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "fs/promises";
-import { HighlightCardService } from "../../src/social-card/highlight-card.service";
+import { HighlightCardService } from "../../src/social-card/highlight-card/highlight-card.service";
 
 
 const folderPath = "dist";

@@ -8,7 +8,6 @@ import {
   ApiTags,
 } from "@nestjs/swagger";
 import { FastifyReply } from "fastify";
-import { HighlightCardService } from "../highlight-card/highlight-card.service";
 
 import { UserCardService } from "./user-card.service";
 
