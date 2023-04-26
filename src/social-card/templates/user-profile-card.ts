@@ -1,11 +1,8 @@
 import cardFooter from "./shared/card-footer";
+import cardStyleSetup from "./shared/card-style-setup";
 
 const userProfileCard = (avatarUrl: string, name: string, langs: string, repos: string): string => `
-  <style>
-    div {
-      display: flex;
-    }
-  </style>
+  ${cardStyleSetup}
 
   <div tw="flex-col justify-between w-1200px h-627px bg-white rounded-2xl p-32px pt-48px">
     <div style="gap: 16px;">
