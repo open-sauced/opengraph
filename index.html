@@ -69,7 +69,13 @@
 <h2 id="🖥️-local-development">🖥️ Local development</h2>
 <p>To install the application:</p>
 <div><pre class="line-numbers"><code class="language-shell">npm ci</code></pre></div><p>To start a local copy of the app on port <code>3001</code>:</p>
-<div><pre class="line-numbers"><code class="language-shell">npm run start:dev</code></pre></div><h3 id="📝-environment-variables">📝 Environment variables</h3>
+<div><pre class="line-numbers"><code class="language-shell">npm run start:dev</code></pre></div><h3 id="local-dev-scripts">Local dev scripts</h3>
+<p>There are a few scripts that can be used to generate and test the social cards locally without having to deploy to the CDN. This is the way to go when developing &amp; testing the interface for the social cards.</p>
+<h4 id="generating-user-profile-cards">Generating user profile cards:</h4>
+<div><pre class="line-numbers"><code class="language-shell">npm run local-dev:usercards</code></pre></div><blockquote>
+<p>Generates user cards for all users in the test array inside <code>test/local-dev/UserCards.ts</code> and outputs them in <code>dist/local-dev/</code> for testing.</p>
+</blockquote>
+<h3 id="📝-environment-variables">📝 Environment variables</h3>
 <p>Some environment variables are required to run the application. You can find them in the <code>.env.example</code> file. While most of them are optional, some are required to run the application.</p>
 <p>One can reverse engineer the <a href="./src/config">named configs</a> but some need a little explanation.</p>
 <p>Boilerplate, changed mostly locally:</p>
