@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+## [2.1.0-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.0.1...v2.1.0-beta.1) (2023-04-26)
+
+
+### 🍕 Features
+
+* adding utilities for cards local generation & testing ([#34](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/34)) ([c5a5fec](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/c5a5fecd3689b11fd3325c7f0fd3228bd368e0f5))
+
 ### [2.0.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.0.0...v2.0.1) (2023-04-19)
 
 
