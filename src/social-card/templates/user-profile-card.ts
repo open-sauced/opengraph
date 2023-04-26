@@ -1,3 +1,5 @@
+import cardFooter from "./shared/card-footer";
+
 const userProfileCard = (avatarUrl: string, name: string, langs: string, repos: string): string => `
   <style>
     div {
@@ -16,17 +18,7 @@ const userProfileCard = (avatarUrl: string, name: string, langs: string, repos: 
       <img tw="w-48px h-48px border border-white rounded" src="https://raw.githubusercontent.com/open-sauced/assets/d9a0d5a317036084aa3f5f4e20cdfbe58dc37377/svgs/slice-Orange-Gradient.svg"/>
     </div>
 
-    <div tw="flex-col" style="gap: 8px;">
-      <div tw="h-48px items-center" style="gap: 8px;">
-        ${repos}
-      </div>
-
-      <div tw="flex-col h-18px justify-center">
-        <div tw="h-12px" style="gap: 4px;">
-          ${langs}
-        </div>
-      </div>
-    </div>
+    ${cardFooter(langs, repos)}
   </div>`;
 
 export default userProfileCard;
