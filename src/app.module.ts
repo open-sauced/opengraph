@@ -49,7 +49,7 @@ import { HighlightCardModule } from "./social-card/highlight-card/highlight-card
     HttpModule,
     S3FileStorageModule,
     UserCardModule,
-    HighlightCardModule
+    HighlightCardModule,
   ],
   controllers: [],
   providers: [],

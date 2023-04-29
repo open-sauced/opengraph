@@ -4,6 +4,7 @@ import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "fs/promises";
 import { HighlightCardService } from "../../src/social-card/highlight-card/highlight-card.service";
 
+const testHighlights = [102, 101, 103];
 
 const folderPath = "dist";
 
@@ -16,7 +17,17 @@ async function testHighlightCards () {
 
   const instance = app.get(HighlightCardService);
 
-  console.log(await instance.getHighlightData(102))
+  const promises = testHighlights.map(async id => {
+    const { svg } = await instance.generateCardBuffer(id);
+
+    if (!existsSync(folderPath)) {
+      await mkdir(folderPath);
+    }
+    await writeFile(`${folderPath}/${id}.svg`, svg);
+  });
+
+  // generating sequential: 10.5 seconds, parallel: 4.5 seconds
+  await Promise.all(promises);
 }
 
 testHighlightCards();

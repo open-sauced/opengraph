@@ -5,6 +5,6 @@ const cardStyleSetup = `
       display: flex;
     }
   </style>
-`
+`;
 
 export default cardStyleSetup;

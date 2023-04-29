@@ -1,7 +1,7 @@
 import cardFooter from "./shared/card-footer";
 import cardStyleSetup from "./shared/card-style-setup";
 
-const userProfileCard = (avatarUrl: string, name: string, langs: string, repos: string): string => `
+const userProfileCardTemplate = (avatarUrl: string, name: string, langs: string, repos: string): string => `
   ${cardStyleSetup}
 
   <div tw="flex-col justify-between w-1200px h-627px bg-white rounded-2xl p-32px pt-48px">
@@ -18,4 +18,4 @@ const userProfileCard = (avatarUrl: string, name: string, langs: string, repos: 
     ${cardFooter(langs, repos)}
   </div>`;
 
-export default userProfileCard;
+export default userProfileCardTemplate;

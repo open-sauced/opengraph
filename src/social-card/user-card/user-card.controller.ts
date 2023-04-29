@@ -15,7 +15,7 @@ import { UserCardService } from "./user-card.service";
 @ApiTags("User social cards")
 export class UserCardController {
   constructor (
-    private readonly userCardService: UserCardService
+    private readonly userCardService: UserCardService,
   ) {}
 
   @Get("/:username")

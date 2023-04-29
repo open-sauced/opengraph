@@ -9,7 +9,7 @@ import { GithubService } from "../../github/github.service";
 import { S3FileStorageService } from "../../s3-file-storage/s3-file-storage.service";
 import userLangs from "../templates/shared/user-langs";
 import userProfileRepos from "../templates/shared/user-repos";
-import userProfileCard from "../templates/user-profile-card";
+import userProfileCardTemplate from "../templates/user-profile-card.template";
 import tailwindConfig from "../templates/tailwind.config";
 
 interface RequiresUpdateMeta {
@@ -85,7 +85,7 @@ export class UserCardService {
 
     const { avatarUrl, repos, langs, langTotal } = userData ? userData : await this.getUserData(username);
 
-    const template = html(userProfileCard(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos)));
+    const template = html(userProfileCardTemplate(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos, 4)));
 
     const interArrayBuffer = await fs.readFile("node_modules/@fontsource/inter/files/inter-all-400-normal.woff");
 

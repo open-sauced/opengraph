@@ -6,6 +6,6 @@ import { HighlightCardService } from "../highlight-card/highlight-card.service";
 
 @Module({
   imports: [HttpModule, GithubModule, S3FileStorageModule],
-  providers: [HighlightCardService]
+  providers: [HighlightCardService],
 })
 export class HighlightCardModule {}
