@@ -6,7 +6,7 @@ import { mkdir, writeFile } from "fs/promises";
 
 
 const testUsernames = [
-  "bdougie", "deadreyo", "defunkt", "0-vortex",
+  "bdougie", "deadreyo", "defunkt", "0-vortex", "Anush008", "diivi"
 ];
 
 const folderPath = "dist";
