@@ -8,7 +8,8 @@ const cardFooter = (langs: string, repos: string, reactions?: number) => `
           ${repos}
         </div>
 
-        ${reactions? `
+        ${reactions
+    ? `
           <div tw="h-48px items-center" style="gap: 12px;">
             <img tw="w-32px h-32px" width="1" height="1" src="${heartIconData}"/>
             <span tw="font-medium text-32px text-black">

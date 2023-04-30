@@ -1,4 +1,4 @@
-import { Injectable, Logger, NotFoundException } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
 import { Resvg } from "@resvg/resvg-js";
 import { Repository, Language } from "@octokit/graphql-schema";
@@ -11,13 +11,6 @@ import userProfileRepos from "../templates/shared/user-repos";
 import tailwindConfig from "../templates/tailwind.config";
 import { firstValueFrom } from "rxjs";
 import highlightCardTemplate from "../templates/highlight-card.template";
-
-interface RequiresUpdateMeta {
-  fileUrl: string,
-  hasFile: boolean;
-  needsUpdate: boolean;
-  lastModified: Date | null,
-}
 
 interface HighlightCardData {
   title: string,
@@ -117,75 +110,4 @@ export class HighlightCardService {
 
     return { png: pngData.asPng(), svg };
   }
-
-  /*
-   * async checkRequiresUpdate (username: string): Promise<RequiresUpdateMeta> {
-   *   const hash = `users/${String(username)}.png`;
-   *   const fileUrl = `${this.s3FileStorageService.getCdnEndpoint()}${hash}`;
-   *   const hasFile = await this.s3FileStorageService.fileExists(hash);
-   *   const today3daysAgo = new Date((new Date).setDate((new Date).getDate() - 3));
-   *   const returnVal: RequiresUpdateMeta = {
-   *     fileUrl,
-   *     hasFile,
-   *     needsUpdate: true,
-   *     lastModified: null,
-   *   };
-   */
-
-  /*
-   *   if (hasFile) {
-   *     const lastModified = await this.s3FileStorageService.getFileLastModified(hash);
-   */
-
-  //     returnVal.lastModified = lastModified;
-
-  /*
-   *     if (lastModified && lastModified > today3daysAgo) {
-   *       this.logger.debug(`User ${username} exists in S3 with lastModified: ${lastModified.toISOString()} less than 3 days ago, redirecting to ${fileUrl}`);
-   *       returnVal.needsUpdate = false;
-   *     }
-   *   }
-   */
-
-  /*
-   *   return returnVal;
-   * }
-   */
-
-  /*
-   * async getUserCard (username: string): Promise<string> {
-   *   const { remaining } = await this.githubService.rateLimit();
-   */
-
-  /*
-   *   if (remaining < 1000) {
-   *     throw new ForbiddenException("Rate limit exceeded");
-   *   }
-   */
-
-  //   const userData = await this.getUserData(username);
-
-  /*
-   *   try {
-   *     const hash = `users/${String(username)}.png`;
-   *     const fileUrl = `${this.s3FileStorageService.getCdnEndpoint()}${hash}`;
-   */
-
-  //     const { png } = await this.generateCardBuffer(username, userData);
-
-  //     await this.s3FileStorageService.uploadFile(png, hash, "image/png", { "x-amz-meta-user-id": String(userData.id) });
-
-  //     this.logger.debug(`User ${username} did not exist in S3, generated image and uploaded to S3, redirecting`);
-
-  /*
-   *     return fileUrl;
-   *   } catch (e) {
-   *     this.logger.error(`Error generating user card for ${username}`, e);
-   */
-
-  /*
-   *     throw (new NotFoundException);
-   *   }
-   * }
-   */
 }
