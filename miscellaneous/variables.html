@@ -618,11 +618,11 @@ query ($username: String!, $dateSince: DateTime) {
                     <td class="col-md-4">
                         <i>Default value : </i><code>(langs: (Language &amp; { size: number })[], totalCount &#x3D; 0, joinLiteral &#x3D; &quot;&quot;) &#x3D;&gt; {
   const filteredLangs &#x3D; langs
-    .filter(({ size }) &#x3D;&gt; size &gt; 0 &amp;&amp; !((size / totalCount) * 100 &lt; 0.5));
+    .filter(({ size }) &#x3D;&gt; size &gt; 0 &amp;&amp; (size / totalCount) * 100 &gt;&#x3D; 0.5);
 
   return filteredLangs
     .map(({ color, size }) &#x3D;&gt; {
-      const realPercent &#x3D; Math.round(size / totalCount * 100);
+      const realPercent &#x3D; size / totalCount * 100;
 
       return &#x60;&lt;div tw&#x3D;&quot;h-12px ${color ? &#x60;bg-[${color}]&#x60; : &quot;bg-black&quot;}&quot; style&#x3D;&quot;width: ${totalCount &gt; 0 ? realPercent : 100 / filteredLangs.length}%&quot;/&gt;&#x60;;
     })
@@ -673,7 +673,7 @@ query ($username: String!, $dateSince: DateTime) {
         ${repos}
       &lt;/div&gt;
 
-      &lt;div tw&#x3D;&quot;flex-col h-18px justify-center&quot;&gt;
+      &lt;div tw&#x3D;&quot;flex-col h-18px justify-center overflow-hidden&quot;&gt;
         &lt;div tw&#x3D;&quot;h-12px&quot; style&#x3D;&quot;gap: 4px;&quot;&gt;
           ${langs}
         &lt;/div&gt;
