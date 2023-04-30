@@ -21,7 +21,7 @@ const userProfileCard = (avatarUrl: string, name: string, langs: string, repos: 
         ${repos}
       </div>
 
-      <div tw="flex-col h-18px justify-center">
+      <div tw="flex-col h-18px justify-center overflow-hidden">
         <div tw="h-12px" style="gap: 4px;">
           ${langs}
         </div>
