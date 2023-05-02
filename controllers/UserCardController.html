@@ -37,7 +37,7 @@
 
 <ol class="breadcrumb">
   <li>Controllers</li>
-  <li >SocialCardController</li>
+  <li >UserCardController</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -55,7 +55,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/social-card/social-card.controller.ts</code>
+            <code>src/social-card/user-card/user-card.controller.ts</code>
         </p>
 
             <p class="comment">
@@ -138,7 +138,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="55"
-                            class="link-to-prism">src/social-card/social-card.controller.ts:55</a></div>
+                            class="link-to-prism">src/social-card/user-card/user-card.controller.ts:55</a></div>
                 </td>
             </tr>
 
@@ -228,7 +228,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="31"
-                            class="link-to-prism">src/social-card/social-card.controller.ts:31</a></div>
+                            class="link-to-prism">src/social-card/user-card/user-card.controller.ts:31</a></div>
                 </td>
             </tr>
 
@@ -303,13 +303,13 @@ import {
 } from &quot;@nestjs/swagger&quot;;
 import { FastifyReply } from &quot;fastify&quot;;
 
-import { SocialCardService } from &quot;./social-card.service&quot;;
+import { UserCardService } from &quot;./user-card.service&quot;;
 
 @Controller(&quot;users&quot;)
 @ApiTags(&quot;User social cards&quot;)
-export class SocialCardController {
+export class UserCardController {
   constructor (
-    private readonly socialCardService: SocialCardService,
+    private readonly userCardService: UserCardService,
   ) {}
 
   @Get(&quot;/:username&quot;)
@@ -327,13 +327,13 @@ export class SocialCardController {
       @Res({ passthrough: true }) res: FastifyReply,
   ): Promise&lt;void&gt; {
     const sanitizedUsername &#x3D; username.toLowerCase();
-    const { fileUrl, hasFile, needsUpdate } &#x3D; await this.socialCardService.checkRequiresUpdate(sanitizedUsername);
+    const { fileUrl, hasFile, needsUpdate } &#x3D; await this.userCardService.checkRequiresUpdate(sanitizedUsername);
 
     if (hasFile &amp;&amp; !needsUpdate) {
       return res.status(HttpStatus.FOUND).redirect(fileUrl);
     }
 
-    const url &#x3D; await this.socialCardService.getUserCard(sanitizedUsername);
+    const url &#x3D; await this.userCardService.getUserCard(sanitizedUsername);
 
     return res.status(HttpStatus.FOUND).redirect(url);
   }
@@ -351,7 +351,7 @@ export class SocialCardController {
       @Res({ passthrough: true }) res: FastifyReply,
   ): Promise&lt;void&gt; {
     const sanitizedUsername &#x3D; username.toLowerCase();
-    const { fileUrl, hasFile, needsUpdate, lastModified } &#x3D; await this.socialCardService.checkRequiresUpdate(sanitizedUsername);
+    const { fileUrl, hasFile, needsUpdate, lastModified } &#x3D; await this.userCardService.checkRequiresUpdate(sanitizedUsername);
 
     return res
       .headers({
@@ -407,7 +407,7 @@ export class SocialCardController {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'controller';
-            var COMPODOC_CURRENT_PAGE_URL = 'SocialCardController.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'UserCardController.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

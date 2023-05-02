@@ -40,7 +40,7 @@
 
 <ol class="breadcrumb">
   <li>Injectables</li>
-  <li >SocialCardService</li>
+  <li >HighlightCardService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -58,7 +58,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/social-card/social-card.service.ts</code>
+            <code>src/social-card/highlight-card/highlight-card.service.ts</code>
         </p>
 
 
@@ -96,20 +96,12 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Async</span>
-                                <a href="#checkRequiresUpdate" >checkRequiresUpdate</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Async</span>
                                 <a href="#generateCardBuffer" >generateCardBuffer</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Async</span>
-                                <a href="#getUserCard" >getUserCard</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Async</span>
-                                <a href="#getUserData" >getUserData</a>
+                                <a href="#getHighlightData" >getHighlightData</a>
                             </li>
                         </ul>
                     </td>
@@ -134,7 +126,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/social-card/social-card.service.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:29</a></div>
                             </td>
                         </tr>
 
@@ -205,77 +197,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="checkRequiresUpdate"></a>
-                    <span class="name">
-                        <span class="modifier">Async</span>
-                        <span ><b>checkRequiresUpdate</b></span>
-                        <a href="#checkRequiresUpdate"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>checkRequiresUpdate(username: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="113"
-                            class="link-to-prism">src/social-card/social-card.service.ts:113</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>username</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../interfaces/RequiresUpdateMeta.html" target="_self" >Promise&lt;RequiresUpdateMeta&gt;</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="generateCardBuffer"></a>
                     <span class="name">
                         <span class="modifier">Async</span>
@@ -287,15 +208,15 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>generateCardBuffer(username: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, userData?: <a href="../interfaces/UserCardData.html" target="_self">UserCardData</a>)</code>
+                    <code>generateCardBuffer(highlightId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, highlightData?: <a href="../interfaces/HighlightCardData.html" target="_self">HighlightCardData</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="82"
-                            class="link-to-prism">src/social-card/social-card.service.ts:82</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="83"
+                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:83</a></div>
                 </td>
             </tr>
 
@@ -316,9 +237,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>username</td>
+                                    <td>highlightId</td>
                                     <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
                                     </td>
 
                                     <td>
@@ -328,9 +249,9 @@
 
                                 </tr>
                                 <tr>
-                                    <td>userData</td>
+                                    <td>highlightData</td>
                                     <td>
-                                                <code><a href="../interfaces/UserCardData.html" target="_self" >UserCardData</a></code>
+                                                <code><a href="../interfaces/HighlightCardData.html" target="_self" >HighlightCardData</a></code>
                                     </td>
 
                                     <td>
@@ -359,98 +280,27 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getUserCard"></a>
-                    <span class="name">
-                        <span class="modifier">Async</span>
-                        <span ><b>getUserCard</b></span>
-                        <a href="#getUserCard"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getUserCard(username: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="139"
-                            class="link-to-prism">src/social-card/social-card.service.ts:139</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>username</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;string&gt;</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getUserData"></a>
+                    <a name="getHighlightData"></a>
                     <span class="name">
                         <span class="modifier">Private</span>
                         <span class="modifier">Async</span>
-                        <span ><b>getUserData</b></span>
-                        <a href="#getUserData"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getHighlightData</b></span>
+                        <a href="#getHighlightData"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getUserData(username: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>getHighlightData(highlightId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="44"
-                            class="link-to-prism">src/social-card/social-card.service.ts:44</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:37</a></div>
                 </td>
             </tr>
 
@@ -471,9 +321,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>username</td>
+                                    <td>highlightId</td>
                                     <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
                                     </td>
 
                                     <td>
@@ -488,7 +338,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../interfaces/UserCardData.html" target="_self" >Promise&lt;UserCardData&gt;</a></code>
+                        <b>Returns : </b>        <code><a href="../interfaces/HighlightCardData.html" target="_self" >Promise&lt;HighlightCardData&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -524,7 +374,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/social-card/social-card.service.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -537,41 +387,34 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ForbiddenException, Injectable, Logger, NotFoundException } from &quot;@nestjs/common&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Logger } from &quot;@nestjs/common&quot;;
 import { HttpService } from &quot;@nestjs/axios&quot;;
 import { Resvg } from &quot;@resvg/resvg-js&quot;;
-import { Repository, Language, User } from &quot;@octokit/graphql-schema&quot;;
+import { Repository, Language } from &quot;@octokit/graphql-schema&quot;;
 import fs from &quot;node:fs/promises&quot;;
 
+import { GithubService } from &quot;../../github/github.service&quot;;
+import { S3FileStorageService } from &quot;../../s3-file-storage/s3-file-storage.service&quot;;
+import userLangs from &quot;../templates/shared/user-langs&quot;;
+import userProfileRepos from &quot;../templates/shared/user-repos&quot;;
+import tailwindConfig from &quot;../templates/tailwind.config&quot;;
+import { firstValueFrom } from &quot;rxjs&quot;;
+import highlightCardTemplate from &quot;../templates/highlight-card.template&quot;;
 
-import { GithubService } from &quot;../github/github.service&quot;;
-import { S3FileStorageService } from &quot;../s3-file-storage/s3-file-storage.service&quot;;
-import userLangs from &quot;./templates/user-langs&quot;;
-import userProfileRepos from &quot;./templates/user-profile-repos&quot;;
-import userProfileCard from &quot;./templates/user-profile-card&quot;;
-import tailwindConfig from &quot;./templates/tailwind.config&quot;;
-
-interface RequiresUpdateMeta {
-  fileUrl: string,
-  hasFile: boolean;
-  needsUpdate: boolean;
-  lastModified: Date | null,
-}
-
-interface UserCardData {
-  id: User[&quot;databaseId&quot;],
-  name: User[&quot;name&quot;],
+interface HighlightCardData {
+  title: string,
+  body: string,
+  reactions: number,
+  avatarUrl: string,
+  repos: Repository[],
+  langTotal: number,
   langs: (Language &amp; {
     size: number,
   })[],
-  langTotal: number,
-  repos: Repository[],
-  avatarUrl: string,
 }
 
-
 @Injectable()
-export class SocialCardService {
+export class HighlightCardService {
   private readonly logger &#x3D; new Logger(this.constructor.name);
 
   constructor (
@@ -580,18 +423,25 @@ export class SocialCardService {
     private readonly s3FileStorageService: S3FileStorageService,
   ) {}
 
-  private async getUserData (username: string): Promise&lt;UserCardData&gt; {
+  private async getHighlightData (highlightId: number): Promise&lt;HighlightCardData&gt; {
     const langs: Record&lt;string, Language &amp; {
       size: number,
     }&gt; &#x3D; {};
     const today &#x3D; (new Date);
     const today30daysAgo &#x3D; new Date((new Date).setDate(today.getDate() - 30));
-    const user &#x3D; await this.githubService.getUser(username);
+
+    const highlightReq &#x3D; await firstValueFrom(this.httpService.get&lt;DbHighlight&gt;(&#x60;https://api.opensauced.pizza/v1/user/highlights/${highlightId}&#x60;));
+    const { login, title, highlight: body } &#x3D; highlightReq.data;
+
+    const reactionsReq &#x3D; await firstValueFrom(this.httpService.get&lt;DbReaction[]&gt;(&#x60;https://api.opensauced.pizza/v1/highlights/${highlightId}/reactions&#x60;));
+    const reactions &#x3D; reactionsReq.data.reduce&lt;number&gt;( (acc, curr) &#x3D;&gt; acc + Number(curr.reaction_count), 0);
+
+    const user &#x3D; await this.githubService.getUser(login);
     const langRepos &#x3D; user.repositories.nodes?.filter(repo &#x3D;&gt; new Date(String(repo?.pushedAt)) &gt; today30daysAgo) as Repository[];
     let langTotal &#x3D; 0;
 
-    langRepos.map(repo &#x3D;&gt; {
-      repo.languages?.edges?.map(edge &#x3D;&gt; {
+    langRepos.forEach(repo &#x3D;&gt; {
+      repo.languages?.edges?.forEach(edge &#x3D;&gt; {
         if (edge?.node.id) {
           langTotal +&#x3D; edge.size;
 
@@ -608,23 +458,24 @@ export class SocialCardService {
     });
 
     return {
-      id: user.databaseId,
-      name: user.name,
+      title,
+      body,
+      reactions,
+      avatarUrl: &#x60;${String(user.avatarUrl)}&amp;size&#x3D;150&#x60;,
       langs: Array.from(Object.values(langs)).sort((a, b) &#x3D;&gt; b.size - a.size),
       langTotal,
-      repos: user.topRepositories.nodes?.filter(repo &#x3D;&gt; !repo?.isPrivate &amp;&amp; repo?.owner.login !&#x3D;&#x3D; username) as Repository[],
-      avatarUrl: &#x60;${String(user.avatarUrl)}&amp;size&#x3D;150&#x60;,
+      repos: user.topRepositories.nodes?.filter(repo &#x3D;&gt; !repo?.isPrivate &amp;&amp; repo?.owner.login !&#x3D;&#x3D; login) as Repository[],
     };
   }
 
   // public only to be used in local scripts. Not for controller direct use.
-  async generateCardBuffer (username: string, userData?: UserCardData) {
+  async generateCardBuffer (highlightId: number, highlightData?: HighlightCardData) {
     const { html } &#x3D; await import(&quot;satori-html&quot;);
     const satori &#x3D; (await import(&quot;satori&quot;)).default;
 
-    const { avatarUrl, repos, langs, langTotal } &#x3D; userData ? userData : await this.getUserData(username);
+    const { title, body, reactions, avatarUrl, repos, langs, langTotal } &#x3D; highlightData ? highlightData : await this.getHighlightData(highlightId);
 
-    const template &#x3D; html(userProfileCard(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos)));
+    const template &#x3D; html(highlightCardTemplate(avatarUrl, title, body, userLangs(langs, langTotal), userProfileRepos(repos, 2), reactions));
 
     const interArrayBuffer &#x3D; await fs.readFile(&quot;node_modules/@fontsource/inter/files/inter-all-400-normal.woff&quot;);
 
@@ -647,59 +498,6 @@ export class SocialCardService {
     const pngData &#x3D; resvg.render();
 
     return { png: pngData.asPng(), svg };
-  }
-
-  async checkRequiresUpdate (username: string): Promise&lt;RequiresUpdateMeta&gt; {
-    const hash &#x3D; &#x60;users/${String(username)}.png&#x60;;
-    const fileUrl &#x3D; &#x60;${this.s3FileStorageService.getCdnEndpoint()}${hash}&#x60;;
-    const hasFile &#x3D; await this.s3FileStorageService.fileExists(hash);
-    const today3daysAgo &#x3D; new Date((new Date).setDate((new Date).getDate() - 3));
-    const returnVal: RequiresUpdateMeta &#x3D; {
-      fileUrl,
-      hasFile,
-      needsUpdate: true,
-      lastModified: null,
-    };
-
-    if (hasFile) {
-      const lastModified &#x3D; await this.s3FileStorageService.getFileLastModified(hash);
-
-      returnVal.lastModified &#x3D; lastModified;
-
-      if (lastModified &amp;&amp; lastModified &gt; today3daysAgo) {
-        this.logger.debug(&#x60;User ${username} exists in S3 with lastModified: ${lastModified.toISOString()} less than 3 days ago, redirecting to ${fileUrl}&#x60;);
-        returnVal.needsUpdate &#x3D; false;
-      }
-    }
-
-    return returnVal;
-  }
-
-  async getUserCard (username: string): Promise&lt;string&gt; {
-    const { remaining } &#x3D; await this.githubService.rateLimit();
-
-    if (remaining &lt; 1000) {
-      throw new ForbiddenException(&quot;Rate limit exceeded&quot;);
-    }
-
-    const userData &#x3D; await this.getUserData(username);
-
-    try {
-      const hash &#x3D; &#x60;users/${String(username)}.png&#x60;;
-      const fileUrl &#x3D; &#x60;${this.s3FileStorageService.getCdnEndpoint()}${hash}&#x60;;
-
-      const { png } &#x3D; await this.generateCardBuffer(username, userData);
-
-      await this.s3FileStorageService.uploadFile(png, hash, &quot;image/png&quot;, { &quot;x-amz-meta-user-id&quot;: String(userData.id) });
-
-      this.logger.debug(&#x60;User ${username} did not exist in S3, generated image and uploaded to S3, redirecting&#x60;);
-
-      return fileUrl;
-    } catch (e) {
-      this.logger.error(&#x60;Error generating user card for ${username}&#x60;, e);
-
-      throw (new NotFoundException);
-    }
   }
 }
 </code></pre>
@@ -745,7 +543,7 @@ export class SocialCardService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'SocialCardService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'HighlightCardService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

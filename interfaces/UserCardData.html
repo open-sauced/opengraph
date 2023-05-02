@@ -65,7 +65,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/social-card/social-card.service.ts</code>
+            <code>src/social-card/user-card/user-card.service.ts</code>
         </p>
 
 
@@ -328,12 +328,12 @@ import { Repository, Language, User } from &quot;@octokit/graphql-schema&quot;;
 import fs from &quot;node:fs/promises&quot;;
 
 
-import { GithubService } from &quot;../github/github.service&quot;;
-import { S3FileStorageService } from &quot;../s3-file-storage/s3-file-storage.service&quot;;
-import userLangs from &quot;./templates/user-langs&quot;;
-import userProfileRepos from &quot;./templates/user-profile-repos&quot;;
-import userProfileCard from &quot;./templates/user-profile-card&quot;;
-import tailwindConfig from &quot;./templates/tailwind.config&quot;;
+import { GithubService } from &quot;../../github/github.service&quot;;
+import { S3FileStorageService } from &quot;../../s3-file-storage/s3-file-storage.service&quot;;
+import userLangs from &quot;../templates/shared/user-langs&quot;;
+import userProfileRepos from &quot;../templates/shared/user-repos&quot;;
+import userProfileCardTemplate from &quot;../templates/user-profile-card.template&quot;;
+import tailwindConfig from &quot;../templates/tailwind.config&quot;;
 
 interface RequiresUpdateMeta {
   fileUrl: string,
@@ -355,7 +355,7 @@ interface UserCardData {
 
 
 @Injectable()
-export class SocialCardService {
+export class UserCardService {
   private readonly logger &#x3D; new Logger(this.constructor.name);
 
   constructor (
@@ -408,7 +408,7 @@ export class SocialCardService {
 
     const { avatarUrl, repos, langs, langTotal } &#x3D; userData ? userData : await this.getUserData(username);
 
-    const template &#x3D; html(userProfileCard(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos)));
+    const template &#x3D; html(userProfileCardTemplate(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos, 4)));
 
     const interArrayBuffer &#x3D; await fs.readFile(&quot;node_modules/@fontsource/inter/files/inter-all-400-normal.woff&quot;);
 

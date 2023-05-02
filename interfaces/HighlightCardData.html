@@ -47,7 +47,7 @@
   <li>Interfaces</li>
   <li
   >
-  RequiresUpdateMeta</li>
+  HighlightCardData</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -65,7 +65,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/social-card/user-card/user-card.service.ts</code>
+            <code>src/social-card/highlight-card/highlight-card.service.ts</code>
         </p>
 
 
@@ -84,27 +84,45 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#fileUrl" 
+                                        <a href="#avatarUrl" 
 >
-                                            fileUrl
+                                            avatarUrl
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#hasFile" 
+                                        <a href="#body" 
 >
-                                            hasFile
+                                            body
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#lastModified" 
+                                        <a href="#langs" 
 >
-                                            lastModified
+                                            langs
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#needsUpdate" 
+                                        <a href="#langTotal" 
 >
-                                            needsUpdate
+                                            langTotal
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#reactions" 
+>
+                                            reactions
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#repos" 
+>
+                                            repos
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#title" 
+>
+                                            title
                                         </a>
                                 </li>
                             </ul>
@@ -122,9 +140,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="fileUrl"></a>
-                                        <span class="name "><b>fileUrl</b>
-                                            <a href="#fileUrl">
+                                        <a name="avatarUrl"></a>
+                                        <span class="name "><b>avatarUrl</b>
+                                            <a href="#avatarUrl">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -132,7 +150,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>fileUrl:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>avatarUrl:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -155,9 +173,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="hasFile"></a>
-                                        <span class="name "><b>hasFile</b>
-                                            <a href="#hasFile">
+                                        <a name="body"></a>
+                                        <span class="name "><b>body</b>
+                                            <a href="#body">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -165,7 +183,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>hasFile:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                        <code>body:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -173,7 +191,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                         </td>
                                     </tr>
@@ -188,9 +206,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="lastModified"></a>
-                                        <span class="name "><b>lastModified</b>
-                                            <a href="#lastModified">
+                                        <a name="langs"></a>
+                                        <span class="name "><b>langs</b>
+                                            <a href="#langs">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -198,7 +216,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>lastModified:     <code>Date | null</code>
+                                        <code>langs:     <code>()[]</code>
 </code>
                                     </td>
                                 </tr>
@@ -206,7 +224,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code>Date | null</code>
+                                            <i>Type : </i>    <code>()[]</code>
 
                                         </td>
                                     </tr>
@@ -221,9 +239,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="needsUpdate"></a>
-                                        <span class="name "><b>needsUpdate</b>
-                                            <a href="#needsUpdate">
+                                        <a name="langTotal"></a>
+                                        <span class="name "><b>langTotal</b>
+                                            <a href="#langTotal">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -231,7 +249,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>needsUpdate:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                        <code>langTotal:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -239,7 +257,106 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="reactions"></a>
+                                        <span class="name "><b>reactions</b>
+                                            <a href="#reactions">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>reactions:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="repos"></a>
+                                        <span class="name "><b>repos</b>
+                                            <a href="#repos">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>repos:     <code>Repository[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>Repository[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="title"></a>
+                                        <span class="name "><b>title</b>
+                                            <a href="#title">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>title:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                         </td>
                                     </tr>
@@ -255,41 +372,34 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ForbiddenException, Injectable, Logger, NotFoundException } from &quot;@nestjs/common&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Logger } from &quot;@nestjs/common&quot;;
 import { HttpService } from &quot;@nestjs/axios&quot;;
 import { Resvg } from &quot;@resvg/resvg-js&quot;;
-import { Repository, Language, User } from &quot;@octokit/graphql-schema&quot;;
+import { Repository, Language } from &quot;@octokit/graphql-schema&quot;;
 import fs from &quot;node:fs/promises&quot;;
-
 
 import { GithubService } from &quot;../../github/github.service&quot;;
 import { S3FileStorageService } from &quot;../../s3-file-storage/s3-file-storage.service&quot;;
 import userLangs from &quot;../templates/shared/user-langs&quot;;
 import userProfileRepos from &quot;../templates/shared/user-repos&quot;;
-import userProfileCardTemplate from &quot;../templates/user-profile-card.template&quot;;
 import tailwindConfig from &quot;../templates/tailwind.config&quot;;
+import { firstValueFrom } from &quot;rxjs&quot;;
+import highlightCardTemplate from &quot;../templates/highlight-card.template&quot;;
 
-interface RequiresUpdateMeta {
-  fileUrl: string,
-  hasFile: boolean;
-  needsUpdate: boolean;
-  lastModified: Date | null,
-}
-
-interface UserCardData {
-  id: User[&quot;databaseId&quot;],
-  name: User[&quot;name&quot;],
+interface HighlightCardData {
+  title: string,
+  body: string,
+  reactions: number,
+  avatarUrl: string,
+  repos: Repository[],
+  langTotal: number,
   langs: (Language &amp; {
     size: number,
   })[],
-  langTotal: number,
-  repos: Repository[],
-  avatarUrl: string,
 }
 
-
 @Injectable()
-export class UserCardService {
+export class HighlightCardService {
   private readonly logger &#x3D; new Logger(this.constructor.name);
 
   constructor (
@@ -298,18 +408,25 @@ export class UserCardService {
     private readonly s3FileStorageService: S3FileStorageService,
   ) {}
 
-  private async getUserData (username: string): Promise&lt;UserCardData&gt; {
+  private async getHighlightData (highlightId: number): Promise&lt;HighlightCardData&gt; {
     const langs: Record&lt;string, Language &amp; {
       size: number,
     }&gt; &#x3D; {};
     const today &#x3D; (new Date);
     const today30daysAgo &#x3D; new Date((new Date).setDate(today.getDate() - 30));
-    const user &#x3D; await this.githubService.getUser(username);
+
+    const highlightReq &#x3D; await firstValueFrom(this.httpService.get&lt;DbHighlight&gt;(&#x60;https://api.opensauced.pizza/v1/user/highlights/${highlightId}&#x60;));
+    const { login, title, highlight: body } &#x3D; highlightReq.data;
+
+    const reactionsReq &#x3D; await firstValueFrom(this.httpService.get&lt;DbReaction[]&gt;(&#x60;https://api.opensauced.pizza/v1/highlights/${highlightId}/reactions&#x60;));
+    const reactions &#x3D; reactionsReq.data.reduce&lt;number&gt;( (acc, curr) &#x3D;&gt; acc + Number(curr.reaction_count), 0);
+
+    const user &#x3D; await this.githubService.getUser(login);
     const langRepos &#x3D; user.repositories.nodes?.filter(repo &#x3D;&gt; new Date(String(repo?.pushedAt)) &gt; today30daysAgo) as Repository[];
     let langTotal &#x3D; 0;
 
-    langRepos.map(repo &#x3D;&gt; {
-      repo.languages?.edges?.map(edge &#x3D;&gt; {
+    langRepos.forEach(repo &#x3D;&gt; {
+      repo.languages?.edges?.forEach(edge &#x3D;&gt; {
         if (edge?.node.id) {
           langTotal +&#x3D; edge.size;
 
@@ -326,23 +443,24 @@ export class UserCardService {
     });
 
     return {
-      id: user.databaseId,
-      name: user.name,
+      title,
+      body,
+      reactions,
+      avatarUrl: &#x60;${String(user.avatarUrl)}&amp;size&#x3D;150&#x60;,
       langs: Array.from(Object.values(langs)).sort((a, b) &#x3D;&gt; b.size - a.size),
       langTotal,
-      repos: user.topRepositories.nodes?.filter(repo &#x3D;&gt; !repo?.isPrivate &amp;&amp; repo?.owner.login !&#x3D;&#x3D; username) as Repository[],
-      avatarUrl: &#x60;${String(user.avatarUrl)}&amp;size&#x3D;150&#x60;,
+      repos: user.topRepositories.nodes?.filter(repo &#x3D;&gt; !repo?.isPrivate &amp;&amp; repo?.owner.login !&#x3D;&#x3D; login) as Repository[],
     };
   }
 
   // public only to be used in local scripts. Not for controller direct use.
-  async generateCardBuffer (username: string, userData?: UserCardData) {
+  async generateCardBuffer (highlightId: number, highlightData?: HighlightCardData) {
     const { html } &#x3D; await import(&quot;satori-html&quot;);
     const satori &#x3D; (await import(&quot;satori&quot;)).default;
 
-    const { avatarUrl, repos, langs, langTotal } &#x3D; userData ? userData : await this.getUserData(username);
+    const { title, body, reactions, avatarUrl, repos, langs, langTotal } &#x3D; highlightData ? highlightData : await this.getHighlightData(highlightId);
 
-    const template &#x3D; html(userProfileCardTemplate(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos, 4)));
+    const template &#x3D; html(highlightCardTemplate(avatarUrl, title, body, userLangs(langs, langTotal), userProfileRepos(repos, 2), reactions));
 
     const interArrayBuffer &#x3D; await fs.readFile(&quot;node_modules/@fontsource/inter/files/inter-all-400-normal.woff&quot;);
 
@@ -365,59 +483,6 @@ export class UserCardService {
     const pngData &#x3D; resvg.render();
 
     return { png: pngData.asPng(), svg };
-  }
-
-  async checkRequiresUpdate (username: string): Promise&lt;RequiresUpdateMeta&gt; {
-    const hash &#x3D; &#x60;users/${String(username)}.png&#x60;;
-    const fileUrl &#x3D; &#x60;${this.s3FileStorageService.getCdnEndpoint()}${hash}&#x60;;
-    const hasFile &#x3D; await this.s3FileStorageService.fileExists(hash);
-    const today3daysAgo &#x3D; new Date((new Date).setDate((new Date).getDate() - 3));
-    const returnVal: RequiresUpdateMeta &#x3D; {
-      fileUrl,
-      hasFile,
-      needsUpdate: true,
-      lastModified: null,
-    };
-
-    if (hasFile) {
-      const lastModified &#x3D; await this.s3FileStorageService.getFileLastModified(hash);
-
-      returnVal.lastModified &#x3D; lastModified;
-
-      if (lastModified &amp;&amp; lastModified &gt; today3daysAgo) {
-        this.logger.debug(&#x60;User ${username} exists in S3 with lastModified: ${lastModified.toISOString()} less than 3 days ago, redirecting to ${fileUrl}&#x60;);
-        returnVal.needsUpdate &#x3D; false;
-      }
-    }
-
-    return returnVal;
-  }
-
-  async getUserCard (username: string): Promise&lt;string&gt; {
-    const { remaining } &#x3D; await this.githubService.rateLimit();
-
-    if (remaining &lt; 1000) {
-      throw new ForbiddenException(&quot;Rate limit exceeded&quot;);
-    }
-
-    const userData &#x3D; await this.getUserData(username);
-
-    try {
-      const hash &#x3D; &#x60;users/${String(username)}.png&#x60;;
-      const fileUrl &#x3D; &#x60;${this.s3FileStorageService.getCdnEndpoint()}${hash}&#x60;;
-
-      const { png } &#x3D; await this.generateCardBuffer(username, userData);
-
-      await this.s3FileStorageService.uploadFile(png, hash, &quot;image/png&quot;, { &quot;x-amz-meta-user-id&quot;: String(userData.id) });
-
-      this.logger.debug(&#x60;User ${username} did not exist in S3, generated image and uploaded to S3, redirecting&#x60;);
-
-      return fileUrl;
-    } catch (e) {
-      this.logger.error(&#x60;Error generating user card for ${username}&#x60;, e);
-
-      throw (new NotFoundException);
-    }
   }
 }
 </code></pre>
@@ -457,7 +522,7 @@ export class UserCardService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'RequiresUpdateMeta.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'HighlightCardData.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
