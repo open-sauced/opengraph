@@ -5,12 +5,12 @@ import { Repository, Language, User } from "@octokit/graphql-schema";
 import fs from "node:fs/promises";
 
 
-import { GithubService } from "../github/github.service";
-import { S3FileStorageService } from "../s3-file-storage/s3-file-storage.service";
-import userLangs from "./templates/user-langs";
-import userProfileRepos from "./templates/user-profile-repos";
-import userProfileCard from "./templates/user-profile-card";
-import tailwindConfig from "./templates/tailwind.config";
+import { GithubService } from "../../github/github.service";
+import { S3FileStorageService } from "../../s3-file-storage/s3-file-storage.service";
+import userLangs from "../templates/shared/user-langs";
+import userProfileRepos from "../templates/shared/user-repos";
+import userProfileCardTemplate from "../templates/user-profile-card.template";
+import tailwindConfig from "../templates/tailwind.config";
 
 interface RequiresUpdateMeta {
   fileUrl: string,
@@ -32,7 +32,7 @@ interface UserCardData {
 
 
 @Injectable()
-export class SocialCardService {
+export class UserCardService {
   private readonly logger = new Logger(this.constructor.name);
 
   constructor (
@@ -85,7 +85,7 @@ export class SocialCardService {
 
     const { avatarUrl, repos, langs, langTotal } = userData ? userData : await this.getUserData(username);
 
-    const template = html(userProfileCard(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos)));
+    const template = html(userProfileCardTemplate(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos, 4)));
 
     const interArrayBuffer = await fs.readFile("node_modules/@fontsource/inter/files/inter-all-400-normal.woff");
 
