@@ -71,6 +71,27 @@ export class S3FileStorageService {
     }
   }
 
+  async getFileMeta(hash: string): Promise<Record<string, string> | null> {
+    try {
+      const response = await this.s3Client.send(
+        new HeadObjectCommand({
+          Bucket: this.config.bucketName,
+          Key: hash,
+        }),
+      );
+
+      return response.Metadata ?? null;
+    } catch (error) {
+      if (error instanceof Error) {
+        if (error.name === "NotFound") {
+          return null;
+        }
+      }
+
+      throw error;
+    }
+  }
+
   async uploadFile (
     fileContent: Buffer | Readable,
     hash: string,
