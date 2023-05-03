@@ -1,4 +1,4 @@
-import { Controller, Get, Header, HttpStatus, Param, Redirect, Res, StreamableFile } from "@nestjs/common";
+import { Controller, Get, Header, HttpStatus, Param, ParseIntPipe, Redirect, Res, StreamableFile } from "@nestjs/common";
 import {
   ApiBadRequestResponse,
   ApiForbiddenResponse,
@@ -32,12 +32,9 @@ export class HighlightCardController {
   @ApiBadRequestResponse({ description: "Invalid highlight id" })
   @Redirect()
   async generateHighlightSocialCard (
-    @Param("id") id: string,
+    @Param("id", ParseIntPipe) id: number,
       @Res({ passthrough: true }) res: FastifyReply,
   ): Promise<void> {
-    if (!isNumberString(id)) {
-      return res.status(HttpStatus.BAD_REQUEST).send();
-    }
 
     const { fileUrl, hasFile, needsUpdate } = await this.highlightCardService.checkRequiresUpdate(Number(id));
 
