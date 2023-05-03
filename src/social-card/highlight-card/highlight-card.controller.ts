@@ -8,7 +8,6 @@ import {
   ApiOperation, ApiResponse,
   ApiTags,
 } from "@nestjs/swagger";
-import { isNumberString } from "class-validator";
 import { FastifyReply } from "fastify";
 import { HighlightCardService } from "./highlight-card.service";
 
@@ -35,7 +34,6 @@ export class HighlightCardController {
     @Param("id", ParseIntPipe) id: number,
       @Res({ passthrough: true }) res: FastifyReply,
   ): Promise<void> {
-
     const { fileUrl, hasFile, needsUpdate } = await this.highlightCardService.checkRequiresUpdate(id);
 
     if (hasFile && !needsUpdate) {
@@ -58,7 +56,7 @@ export class HighlightCardController {
   @ApiBadRequestResponse({ description: "Invalid highlight id", status: HttpStatus.BAD_REQUEST })
   async checkHighlightSocialCard (
     @Param("id", ParseIntPipe) id: number,
-    @Res({ passthrough: true }) res: FastifyReply,
+      @Res({ passthrough: true }) res: FastifyReply,
   ): Promise<void> {
     const { fileUrl, hasFile, needsUpdate, lastModified } = await this.highlightCardService.checkRequiresUpdate(id);
 

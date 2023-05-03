@@ -71,7 +71,7 @@ export class S3FileStorageService {
     }
   }
 
-  async getFileMeta(hash: string): Promise<Record<string, string> | null> {
+  async getFileMeta (hash: string): Promise<Record<string, string> | null> {
     try {
       const response = await this.s3Client.send(
         new HeadObjectCommand({

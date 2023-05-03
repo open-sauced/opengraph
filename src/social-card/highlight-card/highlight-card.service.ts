@@ -133,10 +133,10 @@ export class HighlightCardService {
 
       const { updated_at, reactions } = await this.getHighlightData(id);
       const metadata = await this.s3FileStorageService.getFileMeta(hash);
-      const savedReactions = metadata?.['reactions-count'] ?? "-1";
+      const savedReactions = metadata?.["reactions-count"] ?? "0";
 
       if (lastModified && lastModified > updated_at && savedReactions === String(reactions)) {
-        this.logger.debug(`Highlight ${id} exists in S3 with lastModified: ${lastModified.toISOString()} newer than updated_at: ${updated_at}, and reaction count is the same, redirecting to ${fileUrl}`);
+        this.logger.debug(`Highlight ${id} exists in S3 with lastModified: ${lastModified.toISOString()} newer than updated_at: ${updated_at.toISOString()}, and reaction count is the same, redirecting to ${fileUrl}`);
         returnVal.needsUpdate = false;
       }
     }
