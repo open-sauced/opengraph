@@ -36,13 +36,13 @@ export class HighlightCardController {
       @Res({ passthrough: true }) res: FastifyReply,
   ): Promise<void> {
 
-    const { fileUrl, hasFile, needsUpdate } = await this.highlightCardService.checkRequiresUpdate(Number(id));
+    const { fileUrl, hasFile, needsUpdate } = await this.highlightCardService.checkRequiresUpdate(id);
 
     if (hasFile && !needsUpdate) {
       return res.status(HttpStatus.FOUND).redirect(fileUrl);
     }
 
-    const url = await this.highlightCardService.getHighlightCard(Number(id));
+    const url = await this.highlightCardService.getHighlightCard(id);
 
     return res.status(HttpStatus.FOUND).redirect(url);
   }
@@ -57,10 +57,10 @@ export class HighlightCardController {
   @ApiNotFoundResponse({ description: "Highlight social card image not found", status: HttpStatus.NOT_FOUND })
   @ApiBadRequestResponse({ description: "Invalid highlight id", status: HttpStatus.BAD_REQUEST })
   async checkHighlightSocialCard (
-    @Param("id", ParseIntPipe) id: string,
+    @Param("id", ParseIntPipe) id: number,
     @Res({ passthrough: true }) res: FastifyReply,
   ): Promise<void> {
-    const { fileUrl, hasFile, needsUpdate, lastModified } = await this.highlightCardService.checkRequiresUpdate(Number(id));
+    const { fileUrl, hasFile, needsUpdate, lastModified } = await this.highlightCardService.checkRequiresUpdate(id);
 
     return res
       .headers({
