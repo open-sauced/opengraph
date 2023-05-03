@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { ForbiddenException, Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
 import { Resvg } from "@resvg/resvg-js";
 import { Repository, Language } from "@octokit/graphql-schema";
@@ -11,6 +11,7 @@ import userProfileRepos from "../templates/shared/user-repos";
 import tailwindConfig from "../templates/tailwind.config";
 import { firstValueFrom } from "rxjs";
 import highlightCardTemplate from "../templates/highlight-card.template";
+import RequiresUpdateMeta from "../../../typings/RequiresUpdateMeta";
 
 interface HighlightCardData {
   title: string,
@@ -109,5 +110,58 @@ export class HighlightCardService {
     const pngData = resvg.render();
 
     return { png: pngData.asPng(), svg };
+  }
+
+  async checkRequiresUpdate (id: number): Promise<RequiresUpdateMeta> {
+    const hash = `highlights/${String(id)}.png`;
+    const fileUrl = `${this.s3FileStorageService.getCdnEndpoint()}${hash}`;
+    const hasFile = await this.s3FileStorageService.fileExists(hash);
+    const today1daysAgo = new Date((new Date).setDate((new Date).getDate() - 1));
+    const returnVal: RequiresUpdateMeta = {
+      fileUrl,
+      hasFile,
+      needsUpdate: true,
+      lastModified: null,
+    };
+
+    if (hasFile) {
+      const lastModified = await this.s3FileStorageService.getFileLastModified(hash);
+
+      returnVal.lastModified = lastModified;
+
+      if (lastModified && lastModified > today1daysAgo) {
+        this.logger.debug(`Highlight ${id} exists in S3 with lastModified: ${lastModified.toISOString()} less than 1 days ago, redirecting to ${fileUrl}`);
+        returnVal.needsUpdate = false;
+      }
+    }
+
+    return returnVal;
+  }
+
+  async getHighlightCard (id: number): Promise<string> {
+    const { remaining } = await this.githubService.rateLimit();
+
+    if (remaining < 1000) {
+      throw new ForbiddenException("Rate limit exceeded");
+    }
+
+    const highlightData = await this.getHighlightData(id);
+
+    try {
+      const hash = `highlights/${String(id)}.png`;
+      const fileUrl = `${this.s3FileStorageService.getCdnEndpoint()}${hash}`;
+
+      const { png } = await this.generateCardBuffer(id, highlightData);
+
+      await this.s3FileStorageService.uploadFile(png, hash, "image/png", { "x-amz-meta-user-id": String(id) });
+
+      this.logger.debug(`Highlight ${id} did not exist in S3, generated image and uploaded to S3, redirecting`);
+
+      return fileUrl;
+    } catch (e) {
+      this.logger.error(`Error generating highlight card for ${id}`, e);
+
+      throw (new NotFoundException);
+    }
   }
 }
