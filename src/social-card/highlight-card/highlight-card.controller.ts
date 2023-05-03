@@ -57,13 +57,9 @@ export class HighlightCardController {
   @ApiNotFoundResponse({ description: "Highlight social card image not found", status: HttpStatus.NOT_FOUND })
   @ApiBadRequestResponse({ description: "Invalid highlight id", status: HttpStatus.BAD_REQUEST })
   async checkHighlightSocialCard (
-    @Param("id") id: string,
-      @Res({ passthrough: true }) res: FastifyReply,
+    @Param("id", ParseIntPipe) id: string,
+    @Res({ passthrough: true }) res: FastifyReply,
   ): Promise<void> {
-    if (!isNumberString(id)) {
-      return res.status(HttpStatus.BAD_REQUEST).send();
-    }
-
     const { fileUrl, hasFile, needsUpdate, lastModified } = await this.highlightCardService.checkRequiresUpdate(Number(id));
 
     return res
