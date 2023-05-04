@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { ForbiddenException, Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
 import { Resvg } from "@resvg/resvg-js";
 import { Repository, Language } from "@octokit/graphql-schema";
@@ -11,6 +11,7 @@ import userProfileRepos from "../templates/shared/user-repos";
 import tailwindConfig from "../templates/tailwind.config";
 import { firstValueFrom } from "rxjs";
 import highlightCardTemplate from "../templates/highlight-card.template";
+import RequiresUpdateMeta from "../../../typings/RequiresUpdateMeta";
 
 interface HighlightCardData {
   title: string,
@@ -22,6 +23,7 @@ interface HighlightCardData {
   langs: (Language & {
     size: number,
   })[],
+  updated_at: Date
 }
 
 @Injectable()
@@ -42,7 +44,7 @@ export class HighlightCardService {
     const today30daysAgo = new Date((new Date).setDate(today.getDate() - 30));
 
     const highlightReq = await firstValueFrom(this.httpService.get<DbHighlight>(`https://api.opensauced.pizza/v1/user/highlights/${highlightId}`));
-    const { login, title, highlight: body } = highlightReq.data;
+    const { login, title, highlight: body, updated_at } = highlightReq.data;
 
     const reactionsReq = await firstValueFrom(this.httpService.get<DbReaction[]>(`https://api.opensauced.pizza/v1/highlights/${highlightId}/reactions`));
     const reactions = reactionsReq.data.reduce<number>( (acc, curr) => acc + Number(curr.reaction_count), 0);
@@ -76,6 +78,7 @@ export class HighlightCardService {
       langs: Array.from(Object.values(langs)).sort((a, b) => b.size - a.size),
       langTotal,
       repos: user.topRepositories.nodes?.filter(repo => !repo?.isPrivate && repo?.owner.login !== login) as Repository[],
+      updated_at: new Date(updated_at),
     };
   }
 
@@ -109,5 +112,62 @@ export class HighlightCardService {
     const pngData = resvg.render();
 
     return { png: pngData.asPng(), svg };
+  }
+
+  async checkRequiresUpdate (id: number): Promise<RequiresUpdateMeta> {
+    const hash = `highlights/${String(id)}.png`;
+    const fileUrl = `${this.s3FileStorageService.getCdnEndpoint()}${hash}`;
+    const hasFile = await this.s3FileStorageService.fileExists(hash);
+
+    const returnVal: RequiresUpdateMeta = {
+      fileUrl,
+      hasFile,
+      needsUpdate: true,
+      lastModified: null,
+    };
+
+    if (hasFile) {
+      const lastModified = await this.s3FileStorageService.getFileLastModified(hash);
+
+      returnVal.lastModified = lastModified;
+
+      const { updated_at, reactions } = await this.getHighlightData(id);
+      const metadata = await this.s3FileStorageService.getFileMeta(hash);
+      const savedReactions = metadata?.["reactions-count"] ?? "0";
+
+      if (lastModified && lastModified > updated_at && savedReactions === String(reactions)) {
+        this.logger.debug(`Highlight ${id} exists in S3 with lastModified: ${lastModified.toISOString()} newer than updated_at: ${updated_at.toISOString()}, and reaction count is the same, redirecting to ${fileUrl}`);
+        returnVal.needsUpdate = false;
+      }
+    }
+
+    return returnVal;
+  }
+
+  async getHighlightCard (id: number): Promise<string> {
+    const { remaining } = await this.githubService.rateLimit();
+
+    if (remaining < 1000) {
+      throw new ForbiddenException("Rate limit exceeded");
+    }
+
+    const highlightData = await this.getHighlightData(id);
+
+    try {
+      const hash = `highlights/${String(id)}.png`;
+      const fileUrl = `${this.s3FileStorageService.getCdnEndpoint()}${hash}`;
+
+      const { png } = await this.generateCardBuffer(id, highlightData);
+
+      await this.s3FileStorageService.uploadFile(png, hash, "image/png", { "reactions-count": String(highlightData.reactions) });
+
+      this.logger.debug(`Highlight ${id} did not exist in S3, generated image and uploaded to S3, redirecting`);
+
+      return fileUrl;
+    } catch (e) {
+      this.logger.error(`Error generating highlight card for ${id}`, e);
+
+      throw (new NotFoundException);
+    }
   }
 }

@@ -11,13 +11,7 @@ import userLangs from "../templates/shared/user-langs";
 import userProfileRepos from "../templates/shared/user-repos";
 import userProfileCardTemplate from "../templates/user-profile-card.template";
 import tailwindConfig from "../templates/tailwind.config";
-
-interface RequiresUpdateMeta {
-  fileUrl: string,
-  hasFile: boolean;
-  needsUpdate: boolean;
-  lastModified: Date | null,
-}
+import RequiresUpdateMeta from "../../../typings/RequiresUpdateMeta";
 
 interface UserCardData {
   id: User["databaseId"],
