@@ -49,12 +49,16 @@ export class HighlightCardService {
     const user = await this.githubService.getUser(login);
     const repo = await this.githubService.getRepo(owner, repoName);
 
-    const langList = repo.languages!.edges!.map(edge => ({
-      ...edge!.node ?? {},
-      size: edge?.size ?? 0,
-    }));
-
-    console.log("langList", langList);
+    const langList = repo.languages?.edges?.flatMap(edge => {
+      if(edge) {
+        return {
+          ...edge.node ?? {} as Language,
+          size: edge?.size ?? 0,
+        };
+      } else {
+        return [];
+      }
+  }) ?? [];
 
     return {
       title,

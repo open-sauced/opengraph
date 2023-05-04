@@ -2,7 +2,7 @@ import repoIconWithName from "./repo-icon-with-name";
 import { Repository } from "@octokit/graphql-schema";
 
 const userProfileRepos = (repos: Repository[], limit: number): string => {
-  const charLimit = limit === 1 ? 30 : repos.length === 1 ? 30 : 15;
+  const charLimit = limit === 1 ? 60 : repos.length === 1 ? 60 : 15;
   const repoList = repos.map(({ name, owner: { avatarUrl } }) =>
     repoIconWithName(`${name.substring(0, charLimit).replace(/\.+$/, "")}${name.length > charLimit ? "..." : ""}`, `${String(avatarUrl)}&size=40`));
 
