@@ -56,8 +56,7 @@ export class HighlightCardService {
           size: edge.size,
         };
       }
-      return [];
-    }) ?? [];
+    }) as (Language & { size: number})[];
 
     return {
       title,
