@@ -52,8 +52,8 @@ export class HighlightCardService {
     const langList = repo.languages?.edges?.flatMap(edge => {
       if(edge) {
         return {
-          ...edge.node ?? {} as Language,
-          size: edge?.size ?? 0,
+          ...edge.node,
+          size: edge.size,
         };
       } else {
         return [];
