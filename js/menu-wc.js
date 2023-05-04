@@ -99,15 +99,29 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="modules/HighlightCardModule.html" data-type="entity-link" >HighlightCardModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                            'data-target="#controllers-links-module-HighlightCardModule-681e3691f75fc9c4426877615d7cdae87f179b296db6813d0ad00a23628cdaf743df55a37d607227adfffbe38c8ac5e5d1c7aaf40607c1a81be606dcaec40df3"' : 'data-target="#xs-controllers-links-module-HighlightCardModule-681e3691f75fc9c4426877615d7cdae87f179b296db6813d0ad00a23628cdaf743df55a37d607227adfffbe38c8ac5e5d1c7aaf40607c1a81be606dcaec40df3"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-HighlightCardModule-681e3691f75fc9c4426877615d7cdae87f179b296db6813d0ad00a23628cdaf743df55a37d607227adfffbe38c8ac5e5d1c7aaf40607c1a81be606dcaec40df3"' :
+                                            'id="xs-controllers-links-module-HighlightCardModule-681e3691f75fc9c4426877615d7cdae87f179b296db6813d0ad00a23628cdaf743df55a37d607227adfffbe38c8ac5e5d1c7aaf40607c1a81be606dcaec40df3"' }>
+                                            <li class="link">
+                                                <a href="controllers/HighlightCardController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >HighlightCardController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#injectables-links-module-HighlightCardModule-b0b131b07183cc6481eb5af497f038ee774fbceb948a4e102e8e70590e25b11bb5f1ff8f3a134c133fa06e97e9c1450769d0d4f2a771bc5936eb572144d4df98"' : 'data-target="#xs-injectables-links-module-HighlightCardModule-b0b131b07183cc6481eb5af497f038ee774fbceb948a4e102e8e70590e25b11bb5f1ff8f3a134c133fa06e97e9c1450769d0d4f2a771bc5936eb572144d4df98"' }>
+                                        'data-target="#injectables-links-module-HighlightCardModule-681e3691f75fc9c4426877615d7cdae87f179b296db6813d0ad00a23628cdaf743df55a37d607227adfffbe38c8ac5e5d1c7aaf40607c1a81be606dcaec40df3"' : 'data-target="#xs-injectables-links-module-HighlightCardModule-681e3691f75fc9c4426877615d7cdae87f179b296db6813d0ad00a23628cdaf743df55a37d607227adfffbe38c8ac5e5d1c7aaf40607c1a81be606dcaec40df3"' }>
                                         <span class="icon ion-md-arrow-round-down"></span>
                                         <span>Injectables</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-HighlightCardModule-b0b131b07183cc6481eb5af497f038ee774fbceb948a4e102e8e70590e25b11bb5f1ff8f3a134c133fa06e97e9c1450769d0d4f2a771bc5936eb572144d4df98"' :
-                                        'id="xs-injectables-links-module-HighlightCardModule-b0b131b07183cc6481eb5af497f038ee774fbceb948a4e102e8e70590e25b11bb5f1ff8f3a134c133fa06e97e9c1450769d0d4f2a771bc5936eb572144d4df98"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-HighlightCardModule-681e3691f75fc9c4426877615d7cdae87f179b296db6813d0ad00a23628cdaf743df55a37d607227adfffbe38c8ac5e5d1c7aaf40607c1a81be606dcaec40df3"' :
+                                        'id="xs-injectables-links-module-HighlightCardModule-681e3691f75fc9c4426877615d7cdae87f179b296db6813d0ad00a23628cdaf743df55a37d607227adfffbe38c8ac5e5d1c7aaf40607c1a81be606dcaec40df3"' }>
                                         <li class="link">
                                             <a href="injectables/HighlightCardService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >HighlightCardService</a>
                                         </li>
@@ -174,9 +188,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
                             <li class="link">
                                 <a href="interfaces/HighlightCardData.html" data-type="entity-link" >HighlightCardData</a>
-                            </li>
-                            <li class="link">
-                                <a href="interfaces/RequiresUpdateMeta.html" data-type="entity-link" >RequiresUpdateMeta</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/UserCardData.html" data-type="entity-link" >UserCardData</a>

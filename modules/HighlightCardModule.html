@@ -155,6 +155,15 @@
                     </ul>
                 </div>
                 <div class="col-sm-3">
+                    <h3>Controllers<a href="https://docs.nestjs.com/controllers" target="_blank" title="Official documentation about module controllers"><span
+                                class="icon ion-ios-information-circle-outline"></a></h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="../controllers/HighlightCardController.html">HighlightCardController</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
                     <h3>Imports<a href="https://angular.io/api/core/NgModule#imports" target="_blank" title="Official documentation about module imports"><span
                                 class="icon ion-ios-information-circle-outline"></a></h3>
                     <ul class="list-group">
@@ -179,10 +188,12 @@ import { HttpModule } from &quot;@nestjs/axios&quot;;
 import { GithubModule } from &quot;../../github/github.module&quot;;
 import { S3FileStorageModule } from &quot;../../s3-file-storage/s3-file-storage.module&quot;;
 import { HighlightCardService } from &quot;../highlight-card/highlight-card.service&quot;;
+import { HighlightCardController } from &quot;./highlight-card.controller&quot;;
 
 @Module({
   imports: [HttpModule, GithubModule, S3FileStorageModule],
   providers: [HighlightCardService],
+  controllers: [HighlightCardController],
 })
 export class HighlightCardModule {}
 </code></pre>

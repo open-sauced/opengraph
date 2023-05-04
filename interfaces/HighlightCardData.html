@@ -125,6 +125,12 @@
                                             title
                                         </a>
                                 </li>
+                                <li>
+                                        <a href="#updated_at" 
+>
+                                            updated_at
+                                        </a>
+                                </li>
                             </ul>
                         </td>
                     </tr>
@@ -367,12 +373,45 @@
 
                         </tbody>
                     </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="updated_at"></a>
+                                        <span class="name "><b>updated_at</b>
+                                            <a href="#updated_at">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>updated_at:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
             </section>
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Logger } from &quot;@nestjs/common&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ForbiddenException, Injectable, Logger, NotFoundException } from &quot;@nestjs/common&quot;;
 import { HttpService } from &quot;@nestjs/axios&quot;;
 import { Resvg } from &quot;@resvg/resvg-js&quot;;
 import { Repository, Language } from &quot;@octokit/graphql-schema&quot;;
@@ -385,6 +424,7 @@ import userProfileRepos from &quot;../templates/shared/user-repos&quot;;
 import tailwindConfig from &quot;../templates/tailwind.config&quot;;
 import { firstValueFrom } from &quot;rxjs&quot;;
 import highlightCardTemplate from &quot;../templates/highlight-card.template&quot;;
+import RequiresUpdateMeta from &quot;../../../typings/RequiresUpdateMeta&quot;;
 
 interface HighlightCardData {
   title: string,
@@ -396,6 +436,7 @@ interface HighlightCardData {
   langs: (Language &amp; {
     size: number,
   })[],
+  updated_at: Date
 }
 
 @Injectable()
@@ -416,7 +457,7 @@ export class HighlightCardService {
     const today30daysAgo &#x3D; new Date((new Date).setDate(today.getDate() - 30));
 
     const highlightReq &#x3D; await firstValueFrom(this.httpService.get&lt;DbHighlight&gt;(&#x60;https://api.opensauced.pizza/v1/user/highlights/${highlightId}&#x60;));
-    const { login, title, highlight: body } &#x3D; highlightReq.data;
+    const { login, title, highlight: body, updated_at } &#x3D; highlightReq.data;
 
     const reactionsReq &#x3D; await firstValueFrom(this.httpService.get&lt;DbReaction[]&gt;(&#x60;https://api.opensauced.pizza/v1/highlights/${highlightId}/reactions&#x60;));
     const reactions &#x3D; reactionsReq.data.reduce&lt;number&gt;( (acc, curr) &#x3D;&gt; acc + Number(curr.reaction_count), 0);
@@ -450,6 +491,7 @@ export class HighlightCardService {
       langs: Array.from(Object.values(langs)).sort((a, b) &#x3D;&gt; b.size - a.size),
       langTotal,
       repos: user.topRepositories.nodes?.filter(repo &#x3D;&gt; !repo?.isPrivate &amp;&amp; repo?.owner.login !&#x3D;&#x3D; login) as Repository[],
+      updated_at: new Date(updated_at),
     };
   }
 
@@ -483,6 +525,63 @@ export class HighlightCardService {
     const pngData &#x3D; resvg.render();
 
     return { png: pngData.asPng(), svg };
+  }
+
+  async checkRequiresUpdate (id: number): Promise&lt;RequiresUpdateMeta&gt; {
+    const hash &#x3D; &#x60;highlights/${String(id)}.png&#x60;;
+    const fileUrl &#x3D; &#x60;${this.s3FileStorageService.getCdnEndpoint()}${hash}&#x60;;
+    const hasFile &#x3D; await this.s3FileStorageService.fileExists(hash);
+
+    const returnVal: RequiresUpdateMeta &#x3D; {
+      fileUrl,
+      hasFile,
+      needsUpdate: true,
+      lastModified: null,
+    };
+
+    if (hasFile) {
+      const lastModified &#x3D; await this.s3FileStorageService.getFileLastModified(hash);
+
+      returnVal.lastModified &#x3D; lastModified;
+
+      const { updated_at, reactions } &#x3D; await this.getHighlightData(id);
+      const metadata &#x3D; await this.s3FileStorageService.getFileMeta(hash);
+      const savedReactions &#x3D; metadata?.[&quot;reactions-count&quot;] ?? &quot;0&quot;;
+
+      if (lastModified &amp;&amp; lastModified &gt; updated_at &amp;&amp; savedReactions &#x3D;&#x3D;&#x3D; String(reactions)) {
+        this.logger.debug(&#x60;Highlight ${id} exists in S3 with lastModified: ${lastModified.toISOString()} newer than updated_at: ${updated_at.toISOString()}, and reaction count is the same, redirecting to ${fileUrl}&#x60;);
+        returnVal.needsUpdate &#x3D; false;
+      }
+    }
+
+    return returnVal;
+  }
+
+  async getHighlightCard (id: number): Promise&lt;string&gt; {
+    const { remaining } &#x3D; await this.githubService.rateLimit();
+
+    if (remaining &lt; 1000) {
+      throw new ForbiddenException(&quot;Rate limit exceeded&quot;);
+    }
+
+    const highlightData &#x3D; await this.getHighlightData(id);
+
+    try {
+      const hash &#x3D; &#x60;highlights/${String(id)}.png&#x60;;
+      const fileUrl &#x3D; &#x60;${this.s3FileStorageService.getCdnEndpoint()}${hash}&#x60;;
+
+      const { png } &#x3D; await this.generateCardBuffer(id, highlightData);
+
+      await this.s3FileStorageService.uploadFile(png, hash, &quot;image/png&quot;, { &quot;reactions-count&quot;: String(highlightData.reactions) });
+
+      this.logger.debug(&#x60;Highlight ${id} did not exist in S3, generated image and uploaded to S3, redirecting&#x60;);
+
+      return fileUrl;
+    } catch (e) {
+      this.logger.error(&#x60;Error generating highlight card for ${id}&#x60;, e);
+
+      throw (new NotFoundException);
+    }
   }
 }
 </code></pre>
