@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+## [2.1.0-beta.4](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.1.0-beta.3...v2.1.0-beta.4) (2023-05-04)
+
+
+### 🍕 Features
+
+* higlight card upload & storage ([#39](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/39)) ([b6abefa](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/b6abefaa364c5c7c3f97e52990808ad6687e989c))
+
 ## [2.1.0-beta.3](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.1.0-beta.2...v2.1.0-beta.3) (2023-05-02)
 
 
