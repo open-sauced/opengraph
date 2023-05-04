@@ -50,15 +50,14 @@ export class HighlightCardService {
     const repo = await this.githubService.getRepo(owner, repoName);
 
     const langList = repo.languages?.edges?.flatMap(edge => {
-      if(edge) {
+      if (edge) {
         return {
           ...edge.node,
           size: edge.size,
         };
-      } else {
-        return [];
       }
-  }) ?? [];
+      return [];
+    }) ?? [];
 
     return {
       title,
