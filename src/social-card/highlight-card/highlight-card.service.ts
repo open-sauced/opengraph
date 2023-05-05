@@ -18,12 +18,13 @@ interface HighlightCardData {
   body: string,
   reactions: number,
   avatarUrl: string,
-  repos: Repository[],
+  repo: Repository,
   langTotal: number,
   langs: (Language & {
     size: number,
   })[],
-  updated_at: Date
+  updated_at: Date,
+  url: string,
 }
 
 @Injectable()
@@ -37,48 +38,36 @@ export class HighlightCardService {
   ) {}
 
   private async getHighlightData (highlightId: number): Promise<HighlightCardData> {
-    const langs: Record<string, Language & {
-      size: number,
-    }> = {};
-    const today = (new Date);
-    const today30daysAgo = new Date((new Date).setDate(today.getDate() - 30));
-
     const highlightReq = await firstValueFrom(this.httpService.get<DbHighlight>(`https://api.opensauced.pizza/v1/user/highlights/${highlightId}`));
-    const { login, title, highlight: body, updated_at } = highlightReq.data;
+    const { login, title, highlight: body, updated_at, url } = highlightReq.data;
 
     const reactionsReq = await firstValueFrom(this.httpService.get<DbReaction[]>(`https://api.opensauced.pizza/v1/highlights/${highlightId}/reactions`));
     const reactions = reactionsReq.data.reduce<number>( (acc, curr) => acc + Number(curr.reaction_count), 0);
 
+    const [owner, repoName] = url.replace("https://github.com/", "").split("/");
+
     const user = await this.githubService.getUser(login);
-    const langRepos = user.repositories.nodes?.filter(repo => new Date(String(repo?.pushedAt)) > today30daysAgo) as Repository[];
-    let langTotal = 0;
+    const repo = await this.githubService.getRepo(owner, repoName);
 
-    langRepos.forEach(repo => {
-      repo.languages?.edges?.forEach(edge => {
-        if (edge?.node.id) {
-          langTotal += edge.size;
-
-          if (!Object.keys(langs).includes(edge.node.id)) {
-            langs[edge.node.id] = {
-              ...edge.node,
-              size: edge.size,
-            };
-          } else {
-            langs[edge.node.id].size += edge.size;
-          }
-        }
-      });
-    });
+    const langList = repo.languages?.edges?.flatMap(edge => {
+      if (edge) {
+        return {
+          ...edge.node,
+          size: edge.size,
+        };
+      }
+    }) as (Language & { size: number })[];
 
     return {
       title,
       body,
       reactions,
       avatarUrl: `${String(user.avatarUrl)}&size=150`,
-      langs: Array.from(Object.values(langs)).sort((a, b) => b.size - a.size),
-      langTotal,
-      repos: user.topRepositories.nodes?.filter(repo => !repo?.isPrivate && repo?.owner.login !== login) as Repository[],
+      langs: langList,
+      langTotal: repo.languages?.totalSize ?? 0,
+      repo,
       updated_at: new Date(updated_at),
+      url,
     };
   }
 
@@ -87,9 +76,9 @@ export class HighlightCardService {
     const { html } = await import("satori-html");
     const satori = (await import("satori")).default;
 
-    const { title, body, reactions, avatarUrl, repos, langs, langTotal } = highlightData ? highlightData : await this.getHighlightData(highlightId);
+    const { title, body, reactions, avatarUrl, repo, langs, langTotal } = highlightData ? highlightData : await this.getHighlightData(highlightId);
 
-    const template = html(highlightCardTemplate(avatarUrl, title, body, userLangs(langs, langTotal), userProfileRepos(repos, 2), reactions));
+    const template = html(highlightCardTemplate(avatarUrl, title, body, userLangs(langs, langTotal), userProfileRepos([repo], 2), reactions));
 
     const interArrayBuffer = await fs.readFile("node_modules/@fontsource/inter/files/inter-all-400-normal.woff");
 
