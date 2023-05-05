@@ -73,6 +73,9 @@
                             <a href="#DigitalOceanConfig" title="src/config/digital-ocean.config.ts" ><b>DigitalOceanConfig</b>&nbsp;&nbsp;&nbsp;(src/.../digital-ocean.config.ts)</a>
                         </li>
                         <li>
+                            <a href="#getRepo" title="src/github/gql/get-repo.ts" ><b>getRepo</b>&nbsp;&nbsp;&nbsp;(src/.../get-repo.ts)</a>
+                        </li>
+                        <li>
                             <a href="#getUser" title="src/github/gql/get-user.ts" ><b>getUser</b>&nbsp;&nbsp;&nbsp;(src/.../get-user.ts)</a>
                         </li>
                         <li>
@@ -262,6 +265,63 @@
   cdnCustomDomain: String(process.env.DO_SPACES_SUBDOMAIN ?? &quot;&quot;),
   cdnDisabled: !!process.env.DO_SPACES_CDN_DISABLED,
 }))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/github/gql/get-repo.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getRepo"></a>
+                    <span class="name">
+                        <span ><b>getRepo</b></span>
+                        <a href="#getRepo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(owner: string, repo: string) &#x3D;&gt; ({
+  query: &#x60;
+query ($owner: String!, $repo: String!) {
+  repository(
+    owner: $owner
+    name: $repo
+  ) {
+    id
+    name
+    databaseId
+    nameWithOwner
+    owner {
+      id
+      login
+      avatarUrl
+    }
+    languages (first: 100, orderBy: { field: SIZE, direction: DESC }) {
+      edges {
+        node {
+          id
+          color
+          name
+        }
+        size
+      }
+      totalSize
+      totalCount
+    }
+  }
+}&#x60;,
+  variables: {
+    owner,
+    repo,
+  },
+})</code>
                     </td>
                 </tr>
 
@@ -845,8 +905,9 @@ query ($username: String!, $dateSince: DateTime) {
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>(repos: Repository[], limit: number): string &#x3D;&gt; {
+  const charLimit &#x3D; limit &#x3D;&#x3D;&#x3D; 1 ? 60 : repos.length &#x3D;&#x3D;&#x3D; 1 ? 60 : 15;
   const repoList &#x3D; repos.map(({ name, owner: { avatarUrl } }) &#x3D;&gt;
-    repoIconWithName(&#x60;${name.substring(0, 15).replace(/\.+$/, &quot;&quot;)}${name.length &gt; 15 ? &quot;...&quot; : &quot;&quot;}&#x60;, &#x60;${String(avatarUrl)}&amp;size&#x3D;40&#x60;));
+    repoIconWithName(&#x60;${name.substring(0, charLimit).replace(/\.+$/, &quot;&quot;)}${name.length &gt; charLimit ? &quot;...&quot; : &quot;&quot;}&#x60;, &#x60;${String(avatarUrl)}&amp;size&#x3D;40&#x60;));
 
   return &#x60;${repoList.slice(0, limit).join(&quot;&quot;)}${repoList.length &gt; limit
     ? &#x60;&lt;h2 tw&#x3D;&quot;m-0 font-medium text-32px leading-32px text-zinc-900&quot;&gt;+${repoList.length - limit}&lt;/h2&gt;&#x60;
