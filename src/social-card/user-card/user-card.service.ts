@@ -2,24 +2,32 @@ import { ForbiddenException, Injectable, Logger, NotFoundException } from "@nest
 import { HttpService } from "@nestjs/axios";
 import { Resvg } from "@resvg/resvg-js";
 import { Repository, Language, User } from "@octokit/graphql-schema";
-import { readFile } from "node:fs/promises";
+import fs from "node:fs/promises";
 
-import { GithubService } from "../github/github.service";
-import { S3FileStorageService } from "../s3-file-storage/s3-file-storage.service";
-import userLangs from "./templates/user-langs";
-import userProfileRepos from "./templates/user-profile-repos";
-import userProfileCard from "./templates/user-profile-card";
-import tailwindConfig from "./templates/tailwind.config";
 
-interface RequiresUpdateMeta {
-  fileUrl: string,
-  hasFile: boolean;
-  needsUpdate: boolean;
-  lastModified: Date | null,
+import { GithubService } from "../../github/github.service";
+import { S3FileStorageService } from "../../s3-file-storage/s3-file-storage.service";
+import userLangs from "../templates/shared/user-langs";
+import userProfileRepos from "../templates/shared/user-repos";
+import userProfileCardTemplate from "../templates/user-profile-card.template";
+import tailwindConfig from "../templates/tailwind.config";
+import RequiresUpdateMeta from "../../../typings/RequiresUpdateMeta";
+
+interface UserCardData {
+  id: User["databaseId"],
+  name: User["name"],
+  langs: (Language & {
+    size: number,
+  })[],
+  langTotal: number,
+  repos: Repository[],
+  avatarUrl: string,
+  formattedName: string,
 }
 
+
 @Injectable()
-export class SocialCardService {
+export class UserCardService {
   private readonly logger = new Logger(this.constructor.name);
 
   constructor (
@@ -28,16 +36,7 @@ export class SocialCardService {
     private readonly s3FileStorageService: S3FileStorageService,
   ) {}
 
-  async getUserData (username: string): Promise<{
-    id: User["databaseId"],
-    name: User["name"],
-    langs: (Language & {
-      size: number,
-    })[],
-    langTotal: number,
-    repos: Repository[],
-    avatarUrl: string,
-  }> {
+  private async getUserData (username: string): Promise<UserCardData> {
     const langs: Record<string, Language & {
       size: number,
     }> = {};
@@ -71,7 +70,40 @@ export class SocialCardService {
       langTotal,
       repos: user.topRepositories.nodes?.filter(repo => !repo?.isPrivate && repo?.owner.login !== username) as Repository[],
       avatarUrl: `${String(user.avatarUrl)}&size=150`,
+      formattedName: user.login ?? username,
     };
+  }
+
+  // public only to be used in local scripts. Not for controller direct use.
+  async generateCardBuffer (username: string, userData?: UserCardData) {
+    const { html } = await import("satori-html");
+    const satori = (await import("satori")).default;
+
+    const { avatarUrl, repos, langs, langTotal, formattedName } = userData ? userData : await this.getUserData(username);
+
+    const template = html(userProfileCardTemplate(avatarUrl, formattedName, userLangs(langs, langTotal), userProfileRepos(repos, 3)));
+
+    const interArrayBuffer = await fs.readFile("node_modules/@fontsource/inter/files/inter-all-400-normal.woff");
+
+    const svg = await satori(template, {
+      width: 1200,
+      height: 627,
+      fonts: [
+        {
+          name: "Inter",
+          data: interArrayBuffer,
+          weight: 400,
+          style: "normal",
+        },
+      ],
+      tailwindConfig,
+    });
+
+    const resvg = new Resvg(svg, { background: "rgba(238, 235, 230, .9)" });
+
+    const pngData = resvg.render();
+
+    return { png: pngData.asPng(), svg };
   }
 
   async checkRequiresUpdate (username: string): Promise<RequiresUpdateMeta> {
@@ -107,39 +139,15 @@ export class SocialCardService {
       throw new ForbiddenException("Rate limit exceeded");
     }
 
-    const { html } = await import("satori-html");
-    const satori = (await import("satori")).default;
+    const userData = await this.getUserData(username);
 
     try {
-      const { id, avatarUrl, repos, langs, langTotal } = await this.getUserData(username);
       const hash = `users/${String(username)}.png`;
       const fileUrl = `${this.s3FileStorageService.getCdnEndpoint()}${hash}`;
 
-      const template = html(userProfileCard(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos)));
+      const { png } = await this.generateCardBuffer(username, userData);
 
-      const interArrayBuffer = await readFile("node_modules/@fontsource/inter/files/inter-all-400-normal.woff");
-
-      const svg = await satori(template, {
-        width: 1200,
-        height: 627,
-        fonts: [
-          {
-            name: "Inter",
-            data: interArrayBuffer,
-            weight: 400,
-            style: "normal",
-          },
-        ],
-        tailwindConfig,
-      });
-
-      const resvg = new Resvg(svg, { background: "rgba(238, 235, 230, .9)" });
-
-      const pngData = resvg.render();
-
-      const pngBuffer = pngData.asPng();
-
-      await this.s3FileStorageService.uploadFile(pngBuffer, hash, "image/png", { "x-amz-meta-user-id": String(id) });
+      await this.s3FileStorageService.uploadFile(png, hash, "image/png", { "x-amz-meta-user-id": String(userData.id) });
 
       this.logger.debug(`User ${username} did not exist in S3, generated image and uploaded to S3, redirecting`);
 

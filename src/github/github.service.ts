@@ -1,9 +1,10 @@
 import { Inject, Injectable, Logger } from "@nestjs/common";
 import { ConfigType } from "@nestjs/config";
 import { graphql } from "@octokit/graphql";
-import { RateLimit, User } from "@octokit/graphql-schema";
+import { RateLimit, Repository, User } from "@octokit/graphql-schema";
 
 import GithubConfig from "../config/github.config";
+import getRepo from "./gql/get-repo";
 import getUser from "./gql/get-user";
 
 @Injectable()
@@ -27,6 +28,14 @@ export class GithubService {
     const { user } = await this.graphqlWithAuth<{ user: User }>(query, variables);
 
     return user;
+  }
+
+  async getRepo (owner: string, repo: string) {
+    const { query, variables } = getRepo(owner, repo);
+
+    const { repository } = await this.graphqlWithAuth<{ repository: Repository }>(query, variables);
+
+    return repository;
   }
 
   async rateLimit () {

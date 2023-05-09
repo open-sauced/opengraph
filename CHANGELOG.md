@@ -5,6 +5,48 @@
 
 > All notable changes to this project will be documented in this file
 
+## [2.1.0-beta.6](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.1.0-beta.5...v2.1.0-beta.6) (2023-05-09)
+
+
+### 🍕 Features
+
+* UI adjustments ([#42](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/42)) ([acbe81a](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/acbe81a39303d7495fd4bebd51306bd3fe8d9d18))
+
+## [2.1.0-beta.5](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.1.0-beta.4...v2.1.0-beta.5) (2023-05-05)
+
+
+### 🍕 Features
+
+* highlights getting repo name & languages from pr's repo ([#41](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/41)) ([1555a25](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/1555a25a114b0d812c058d1a9728706a63965b44))
+
+## [2.1.0-beta.4](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.1.0-beta.3...v2.1.0-beta.4) (2023-05-04)
+
+
+### 🍕 Features
+
+* higlight card upload & storage ([#39](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/39)) ([b6abefa](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/b6abefaa364c5c7c3f97e52990808ad6687e989c))
+
+## [2.1.0-beta.3](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.1.0-beta.2...v2.1.0-beta.3) (2023-05-02)
+
+
+### 🍕 Features
+
+* Highlight Cards UI Generation (frontend-only) ([#36](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/36)) ([138a847](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/138a847bad92eb1f35fafa467720de01646f31cc))
+
+## [2.1.0-beta.2](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.1.0-beta.1...v2.1.0-beta.2) (2023-04-30)
+
+
+### 🐛 Bug Fixes
+
+* Overflowing language bar fix ([#38](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/38)) ([3dc1a0a](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/3dc1a0add116c1124af6a993e9e843015f3c0d25))
+
+## [2.1.0-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.0.1...v2.1.0-beta.1) (2023-04-26)
+
+
+### 🍕 Features
+
+* adding utilities for cards local generation & testing ([#34](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/34)) ([c5a5fec](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/c5a5fecd3689b11fd3325c7f0fd3228bd368e0f5))
+
 ### [2.0.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.0.0...v2.0.1) (2023-04-19)
 
 
