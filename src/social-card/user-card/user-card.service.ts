@@ -22,6 +22,7 @@ interface UserCardData {
   langTotal: number,
   repos: Repository[],
   avatarUrl: string,
+  formattedName: string,
 }
 
 
@@ -69,6 +70,7 @@ export class UserCardService {
       langTotal,
       repos: user.topRepositories.nodes?.filter(repo => !repo?.isPrivate && repo?.owner.login !== username) as Repository[],
       avatarUrl: `${String(user.avatarUrl)}&size=150`,
+      formattedName: user.login ?? username,
     };
   }
 
@@ -77,9 +79,9 @@ export class UserCardService {
     const { html } = await import("satori-html");
     const satori = (await import("satori")).default;
 
-    const { avatarUrl, repos, langs, langTotal } = userData ? userData : await this.getUserData(username);
+    const { avatarUrl, repos, langs, langTotal, formattedName } = userData ? userData : await this.getUserData(username);
 
-    const template = html(userProfileCardTemplate(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos, 4)));
+    const template = html(userProfileCardTemplate(avatarUrl, formattedName, userLangs(langs, langTotal), userProfileRepos(repos, 3)));
 
     const interArrayBuffer = await fs.readFile("node_modules/@fontsource/inter/files/inter-all-400-normal.woff");
 

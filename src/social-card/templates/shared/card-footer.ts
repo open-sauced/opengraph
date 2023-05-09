@@ -21,7 +21,7 @@ const cardFooter = (langs: string, repos: string, reactions?: number) => `
       </div>
 
       <div tw="flex-col h-18px justify-center overflow-hidden">
-        <div tw="h-12px" style="gap: 4px;">
+        <div tw="h-12px" style="gap: 0px;">
           ${langs}
         </div>
       </div>
