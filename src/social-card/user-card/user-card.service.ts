@@ -79,7 +79,7 @@ export class UserCardService {
 
     const { avatarUrl, repos, langs, langTotal } = userData ? userData : await this.getUserData(username);
 
-    const template = html(userProfileCardTemplate(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos, 4)));
+    const template = html(userProfileCardTemplate(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos, 3)));
 
     const interArrayBuffer = await fs.readFile("node_modules/@fontsource/inter/files/inter-all-400-normal.woff");
 
