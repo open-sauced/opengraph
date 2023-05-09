@@ -90,6 +90,12 @@
                                         </a>
                                 </li>
                                 <li>
+                                        <a href="#formattedName" 
+>
+                                            formattedName
+                                        </a>
+                                </li>
+                                <li>
                                         <a href="#id" 
 >
                                             id
@@ -145,6 +151,39 @@
                                 <tr>
                                     <td class="col-md-4">
                                         <code>avatarUrl:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="formattedName"></a>
+                                        <span class="name "><b>formattedName</b>
+                                            <a href="#formattedName">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>formattedName:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -345,6 +384,7 @@ interface UserCardData {
   langTotal: number,
   repos: Repository[],
   avatarUrl: string,
+  formattedName: string,
 }
 
 
@@ -392,6 +432,7 @@ export class UserCardService {
       langTotal,
       repos: user.topRepositories.nodes?.filter(repo &#x3D;&gt; !repo?.isPrivate &amp;&amp; repo?.owner.login !&#x3D;&#x3D; username) as Repository[],
       avatarUrl: &#x60;${String(user.avatarUrl)}&amp;size&#x3D;150&#x60;,
+      formattedName: user.login ?? username,
     };
   }
 
@@ -400,9 +441,9 @@ export class UserCardService {
     const { html } &#x3D; await import(&quot;satori-html&quot;);
     const satori &#x3D; (await import(&quot;satori&quot;)).default;
 
-    const { avatarUrl, repos, langs, langTotal } &#x3D; userData ? userData : await this.getUserData(username);
+    const { avatarUrl, repos, langs, langTotal, formattedName } &#x3D; userData ? userData : await this.getUserData(username);
 
-    const template &#x3D; html(userProfileCardTemplate(avatarUrl, username, userLangs(langs, langTotal), userProfileRepos(repos, 4)));
+    const template &#x3D; html(userProfileCardTemplate(avatarUrl, formattedName, userLangs(langs, langTotal), userProfileRepos(repos, 3)));
 
     const interArrayBuffer &#x3D; await fs.readFile(&quot;node_modules/@fontsource/inter/files/inter-all-400-normal.woff&quot;);
 
