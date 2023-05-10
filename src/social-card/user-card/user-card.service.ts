@@ -75,7 +75,7 @@ export class UserCardService {
       langTotal,
       repos: user.topRepositories.nodes?.filter(repo => !repo?.isPrivate && repo?.owner.login !== username) as Repository[],
       avatarUrl: `${String(user.avatarUrl)}&size=150`,
-      formattedName: user.login ?? username,
+      formattedName: user.login,
     };
   }
 

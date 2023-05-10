@@ -40,12 +40,6 @@ export class HighlightCardService {
   ) {}
 
   private async getHighlightData (highlightId: number): Promise<HighlightCardData> {
-    const langs: Record<string, Language & {
-      size: number,
-    }> = {};
-    const today = (new Date);
-    const today30daysAgo = new Date((new Date).setDate(today.getDate() - 30));
-
     const highlightReq = await firstValueFrom(this.httpService.get<DbUserHighlight>(`https://api.opensauced.pizza/v1/user/highlights/${highlightId}`));
     const { login, title, highlight: body, updated_at, url } = highlightReq.data;
 
