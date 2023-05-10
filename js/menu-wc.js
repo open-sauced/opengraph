@@ -187,7 +187,16 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
                             <li class="link">
+                                <a href="interfaces/DbReaction.html" data-type="entity-link" >DbReaction</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/DbUserHighlight.html" data-type="entity-link" >DbUserHighlight</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/HighlightCardData.html" data-type="entity-link" >HighlightCardData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/RequiresUpdateMeta.html" data-type="entity-link" >RequiresUpdateMeta</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/UserCardData.html" data-type="entity-link" >UserCardData</a>

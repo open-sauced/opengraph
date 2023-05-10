@@ -134,7 +134,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/social-card/user-card/user-card.service.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/social-card/user-card/user-card.service.ts:36</a></div>
                             </td>
                         </tr>
 
@@ -223,8 +223,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="109"
-                            class="link-to-prism">src/social-card/user-card/user-card.service.ts:109</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="114"
+                            class="link-to-prism">src/social-card/user-card/user-card.service.ts:114</a></div>
                 </td>
             </tr>
 
@@ -262,7 +262,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;RequiresUpdateMeta&gt;</code>
+                        <b>Returns : </b>        <code><a href="../interfaces/RequiresUpdateMeta.html" target="_self" >Promise&lt;RequiresUpdateMeta&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -294,8 +294,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="78"
-                            class="link-to-prism">src/social-card/user-card/user-card.service.ts:78</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="83"
+                            class="link-to-prism">src/social-card/user-card/user-card.service.ts:83</a></div>
                 </td>
             </tr>
 
@@ -377,8 +377,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="135"
-                            class="link-to-prism">src/social-card/user-card/user-card.service.ts:135</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="140"
+                            class="link-to-prism">src/social-card/user-card/user-card.service.ts:140</a></div>
                 </td>
             </tr>
 
@@ -449,8 +449,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="39"
-                            class="link-to-prism">src/social-card/user-card/user-card.service.ts:39</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="44"
+                            class="link-to-prism">src/social-card/user-card/user-card.service.ts:44</a></div>
                 </td>
             </tr>
 
@@ -524,7 +524,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/social-card/user-card/user-card.service.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/social-card/user-card/user-card.service.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -550,9 +550,8 @@ import userLangs from &quot;../templates/shared/user-langs&quot;;
 import userProfileRepos from &quot;../templates/shared/user-repos&quot;;
 import userProfileCardTemplate from &quot;../templates/user-profile-card.template&quot;;
 import tailwindConfig from &quot;../templates/tailwind.config&quot;;
-import RequiresUpdateMeta from &quot;../../../typings/RequiresUpdateMeta&quot;;
 
-interface UserCardData {
+export interface UserCardData {
   id: User[&quot;databaseId&quot;],
   name: User[&quot;name&quot;],
   langs: (Language &amp; {
@@ -564,6 +563,12 @@ interface UserCardData {
   formattedName: string,
 }
 
+export interface RequiresUpdateMeta {
+  fileUrl: string,
+  hasFile: boolean;
+  needsUpdate: boolean;
+  lastModified: Date | null,
+}
 
 @Injectable()
 export class UserCardService {
@@ -609,7 +614,7 @@ export class UserCardService {
       langTotal,
       repos: user.topRepositories.nodes?.filter(repo &#x3D;&gt; !repo?.isPrivate &amp;&amp; repo?.owner.login !&#x3D;&#x3D; username) as Repository[],
       avatarUrl: &#x60;${String(user.avatarUrl)}&amp;size&#x3D;150&#x60;,
-      formattedName: user.login ?? username,
+      formattedName: user.login,
     };
   }
 
