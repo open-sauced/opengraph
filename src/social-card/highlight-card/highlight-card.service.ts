@@ -11,7 +11,9 @@ import userProfileRepos from "../templates/shared/user-repos";
 import tailwindConfig from "../templates/tailwind.config";
 import { firstValueFrom } from "rxjs";
 import highlightCardTemplate from "../templates/highlight-card.template";
-import RequiresUpdateMeta from "../../../typings/RequiresUpdateMeta";
+import { DbUserHighlight } from "../../github/entities/db-user-highlight.entity";
+import { DbReaction } from "../../github/entities/db-reaction.entity";
+import { RequiresUpdateMeta } from "../user-card/user-card.service";
 
 interface HighlightCardData {
   title: string,
@@ -38,7 +40,13 @@ export class HighlightCardService {
   ) {}
 
   private async getHighlightData (highlightId: number): Promise<HighlightCardData> {
-    const highlightReq = await firstValueFrom(this.httpService.get<DbHighlight>(`https://api.opensauced.pizza/v1/user/highlights/${highlightId}`));
+    const langs: Record<string, Language & {
+      size: number,
+    }> = {};
+    const today = (new Date);
+    const today30daysAgo = new Date((new Date).setDate(today.getDate() - 30));
+
+    const highlightReq = await firstValueFrom(this.httpService.get<DbUserHighlight>(`https://api.opensauced.pizza/v1/user/highlights/${highlightId}`));
     const { login, title, highlight: body, updated_at, url } = highlightReq.data;
 
     const reactionsReq = await firstValueFrom(this.httpService.get<DbReaction[]>(`https://api.opensauced.pizza/v1/highlights/${highlightId}/reactions`));

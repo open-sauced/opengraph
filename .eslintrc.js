@@ -38,7 +38,6 @@ module.exports = {
     "public",
     "/**/node_modules/*",
     ".eslintrc.js",
-    "migrations",
   ],
   rules: {
     // eslint:recommended

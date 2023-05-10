@@ -1,4 +1,4 @@
-interface DbHighlight {
+export interface DbUserHighlight {
   readonly id: string;
   readonly user_id: string;
   readonly url: string;
@@ -9,9 +9,4 @@ interface DbHighlight {
   readonly updated_at: string;
   readonly deleted_at: string | null;
   readonly login: string;
-}
-
-interface DbReaction {
-  emoji_id: string;
-  reaction_count: string;
 }
