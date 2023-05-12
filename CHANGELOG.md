@@ -5,6 +5,18 @@
 
 > All notable changes to this project will be documented in this file
 
+### [2.1.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.1.0...v2.1.1) (2023-05-12)
+
+
+### 🐛 Bug Fixes
+
+* correct rolled back build ([e91c43f](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/e91c43fa683299d7bd0d64b7b7abb63f56a454f1))
+
+
+### 🧑‍💻 Code Refactoring
+
+* correct lint and merge issues ([cba7521](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/cba7521c71f7d5ef19c2be49f1b2cd6171272dc8))
+
 ### [2.1.1-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.1.0...v2.1.1-beta.1) (2023-05-12)
 
 
