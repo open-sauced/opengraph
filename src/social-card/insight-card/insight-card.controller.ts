@@ -25,7 +25,7 @@ import { InsightCardService } from "./insight-card.service";
 @Controller("insights")
 @ApiTags("Insight social cards")
 export class InsightCardController {
-  constructor(private readonly insightCardService: InsightCardService) {}
+  constructor (private readonly insightCardService: InsightCardService) {}
 
   @Get("/:id")
   @ApiOperation({
@@ -38,9 +38,9 @@ export class InsightCardController {
   @ApiForbiddenResponse({ description: "Rate limit exceeded" })
   @ApiBadRequestResponse({ description: "Invalid insight id" })
   @Redirect()
-  async generateInsightSocialCard(
+  async generateInsightSocialCard (
     @Param("id", ParseIntPipe) id: number,
-    @Res({ passthrough: true }) res: FastifyReply
+      @Res({ passthrough: true }) res: FastifyReply,
   ): Promise<void> {
     const { fileUrl, hasFile, needsUpdate } = await this.insightCardService.checkRequiresUpdate(id);
 
@@ -62,9 +62,9 @@ export class InsightCardController {
   @ApiResponse({ description: "Insight social card image needs regeneration", status: HttpStatus.NOT_MODIFIED })
   @ApiNotFoundResponse({ description: "Insight social card image not found", status: HttpStatus.NOT_FOUND })
   @ApiBadRequestResponse({ description: "Invalid insight id", status: HttpStatus.BAD_REQUEST })
-  async checkInsightSocialCard(
+  async checkInsightSocialCard (
     @Param("id", ParseIntPipe) id: number,
-    @Res({ passthrough: true }) res: FastifyReply
+      @Res({ passthrough: true }) res: FastifyReply,
   ): Promise<void> {
     const { fileUrl, hasFile, needsUpdate, lastModified } = await this.insightCardService.checkRequiresUpdate(id);
 
