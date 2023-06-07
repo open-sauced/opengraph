@@ -1,7 +1,6 @@
 const insightContributors = (contributors: string[]): string => {
   const repoList = contributors.map(
-    contributor =>
-      `<img tw="w-46px h-46px border-2 border-white rounded-full" src="${String(contributor)}&size=80" />`,
+    contributor => `<img tw="w-46px h-46px border-2 border-white rounded-full" src="${String(contributor)}" />`,
   );
 
   return `${repoList.slice(0, 5).join("")}${

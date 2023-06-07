@@ -18,12 +18,12 @@ async function testHighlightCards() {
   const instance = app.get(InsightCardService);
 
   const promises = testInsightIds.map(async (id) => {
-    const { svg } = await instance.generateCardBuffer(id);
+    const { png } = await instance.generateCardBuffer(id);
 
     if (!existsSync(folderPath)) {
       await mkdir(folderPath);
     }
-    await writeFile(`${folderPath}/${id}.svg`, svg);
+    await writeFile(`${folderPath}/${id}.png`, png);
   });
 
   // generating sequential: 10.5 seconds, parallel: 4.5 seconds
