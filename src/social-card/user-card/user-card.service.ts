@@ -99,6 +99,7 @@ export class UserCardService {
     );
 
     const interArrayBuffer = await fs.readFile("node_modules/@fontsource/inter/files/inter-all-400-normal.woff");
+    const interArrayBufferMedium = await fs.readFile("node_modules/@fontsource/inter/files/inter-all-500-normal.woff");
 
     const svg = await satori(template, {
       width: 1200,
@@ -108,6 +109,12 @@ export class UserCardService {
           name: "Inter",
           data: interArrayBuffer,
           weight: 400,
+          style: "normal",
+        },
+        {
+          name: "Inter",
+          data: interArrayBufferMedium,
+          weight: 500,
           style: "normal",
         },
       ],

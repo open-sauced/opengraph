@@ -4,14 +4,11 @@ import { UserCardService } from "../../src/social-card/user-card/user-card.servi
 import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "fs/promises";
 
-
-const testUsernames = [
-  "bdougie", "deadreyo", "defunkt", "0-vortex", "Anush008", "diivi"
-];
+const testUsernames = ["bdougie", "deadreyo", "defunkt", "0-vortex", "Anush008", "diivi"];
 
 const folderPath = "dist";
 
-async function testUserCards () {
+async function testUserCards() {
   const moduleFixture: TestingModule = await Test.createTestingModule({ imports: [AppModule] }).compile();
 
   const app = moduleFixture.createNestApplication();
@@ -20,13 +17,13 @@ async function testUserCards () {
 
   const instance = app.get(UserCardService);
 
-  const promises = testUsernames.map(async username => {
-    const { svg } = await instance.generateCardBuffer(username);
+  const promises = testUsernames.map(async (username) => {
+    const { png } = await instance.generateCardBuffer(username);
 
     if (!existsSync(folderPath)) {
       await mkdir(folderPath);
     }
-    await writeFile(`${folderPath}/${username}.svg`, svg);
+    await writeFile(`${folderPath}/${username}.png`, png);
   });
 
   // generating sequential: 10.5 seconds, parallel: 4.5 seconds
