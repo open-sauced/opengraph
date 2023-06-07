@@ -14,22 +14,6 @@ import insightCardTemplate from "../templates/insight-card.template";
 import insightRepos from "../templates/shared/insight-repos";
 import insightContributors from "../templates/shared/insight-contributors";
 
-/*
- * interface HighlightCardData {
- *   title: string;
- *   body: string;
- *   reactions: number;
- *   avatarUrl: string;
- *   repo: Repository;
- *   langTotal: number;
- *   langs: (Language & {
- *     size: number;
- *   })[];
- *   updated_at: Date;
- *   url: string;
- * }
- */
-
 interface InsightCardData {
   pageName: string;
   repos: { repoName: string; avatarUrl: string }[];
@@ -48,13 +32,6 @@ export class InsightCardService {
   ) {}
 
   private async getInsightData (insightId: number): Promise<InsightCardData> {
-    /*
-     * const highlightReq = await firstValueFrom(
-     *   this.httpService.get<DbUserHighlight>(`https://opensauced.pizza/v1/user/highlights/${highlightId}`)
-     * );
-     * const { login, title, highlight: body, updated_at, url } = highlightReq.data;
-     */
-
     const insightPageReq = await firstValueFrom(
       this.httpService.get<DbInsight>(`https://api.opensauced.pizza/v1/insights/${insightId}`),
     );
@@ -150,11 +127,6 @@ export class InsightCardService {
       returnVal.lastModified = lastModified;
 
       const { updated_at } = await this.getInsightData(id);
-
-      /*
-       * const metadata = await this.s3FileStorageService.getFileMeta(hash);
-       * const savedReactions = metadata?.["reactions-count"] ?? "0";
-       */
 
       if (lastModified && lastModified > updated_at) {
         this.logger.debug(
