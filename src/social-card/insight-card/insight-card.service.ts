@@ -11,6 +11,8 @@ import { firstValueFrom } from "rxjs";
 import { RequiresUpdateMeta } from "../user-card/user-card.service";
 import { DbInsight } from "../../github/entities/db-insight.entity";
 import insightCardTemplate from "../templates/insight-card.template";
+import insightRepos from "../templates/shared/insight-repos";
+import insightContributors from "../templates/shared/insight-contributors";
 
 /*
  * interface HighlightCardData {
@@ -48,7 +50,7 @@ export class InsightCardService {
   private async getInsightData (insightId: number): Promise<InsightCardData> {
     /*
      * const highlightReq = await firstValueFrom(
-     *   this.httpService.get<DbUserHighlight>(`https://api.opensauced.pizza/v1/user/highlights/${highlightId}`)
+     *   this.httpService.get<DbUserHighlight>(`https://opensauced.pizza/v1/user/highlights/${highlightId}`)
      * );
      * const { login, title, highlight: body, updated_at, url } = highlightReq.data;
      */
@@ -59,41 +61,29 @@ export class InsightCardService {
 
     const { repos, name, updated_at } = insightPageReq.data;
 
-    const repoIdsQuery = repos.map(repo => repo.repo_id).join(",");
+    const query = (new URLSearchParams);
+
+    query.set("repoIds", repos.map(repo => repo.repo_id).join(","));
 
     const contributorsReq = await firstValueFrom(
-      this.httpService.get<{ author_login: string }[]>(
-        `https://api.opensauced.pizza/v1/contributors/search?repoIds=${repoIdsQuery}`,
+      this.httpService.get<{ data: { author_login: string }[] }>(
+        `https://api.opensauced.pizza/v1/contributors/search?${String(query)}`,
       ),
     );
-    const contributors = contributorsReq.data.map(contributor => contributor.author_login);
+
+    const contributorsRes = contributorsReq.data.data;
+    const contributors = contributorsRes.map(
+      ({ author_login }) => `https://www.github.com/${author_login}.png?size=50`,
+    );
 
     const repositories = repos.map(repo => {
       const [owner, repoName] = repo.full_name.split("/");
 
       return {
         repoName,
-        avatarUrl: `https://github.com/${owner}.png&size=50`,
+        avatarUrl: `https://www.github.com/${owner}.png?size=50`,
       };
     });
-
-    // const [owner, repoName] = url.replace("https://github.com/", "").split("/");
-
-    /*
-     * const user = await this.githubService.getUser(login);
-     * const repo = await this.githubService.getRepo(owner, repoName);
-     */
-
-    /*
-     * const langList = repo.languages?.edges?.flatMap(edge => {
-     *   if (edge) {
-     *     return {
-     *       ...edge.node,
-     *       size: edge.size,
-     *     };
-     *   }
-     * }) as (Language & { size: number })[];
-     */
 
     return {
       pageName: name,
@@ -110,9 +100,10 @@ export class InsightCardService {
 
     const { pageName, repos, contributors } = insightData ? insightData : await this.getInsightData(insightId);
 
-    const template = html(insightCardTemplate(pageName, contributors, repos));
+    const template = html(insightCardTemplate(pageName, insightContributors(contributors), insightRepos(repos, 2)));
 
     const interArrayBuffer = await fs.readFile("node_modules/@fontsource/inter/files/inter-all-400-normal.woff");
+    const interArrayBufferMedium = await fs.readFile("node_modules/@fontsource/inter/files/inter-all-500-normal.woff");
 
     const svg = await satori(template, {
       width: 1200,
@@ -122,6 +113,12 @@ export class InsightCardService {
           name: "Inter",
           data: interArrayBuffer,
           weight: 400,
+          style: "normal",
+        },
+        {
+          name: "Inter",
+          data: interArrayBufferMedium,
+          weight: 500,
           style: "normal",
         },
       ],
