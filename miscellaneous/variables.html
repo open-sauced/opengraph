@@ -88,6 +88,18 @@
                             <a href="#highlightCardTemplate" title="src/social-card/templates/highlight-card.template.ts" ><b>highlightCardTemplate</b>&nbsp;&nbsp;&nbsp;(src/.../highlight-card.template.ts)</a>
                         </li>
                         <li>
+                            <a href="#insightCardTemplate" title="src/social-card/templates/insight-card.template.ts" ><b>insightCardTemplate</b>&nbsp;&nbsp;&nbsp;(src/.../insight-card.template.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#insightContributors" title="src/social-card/templates/shared/insight-contributors.ts" ><b>insightContributors</b>&nbsp;&nbsp;&nbsp;(src/.../insight-contributors.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#insightFooter" title="src/social-card/templates/shared/insight-footer.ts" ><b>insightFooter</b>&nbsp;&nbsp;&nbsp;(src/.../insight-footer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#insightRepos" title="src/social-card/templates/shared/insight-repos.ts" ><b>insightRepos</b>&nbsp;&nbsp;&nbsp;(src/.../insight-repos.ts)</a>
+                        </li>
+                        <li>
                             <a href="#repoIconWithName" title="src/social-card/templates/shared/repo-icon-with-name.ts" ><b>repoIconWithName</b>&nbsp;&nbsp;&nbsp;(src/.../repo-icon-with-name.ts)</a>
                         </li>
                         <li>
@@ -165,7 +177,8 @@
           ${repos}
         &lt;/div&gt;
 
-        ${reactions
+        ${
+  reactions
     ? &#x60;
           &lt;div tw&#x3D;&quot;h-48px items-center&quot; style&#x3D;&quot;gap: 12px;&quot;&gt;
             &lt;img tw&#x3D;&quot;w-32px h-32px&quot; width&#x3D;&quot;1&quot; height&#x3D;&quot;1&quot; src&#x3D;&quot;${heartIconData}&quot;/&gt;
@@ -174,11 +187,12 @@
             &lt;/span&gt;
           &lt;/div&gt;
         &#x60;
-    : &quot;&quot;}
+    : &quot;&quot;
+}
       &lt;/div&gt;
 
-      &lt;div tw&#x3D;&quot;flex-col h-18px justify-center overflow-hidden&quot;&gt;
-        &lt;div tw&#x3D;&quot;h-12px&quot; style&#x3D;&quot;gap: 0px;&quot;&gt;
+      &lt;div tw&#x3D;&quot;flex-col h-12px rounded-full justify-center overflow-hidden&quot;&gt;
+        &lt;div tw&#x3D;&quot;h-12px &quot; style&#x3D;&quot;gap: 3px;&quot;&gt;
           ${langs}
         &lt;/div&gt;
       &lt;/div&gt;
@@ -507,7 +521,14 @@ query ($username: String!, $dateSince: DateTime) {
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>(avatarUrl: string, title: string, body: string, langs: string, repos: string, reactions: number): string &#x3D;&gt; &#x60;
+                        <i>Default value : </i><code>(
+  avatarUrl: string,
+  title: string,
+  body: string,
+  langs: string,
+  repos: string,
+  reactions: number,
+): string &#x3D;&gt; &#x60;
   ${cardStyleSetup}
 
   &lt;div tw&#x3D;&quot;flex-col justify-between w-1200px h-627px bg-white rounded-2xl p-32px pt-48px&quot;&gt;
@@ -517,8 +538,8 @@ query ($username: String!, $dateSince: DateTime) {
       &lt;/div&gt;
 
       &lt;div tw&#x3D;&quot;w-906px flex-col flex-nowrap&quot; style&#x3D;&quot;gap: -10px;&quot;&gt;
-        &lt;h1 tw&#x3D;&quot;font-medium text-72px leading-72px text-zinc-900 tracking-tight&quot; style&#x3D;&quot;width: 926px;&quot;&gt;
-          ${title}
+        &lt;h1 tw&#x3D;&quot;text-72px leading-72px text-black tracking-tight&quot; style&#x3D;&quot;width: 926px; font-weight: 500;&quot;&gt;
+          ${title.length &gt; 50 ? &#x60;${title.slice(0, 50)}...&#x60; : title}
         &lt;/h1&gt;
         &lt;p tw&#x3D;&quot;font-normal text-48px text-light-slate-11 tracking-tight&quot;&gt;
           ${body.length &gt; 108 ? &#x60;${body.slice(0, 108)}...&#x60; : body}
@@ -532,6 +553,153 @@ query ($username: String!, $dateSince: DateTime) {
 
     ${cardFooter(langs, repos, reactions)}
   &lt;/div&gt;&#x60;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/social-card/templates/insight-card.template.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="insightCardTemplate"></a>
+                    <span class="name">
+                        <span ><b>insightCardTemplate</b></span>
+                        <a href="#insightCardTemplate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(pageName: string, contributors: string, repos: string): string &#x3D;&gt; &#x60;
+  ${cardStyleSetup}
+
+  &lt;div tw&#x3D;&quot;flex-col justify-between w-1200px h-627px bg-white rounded-2xl p-32px pt-48px&quot;&gt;
+    &lt;div tw&#x3D;&quot;&quot;&gt;
+      &lt;div tw&#x3D;&quot;w-full flex-col flex-nowrap&quot; style&#x3D;&quot;gap: -10px;&quot;&gt;
+        &lt;h1 tw&#x3D;&quot;font-medium text-72px leading-72px text-zinc-900 tracking-tight&quot; style&#x3D;&quot;width: 100%;&quot;&gt;
+          ${pageName}: Insights
+        &lt;/h1&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    ${insightFooter(contributors, repos)}
+  &lt;/div&gt;&#x60;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/social-card/templates/shared/insight-contributors.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="insightContributors"></a>
+                    <span class="name">
+                        <span ><b>insightContributors</b></span>
+                        <a href="#insightContributors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(contributors: string[]): string &#x3D;&gt; {
+  const repoList &#x3D; contributors.map(
+    contributor &#x3D;&gt; &#x60;&lt;img tw&#x3D;&quot;w-46px h-46px border-2 border-white rounded-full&quot; src&#x3D;&quot;${String(contributor)}&quot; /&gt;&#x60;,
+  );
+
+  return &#x60;${repoList.slice(0, 5).join(&quot;&quot;)}${
+    repoList.length &gt; 5
+      ? &#x60;&lt;h2 tw&#x3D;&quot;ml-4 font-medium items-center text-32px leading-32px text-zinc-500&quot; style&#x3D;&quot;display: flex;&quot;&gt;+${
+        repoList.length - 5
+      }&lt;/h2&gt;&#x60;
+      : &#x60;&#x60;
+  }&#x60;;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/social-card/templates/shared/insight-footer.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="insightFooter"></a>
+                    <span class="name">
+                        <span ><b>insightFooter</b></span>
+                        <a href="#insightFooter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(contributors: string, repos: string) &#x3D;&gt; &#x60;
+    &lt;div tw&#x3D;&quot;flex-col&quot; style&#x3D;&quot;gap: 8px;&quot;&gt;
+      &lt;div tw&#x3D;&quot;h-48px justify-between items-center&quot; style&#x3D;&quot;gap: 8px;&quot;&gt;
+        &lt;div tw&#x3D;&quot;h-48px items-center&quot; style&#x3D;&quot;gap: 8px;&quot;&gt;
+          ${repos}
+        &lt;/div&gt;
+        &lt;div&gt;
+           &lt;img tw&#x3D;&quot;w-46px h-46px border border-white rounded&quot; src&#x3D;&quot;https://raw.githubusercontent.com/open-sauced/assets/d9a0d5a317036084aa3f5f4e20cdfbe58dc37377/svgs/slice-Orange-Gradient.svg&quot;/&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div tw&#x3D;&quot;flex-col  justify-center overflow-hidden&quot;&gt;
+        &lt;div tw&#x3D;&quot; items-center&quot; style&#x3D;&quot;gap: -12px;&quot;&gt;
+          ${contributors}
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &#x60;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/social-card/templates/shared/insight-repos.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="insightRepos"></a>
+                    <span class="name">
+                        <span ><b>insightRepos</b></span>
+                        <a href="#insightRepos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(repos: { repoName: string; avatarUrl: string }[], limit: number): string &#x3D;&gt; {
+  const charLimit &#x3D; limit &#x3D;&#x3D;&#x3D; 1 ? 60 : repos.length &#x3D;&#x3D;&#x3D; 1 ? 60 : 15;
+  const repoList &#x3D; repos.map(({ repoName, avatarUrl }) &#x3D;&gt;
+    repoIconWithName(
+      &#x60;${repoName.substring(0, charLimit).replace(/\.+$/, &quot;&quot;)}${repoName.length &gt; charLimit ? &quot;...&quot; : &quot;&quot;}&#x60;,
+      &#x60;${String(avatarUrl)}&amp;size&#x3D;40&#x60;,
+    ));
+
+  return &#x60;${repoList.slice(0, limit).join(&quot;&quot;)}${
+    repoList.length &gt; limit
+      ? &#x60;&lt;h2 tw&#x3D;&quot;m-0 font-medium text-32px leading-32px text-zinc-900&quot;&gt;+${repoList.length - limit}&lt;/h2&gt;&#x60;
+      : &#x60;&#x60;
+  }&#x60;;
+}</code>
                     </td>
                 </tr>
 
@@ -614,6 +782,7 @@ query ($username: String!, $dateSince: DateTime) {
         &quot;16px&quot;: &quot;16px&quot;,
         &quot;32px&quot;: &quot;32px&quot;,
         &quot;48px&quot;: &quot;48px&quot;,
+        &quot;58px&quot;: &quot;58px&quot;,
         &quot;96px&quot;: &quot;96px&quot;,
         &quot;134px&quot;: &quot;134px&quot;,
         &quot;627px&quot;: &quot;627px&quot;,

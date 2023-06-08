@@ -134,7 +134,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/social-card/user-card/user-card.service.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/social-card/user-card/user-card.service.ts:35</a></div>
                             </td>
                         </tr>
 
@@ -223,8 +223,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="114"
-                            class="link-to-prism">src/social-card/user-card/user-card.service.ts:114</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="131"
+                            class="link-to-prism">src/social-card/user-card/user-card.service.ts:131</a></div>
                 </td>
             </tr>
 
@@ -294,8 +294,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="83"
-                            class="link-to-prism">src/social-card/user-card/user-card.service.ts:83</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="89"
+                            class="link-to-prism">src/social-card/user-card/user-card.service.ts:89</a></div>
                 </td>
             </tr>
 
@@ -377,8 +377,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="140"
-                            class="link-to-prism">src/social-card/user-card/user-card.service.ts:140</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="159"
+                            class="link-to-prism">src/social-card/user-card/user-card.service.ts:159</a></div>
                 </td>
             </tr>
 
@@ -449,8 +449,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="44"
-                            class="link-to-prism">src/social-card/user-card/user-card.service.ts:44</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">src/social-card/user-card/user-card.service.ts:43</a></div>
                 </td>
             </tr>
 
@@ -524,7 +524,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/social-card/user-card/user-card.service.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/social-card/user-card/user-card.service.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -543,7 +543,6 @@ import { Resvg } from &quot;@resvg/resvg-js&quot;;
 import { Repository, Language, User } from &quot;@octokit/graphql-schema&quot;;
 import fs from &quot;node:fs/promises&quot;;
 
-
 import { GithubService } from &quot;../../github/github.service&quot;;
 import { S3FileStorageService } from &quot;../../s3-file-storage/s3-file-storage.service&quot;;
 import userLangs from &quot;../templates/shared/user-langs&quot;;
@@ -552,22 +551,22 @@ import userProfileCardTemplate from &quot;../templates/user-profile-card.templat
 import tailwindConfig from &quot;../templates/tailwind.config&quot;;
 
 export interface UserCardData {
-  id: User[&quot;databaseId&quot;],
-  name: User[&quot;name&quot;],
+  id: User[&quot;databaseId&quot;];
+  name: User[&quot;name&quot;];
   langs: (Language &amp; {
-    size: number,
-  })[],
-  langTotal: number,
-  repos: Repository[],
-  avatarUrl: string,
-  formattedName: string,
+    size: number;
+  })[];
+  langTotal: number;
+  repos: Repository[];
+  avatarUrl: string;
+  formattedName: string;
 }
 
 export interface RequiresUpdateMeta {
-  fileUrl: string,
+  fileUrl: string;
   hasFile: boolean;
   needsUpdate: boolean;
-  lastModified: Date | null,
+  lastModified: Date | null;
 }
 
 @Injectable()
@@ -581,13 +580,18 @@ export class UserCardService {
   ) {}
 
   private async getUserData (username: string): Promise&lt;UserCardData&gt; {
-    const langs: Record&lt;string, Language &amp; {
-      size: number,
-    }&gt; &#x3D; {};
+    const langs: Record&lt;
+    string,
+    Language &amp; {
+      size: number;
+    }
+    &gt; &#x3D; {};
     const today &#x3D; (new Date);
     const today30daysAgo &#x3D; new Date((new Date).setDate(today.getDate() - 30));
     const user &#x3D; await this.githubService.getUser(username);
-    const langRepos &#x3D; user.repositories.nodes?.filter(repo &#x3D;&gt; new Date(String(repo?.pushedAt)) &gt; today30daysAgo) as Repository[];
+    const langRepos &#x3D; user.repositories.nodes?.filter(
+      repo &#x3D;&gt; new Date(String(repo?.pushedAt)) &gt; today30daysAgo,
+    ) as Repository[];
     let langTotal &#x3D; 0;
 
     langRepos.map(repo &#x3D;&gt; {
@@ -612,7 +616,9 @@ export class UserCardService {
       name: user.name,
       langs: Array.from(Object.values(langs)).sort((a, b) &#x3D;&gt; b.size - a.size),
       langTotal,
-      repos: user.topRepositories.nodes?.filter(repo &#x3D;&gt; !repo?.isPrivate &amp;&amp; repo?.owner.login !&#x3D;&#x3D; username) as Repository[],
+      repos: user.topRepositories.nodes?.filter(
+        repo &#x3D;&gt; !repo?.isPrivate &amp;&amp; repo?.owner.login !&#x3D;&#x3D; username,
+      ) as Repository[],
       avatarUrl: &#x60;${String(user.avatarUrl)}&amp;size&#x3D;150&#x60;,
       formattedName: user.login,
     };
@@ -623,11 +629,16 @@ export class UserCardService {
     const { html } &#x3D; await import(&quot;satori-html&quot;);
     const satori &#x3D; (await import(&quot;satori&quot;)).default;
 
-    const { avatarUrl, repos, langs, langTotal, formattedName } &#x3D; userData ? userData : await this.getUserData(username);
+    const { avatarUrl, repos, langs, langTotal, formattedName } &#x3D; userData
+      ? userData
+      : await this.getUserData(username);
 
-    const template &#x3D; html(userProfileCardTemplate(avatarUrl, formattedName, userLangs(langs, langTotal), userProfileRepos(repos, 3)));
+    const template &#x3D; html(
+      userProfileCardTemplate(avatarUrl, formattedName, userLangs(langs, langTotal), userProfileRepos(repos, 3)),
+    );
 
     const interArrayBuffer &#x3D; await fs.readFile(&quot;node_modules/@fontsource/inter/files/inter-all-400-normal.woff&quot;);
+    const interArrayBufferMedium &#x3D; await fs.readFile(&quot;node_modules/@fontsource/inter/files/inter-all-500-normal.woff&quot;);
 
     const svg &#x3D; await satori(template, {
       width: 1200,
@@ -637,6 +648,12 @@ export class UserCardService {
           name: &quot;Inter&quot;,
           data: interArrayBuffer,
           weight: 400,
+          style: &quot;normal&quot;,
+        },
+        {
+          name: &quot;Inter&quot;,
+          data: interArrayBufferMedium,
+          weight: 500,
           style: &quot;normal&quot;,
         },
       ],
@@ -668,7 +685,9 @@ export class UserCardService {
       returnVal.lastModified &#x3D; lastModified;
 
       if (lastModified &amp;&amp; lastModified &gt; today3daysAgo) {
-        this.logger.debug(&#x60;User ${username} exists in S3 with lastModified: ${lastModified.toISOString()} less than 3 days ago, redirecting to ${fileUrl}&#x60;);
+        this.logger.debug(
+          &#x60;User ${username} exists in S3 with lastModified: ${lastModified.toISOString()} less than 3 days ago, redirecting to ${fileUrl}&#x60;,
+        );
         returnVal.needsUpdate &#x3D; false;
       }
     }

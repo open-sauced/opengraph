@@ -468,17 +468,17 @@ import { DbReaction } from &quot;../../github/entities/db-reaction.entity&quot;;
 import { RequiresUpdateMeta } from &quot;../user-card/user-card.service&quot;;
 
 interface HighlightCardData {
-  title: string,
-  body: string,
-  reactions: number,
-  avatarUrl: string,
-  repo: Repository,
-  langTotal: number,
+  title: string;
+  body: string;
+  reactions: number;
+  avatarUrl: string;
+  repo: Repository;
+  langTotal: number;
   langs: (Language &amp; {
-    size: number,
-  })[],
-  updated_at: Date,
-  url: string,
+    size: number;
+  })[];
+  updated_at: Date;
+  url: string;
 }
 
 @Injectable()
@@ -492,11 +492,15 @@ export class HighlightCardService {
   ) {}
 
   private async getHighlightData (highlightId: number): Promise&lt;HighlightCardData&gt; {
-    const highlightReq &#x3D; await firstValueFrom(this.httpService.get&lt;DbUserHighlight&gt;(&#x60;https://api.opensauced.pizza/v1/user/highlights/${highlightId}&#x60;));
+    const highlightReq &#x3D; await firstValueFrom(
+      this.httpService.get&lt;DbUserHighlight&gt;(&#x60;https://api.opensauced.pizza/v1/user/highlights/${highlightId}&#x60;),
+    );
     const { login, title, highlight: body, updated_at, url } &#x3D; highlightReq.data;
 
-    const reactionsReq &#x3D; await firstValueFrom(this.httpService.get&lt;DbReaction[]&gt;(&#x60;https://api.opensauced.pizza/v1/highlights/${highlightId}/reactions&#x60;));
-    const reactions &#x3D; reactionsReq.data.reduce&lt;number&gt;( (acc, curr) &#x3D;&gt; acc + Number(curr.reaction_count), 0);
+    const reactionsReq &#x3D; await firstValueFrom(
+      this.httpService.get&lt;DbReaction[]&gt;(&#x60;https://api.opensauced.pizza/v1/highlights/${highlightId}/reactions&#x60;),
+    );
+    const reactions &#x3D; reactionsReq.data.reduce&lt;number&gt;((acc, curr) &#x3D;&gt; acc + Number(curr.reaction_count), 0);
 
     const [owner, repoName] &#x3D; url.replace(&quot;https://github.com/&quot;, &quot;&quot;).split(&quot;/&quot;);
 
@@ -530,11 +534,16 @@ export class HighlightCardService {
     const { html } &#x3D; await import(&quot;satori-html&quot;);
     const satori &#x3D; (await import(&quot;satori&quot;)).default;
 
-    const { title, body, reactions, avatarUrl, repo, langs, langTotal } &#x3D; highlightData ? highlightData : await this.getHighlightData(highlightId);
+    const { title, body, reactions, avatarUrl, repo, langs, langTotal } &#x3D; highlightData
+      ? highlightData
+      : await this.getHighlightData(highlightId);
 
-    const template &#x3D; html(highlightCardTemplate(avatarUrl, title, body, userLangs(langs, langTotal), userProfileRepos([repo], 2), reactions));
+    const template &#x3D; html(
+      highlightCardTemplate(avatarUrl, title, body, userLangs(langs, langTotal), userProfileRepos([repo], 2), reactions),
+    );
 
     const interArrayBuffer &#x3D; await fs.readFile(&quot;node_modules/@fontsource/inter/files/inter-all-400-normal.woff&quot;);
+    const interArrayBufferMedium &#x3D; await fs.readFile(&quot;node_modules/@fontsource/inter/files/inter-all-500-normal.woff&quot;);
 
     const svg &#x3D; await satori(template, {
       width: 1200,
@@ -544,6 +553,12 @@ export class HighlightCardService {
           name: &quot;Inter&quot;,
           data: interArrayBuffer,
           weight: 400,
+          style: &quot;normal&quot;,
+        },
+        {
+          name: &quot;Inter&quot;,
+          data: interArrayBufferMedium,
+          weight: 500,
           style: &quot;normal&quot;,
         },
       ],
@@ -579,7 +594,9 @@ export class HighlightCardService {
       const savedReactions &#x3D; metadata?.[&quot;reactions-count&quot;] ?? &quot;0&quot;;
 
       if (lastModified &amp;&amp; lastModified &gt; updated_at &amp;&amp; savedReactions &#x3D;&#x3D;&#x3D; String(reactions)) {
-        this.logger.debug(&#x60;Highlight ${id} exists in S3 with lastModified: ${lastModified.toISOString()} newer than updated_at: ${updated_at.toISOString()}, and reaction count is the same, redirecting to ${fileUrl}&#x60;);
+        this.logger.debug(
+          &#x60;Highlight ${id} exists in S3 with lastModified: ${lastModified.toISOString()} newer than updated_at: ${updated_at.toISOString()}, and reaction count is the same, redirecting to ${fileUrl}&#x60;,
+        );
         returnVal.needsUpdate &#x3D; false;
       }
     }

@@ -129,6 +129,37 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                             </li>
                             <li class="link">
+                                <a href="modules/InsightCardModule.html" data-type="entity-link" >InsightCardModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                            'data-target="#controllers-links-module-InsightCardModule-6af7a7484269e9343893ede092e3638afcf4e5fcac52454cd6e103145a9b777fdb19f5c9843a051a5775713068c07c160463832f22fd7831dd50e41d7b72867e"' : 'data-target="#xs-controllers-links-module-InsightCardModule-6af7a7484269e9343893ede092e3638afcf4e5fcac52454cd6e103145a9b777fdb19f5c9843a051a5775713068c07c160463832f22fd7831dd50e41d7b72867e"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-InsightCardModule-6af7a7484269e9343893ede092e3638afcf4e5fcac52454cd6e103145a9b777fdb19f5c9843a051a5775713068c07c160463832f22fd7831dd50e41d7b72867e"' :
+                                            'id="xs-controllers-links-module-InsightCardModule-6af7a7484269e9343893ede092e3638afcf4e5fcac52454cd6e103145a9b777fdb19f5c9843a051a5775713068c07c160463832f22fd7831dd50e41d7b72867e"' }>
+                                            <li class="link">
+                                                <a href="controllers/InsightCardController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >InsightCardController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                        'data-target="#injectables-links-module-InsightCardModule-6af7a7484269e9343893ede092e3638afcf4e5fcac52454cd6e103145a9b777fdb19f5c9843a051a5775713068c07c160463832f22fd7831dd50e41d7b72867e"' : 'data-target="#xs-injectables-links-module-InsightCardModule-6af7a7484269e9343893ede092e3638afcf4e5fcac52454cd6e103145a9b777fdb19f5c9843a051a5775713068c07c160463832f22fd7831dd50e41d7b72867e"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-InsightCardModule-6af7a7484269e9343893ede092e3638afcf4e5fcac52454cd6e103145a9b777fdb19f5c9843a051a5775713068c07c160463832f22fd7831dd50e41d7b72867e"' :
+                                        'id="xs-injectables-links-module-InsightCardModule-6af7a7484269e9343893ede092e3638afcf4e5fcac52454cd6e103145a9b777fdb19f5c9843a051a5775713068c07c160463832f22fd7831dd50e41d7b72867e"' }>
+                                        <li class="link">
+                                            <a href="injectables/InsightCardService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >InsightCardService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
                                 <a href="modules/S3FileStorageModule.html" data-type="entity-link" >S3FileStorageModule</a>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
@@ -187,13 +218,25 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
                             <li class="link">
+                                <a href="interfaces/DbInsight.html" data-type="entity-link" >DbInsight</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/DbReaction.html" data-type="entity-link" >DbReaction</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/DbRepo.html" data-type="entity-link" >DbRepo</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/DbUserHighlight.html" data-type="entity-link" >DbUserHighlight</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/DbUserInsightRepo.html" data-type="entity-link" >DbUserInsightRepo</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/HighlightCardData.html" data-type="entity-link" >HighlightCardData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/InsightCardData.html" data-type="entity-link" >InsightCardData</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/RequiresUpdateMeta.html" data-type="entity-link" >RequiresUpdateMeta</a>
