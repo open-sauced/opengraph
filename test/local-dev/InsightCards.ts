@@ -2,9 +2,9 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { AppModule } from "../../src/app.module";
 import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "fs/promises";
-import { HighlightCardService } from "../../src/social-card/highlight-card/highlight-card.service";
+import { InsightCardService } from "../../src/social-card/insight-card/insight-card.service";
 
-const testHighlights = [102, 101, 103];
+const testInsightIds = [350, 351];
 
 const folderPath = "dist";
 
@@ -15,9 +15,9 @@ async function testHighlightCards() {
 
   await app.init();
 
-  const instance = app.get(HighlightCardService);
+  const instance = app.get(InsightCardService);
 
-  const promises = testHighlights.map(async (id) => {
+  const promises = testInsightIds.map(async (id) => {
     const { png } = await instance.generateCardBuffer(id);
 
     if (!existsSync(folderPath)) {
