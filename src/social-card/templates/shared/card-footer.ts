@@ -9,15 +9,15 @@ const cardFooter = (langs: string, repos: string, reactions?: number) => `
 
 
 
-          <div tw="h-48px bg-red-300 items-center" style="gap: 12px;">
+          <div tw="h-48px items-center" style="gap: 12px;">
             ${
-  reactions
-    ? ` <img tw="w-32px h-32px" width="1" height="1" src="${heartIconData}"/>
+              reactions
+                ? ` <img tw="w-32px h-32px" width="1" height="1" src="${heartIconData}"/>
             <span tw="font-medium text-32px text-black">
               ${reactions} Reactions
             </span>`
-    : ""
-}
+                : ""
+            }
 
             <div>
                <img tw="w-46px h-46px rounded" src="https://raw.githubusercontent.com/open-sauced/assets/d9a0d5a317036084aa3f5f4e20cdfbe58dc37377/svgs/slice-Orange-Gradient.svg"/>
