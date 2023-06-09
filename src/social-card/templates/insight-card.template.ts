@@ -13,7 +13,6 @@ const insightCardTemplate = (pageName: string, contributors: string, repos: stri
         <p tw="font-medium text-48px tracking-tight"> ${pageName}: Insights </p>
       </div>
     </div>
-
     ${insightFooter(contributors, repos)}
   </div>`;
 
