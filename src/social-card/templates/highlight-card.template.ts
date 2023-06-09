@@ -11,7 +11,7 @@ const highlightCardTemplate = (
   ${cardStyleSetup}
 
   <div tw="flex-col justify-between bg-white w-1200px h-627px">
-    <div tw="flex-col justify-between w-full  rounded-3xl overflow-hidden pt-48px px-32px">
+    <div tw="flex-col justify-between w-full overflow-hidden pt-48px px-32px">
       <div tw="flex-row justify-between" style="gap: 16px;">
         <div tw="w-906px flex-col flex-nowrap" style="gap: -10px;">
           <h1 tw="text-72px leading-72px text-black tracking-tight" style="width: 926px; font-weight: 500;">
