@@ -3,34 +3,31 @@ import cardStyleSetup from "./shared/card-style-setup";
 
 const highlightCardTemplate = (
   avatarUrl: string,
-  title: string,
-  body: string,
+  login: string,
   langs: string,
   repos: string,
   reactions: number,
 ): string => `
   ${cardStyleSetup}
 
-  <div tw="flex-col justify-between w-1200px h-627px bg-white rounded-2xl p-32px pt-48px">
-    <div style="gap: 16px;">
-      <div tw="p-2.5 pt-5" style="gap: 10px;">
-        <img tw="w-132px h-132px border border-sauced-orange rounded-full" src="${avatarUrl}"/>
+  <div tw="flex-col justify-between bg-white w-1200px h-627px">
+    <div tw="flex-col justify-between w-full  rounded-3xl overflow-hidden pt-48px px-32px">
+      <div tw="flex-row justify-between" style="gap: 16px;">
+        <div tw="w-906px flex-col flex-nowrap" style="gap: -10px;">
+          <h1 tw="text-72px leading-72px text-black tracking-tight" style="width: 926px; font-weight: 500;">
+               OpenSauced Highlight
+          </h1>
+          <p tw="font-normal text-48px text-light-slate-11 tracking-tight">
+             ${login}
+          </p>
+        </div>
+        <div>
+          <img tw="w-132px h-132px border border-sauced-orange rounded-full" src="${avatarUrl}"/>
+        </div>
       </div>
 
-      <div tw="w-906px flex-col flex-nowrap" style="gap: -10px;">
-        <h1 tw="text-72px leading-72px text-black tracking-tight" style="width: 926px; font-weight: 500;">
-          ${title.length > 50 ? `${title.slice(0, 50)}...` : title}
-        </h1>
-        <p tw="font-normal text-48px text-light-slate-11 tracking-tight">
-          ${body.length > 108 ? `${body.slice(0, 108)}...` : body}
-        </p>
-      </div>
 
-      <div>
-        <img tw="w-46px h-46px border border-white rounded" src="https://raw.githubusercontent.com/open-sauced/assets/d9a0d5a317036084aa3f5f4e20cdfbe58dc37377/svgs/slice-Orange-Gradient.svg"/>
-      </div>
     </div>
-
     ${cardFooter(langs, repos, reactions)}
   </div>`;
 

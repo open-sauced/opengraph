@@ -8,8 +8,9 @@ const insightCardTemplate = (pageName: string, contributors: string, repos: stri
     <div tw="">
       <div tw="w-full flex-col flex-nowrap" style="gap: -10px;">
         <h1 tw="font-medium text-72px leading-72px text-zinc-900 tracking-tight" style="width: 100%;">
-          ${pageName}: Insights
+          OpenSauced Insights
         </h1>
+        <p tw="font-medium text-48px tracking-tight"> ${pageName}: Insights </p>
       </div>
     </div>
 
