@@ -5,8 +5,7 @@ import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "fs/promises";
 
 const testUsernames = ["bdougie", "deadreyo", "defunkt", "0-vortex", "Anush008", "diivi"];
-
-const folderPath = "dist";
+const folderPath = "dist/local-dev";
 
 async function testUserCards() {
   const moduleFixture: TestingModule = await Test.createTestingModule({ imports: [AppModule] }).compile();

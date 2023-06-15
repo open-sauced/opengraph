@@ -1,19 +1,21 @@
 <div align="center">
   <br>
 
-  [![Open Sauced](https://i.ibb.co/7jPXt0Z/logo1-92f1a87f.png)](https://opensauced.pizza)
+[![Open Sauced](https://i.ibb.co/7jPXt0Z/logo1-92f1a87f.png)](https://opensauced.pizza)
 
-  # 🍕 Open Sauced OpenGraph Generator 🍕
-  > The path to your next Open Source contribution
+# 🍕 Open Sauced OpenGraph Generator 🍕
 
-  [![Powered by Digital Ocean](https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg)](https://www.digitalocean.com/?refcode=c65a90d0956d&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
+> The path to your next Open Source contribution
 
-  [![Code Size](https://img.shields.io/github/languages/code-size/open-sauced/opengraph.opensauced.pizza?style=flat)](https://github.com/open-sauced/opengraph.opensauced.pizza/pulse)
-  [![Commits](https://img.shields.io/github/commit-activity/w/open-sauced/opengraph.opensauced.pizza?style=flat)](https://github.com/open-sauced/opengraph.opensauced.pizza/pulse)
-  [![Issues](https://img.shields.io/github/issues/open-sauced/opengraph.opensauced.pizza.svg?style=flat)](https://github.com/open-sauced/opengraph.opensauced.pizza/issues)
-  [![Releases](https://img.shields.io/github/v/release/open-sauced/opengraph.opensauced.pizza.svg?style=flat)](https://github.com/open-sauced/opengraph.opensauced.pizza/releases)
-  [![Discord](https://img.shields.io/discord/714698561081704529.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/U2peSNf23P)
-  [![Twitter](https://img.shields.io/twitter/follow/saucedopen?label=Follow&style=social)](https://twitter.com/saucedopen)
+[![Powered by Digital Ocean](https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg)](https://www.digitalocean.com/?refcode=c65a90d0956d&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
+
+[![Code Size](https://img.shields.io/github/languages/code-size/open-sauced/opengraph.opensauced.pizza?style=flat)](https://github.com/open-sauced/opengraph.opensauced.pizza/pulse)
+[![Commits](https://img.shields.io/github/commit-activity/w/open-sauced/opengraph.opensauced.pizza?style=flat)](https://github.com/open-sauced/opengraph.opensauced.pizza/pulse)
+[![Issues](https://img.shields.io/github/issues/open-sauced/opengraph.opensauced.pizza.svg?style=flat)](https://github.com/open-sauced/opengraph.opensauced.pizza/issues)
+[![Releases](https://img.shields.io/github/v/release/open-sauced/opengraph.opensauced.pizza.svg?style=flat)](https://github.com/open-sauced/opengraph.opensauced.pizza/releases)
+[![Discord](https://img.shields.io/discord/714698561081704529.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/U2peSNf23P)
+[![Twitter](https://img.shields.io/twitter/follow/saucedopen?label=Follow&style=social)](https://twitter.com/saucedopen)
+
 </div>
 
 ## 🚀 Live release environments
@@ -31,6 +33,7 @@
 ## 📖 Prerequisites
 
 In order to run the project we need the following software binaries installed on our development machines:
+
 - [x] `node>=18.15.0`
 - [x] `npm>=9.6.3`
 - [ ] `docker>=20.10.23`
@@ -53,13 +56,20 @@ npm run start:dev
 
 There are a few scripts that can be used to generate and test the social cards locally without having to deploy to the CDN. This is the way to go when developing & testing the interface for the social cards.
 
-#### Generating user profile cards:
+#### Generating user profile cards
 
 ```shell
-npm run local-dev:usercards
+npm run test:local:user
 ```
 
 > Generates user cards for all users in the test array inside `test/local-dev/UserCards.ts` and outputs them in `dist/local-dev/` for testing.
+
+The same goes for the other card types:
+
+- `npm run test:local:insight` is for generating insight cards.
+- `npm run test:local:highlight` is for generating highlight cards.
+
+The output of these scripts can be found in the `dist/local-dev/` folder as well.
 
 ### 📝 Environment variables
 
@@ -137,7 +147,7 @@ We have a couple of scripts to check and adjust missing types.
 In order to dry run what types would be added to `package.json`:
 
 ```shell
-npm run types:auto-check 
+npm run types:auto-check
 ```
 
 In order to add any missing types to `package.json`:
