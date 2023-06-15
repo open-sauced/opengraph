@@ -6,7 +6,7 @@ import { HighlightCardService } from "../../src/social-card/highlight-card/highl
 
 const testHighlights = [102, 101, 103];
 
-const folderPath = "dist";
+const folderPath = "dist/local-dev";
 
 async function testHighlightCards() {
   const moduleFixture: TestingModule = await Test.createTestingModule({ imports: [AppModule] }).compile();
