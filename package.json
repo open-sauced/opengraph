@@ -1,6 +1,6 @@
 {
   "name": "@open-sauced/opengraph.opensauced.pizza",
-  "version": "2.1.1",
+  "version": "2.2.0-beta.2",
   "keywords": [],
   "description": "OpenGraph dot Open Sauced is a general purpose social card generator",
   "author": "Ahmed Mohamed Atwa <Ahmedatwa866@yahoo.com>",
@@ -40,6 +40,7 @@
     "test:e2e": "npm run test --config test/jest-e2e.json",
     "test:local:user": "npx ts-node test/local-dev/UserCards",
     "test:local:highlight": "npx ts-node test/local-dev/HighlightCards",
+    "test:local:insight": "npx ts-node test/local-dev/InsightCards",
     "docs": "npx compodoc -p tsconfig.json --hideGenerator --disableDependencies -d ./dist/documentation ./src",
     "docs:serve": "npm run docs -- --serve"
   },

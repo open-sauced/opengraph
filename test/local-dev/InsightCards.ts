@@ -1,32 +1,33 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { AppModule } from "../../src/app.module";
-import { UserCardService } from "../../src/social-card/user-card/user-card.service";
 import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "fs/promises";
+import { InsightCardService } from "../../src/social-card/insight-card/insight-card.service";
 
-const testUsernames = ["bdougie", "deadreyo", "defunkt", "0-vortex", "Anush008", "diivi"];
+const testInsightIds = [350, 351];
+
 const folderPath = "dist/local-dev";
 
-async function testUserCards() {
+async function testHighlightCards() {
   const moduleFixture: TestingModule = await Test.createTestingModule({ imports: [AppModule] }).compile();
 
   const app = moduleFixture.createNestApplication();
 
   await app.init();
 
-  const instance = app.get(UserCardService);
+  const instance = app.get(InsightCardService);
 
-  const promises = testUsernames.map(async (username) => {
-    const { png } = await instance.generateCardBuffer(username);
+  const promises = testInsightIds.map(async (id) => {
+    const { png } = await instance.generateCardBuffer(id);
 
     if (!existsSync(folderPath)) {
       await mkdir(folderPath);
     }
-    await writeFile(`${folderPath}/${username}.png`, png);
+    await writeFile(`${folderPath}/${id}.png`, png);
   });
 
   // generating sequential: 10.5 seconds, parallel: 4.5 seconds
   await Promise.all(promises);
 }
 
-testUserCards();
+testHighlightCards();

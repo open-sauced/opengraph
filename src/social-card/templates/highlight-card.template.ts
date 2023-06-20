@@ -1,7 +1,14 @@
 import cardFooter from "./shared/card-footer";
 import cardStyleSetup from "./shared/card-style-setup";
 
-const highlightCardTemplate = (avatarUrl: string, title: string, body: string, langs: string, repos: string, reactions: number): string => `
+const highlightCardTemplate = (
+  avatarUrl: string,
+  title: string,
+  body: string,
+  langs: string,
+  repos: string,
+  reactions: number,
+): string => `
   ${cardStyleSetup}
 
   <div tw="flex-col justify-between w-1200px h-627px bg-white rounded-2xl p-32px pt-48px">
@@ -11,8 +18,8 @@ const highlightCardTemplate = (avatarUrl: string, title: string, body: string, l
       </div>
 
       <div tw="w-906px flex-col flex-nowrap" style="gap: -10px;">
-        <h1 tw="font-medium text-72px leading-72px text-zinc-900 tracking-tight" style="width: 926px;">
-          ${title}
+        <h1 tw="text-72px leading-72px text-black tracking-tight" style="width: 926px; font-weight: 500;">
+          ${title.length > 50 ? `${title.slice(0, 50)}...` : title}
         </h1>
         <p tw="font-normal text-48px text-light-slate-11 tracking-tight">
           ${body.length > 108 ? `${body.slice(0, 108)}...` : body}

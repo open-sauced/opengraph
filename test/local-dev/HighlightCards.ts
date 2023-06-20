@@ -6,9 +6,9 @@ import { HighlightCardService } from "../../src/social-card/highlight-card/highl
 
 const testHighlights = [102, 101, 103];
 
-const folderPath = "dist";
+const folderPath = "dist/local-dev";
 
-async function testHighlightCards () {
+async function testHighlightCards() {
   const moduleFixture: TestingModule = await Test.createTestingModule({ imports: [AppModule] }).compile();
 
   const app = moduleFixture.createNestApplication();
@@ -17,13 +17,13 @@ async function testHighlightCards () {
 
   const instance = app.get(HighlightCardService);
 
-  const promises = testHighlights.map(async id => {
-    const { svg } = await instance.generateCardBuffer(id);
+  const promises = testHighlights.map(async (id) => {
+    const { png } = await instance.generateCardBuffer(id);
 
     if (!existsSync(folderPath)) {
       await mkdir(folderPath);
     }
-    await writeFile(`${folderPath}/${id}.svg`, svg);
+    await writeFile(`${folderPath}/${id}.png`, png);
   });
 
   // generating sequential: 10.5 seconds, parallel: 4.5 seconds

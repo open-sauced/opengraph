@@ -11,15 +11,12 @@ import DigitalOceanConfig from "./config/digital-ocean.config";
 import { UserCardModule } from "./social-card/user-card/user-card.module";
 import { S3FileStorageModule } from "./s3-file-storage/s3-file-storage.module";
 import { HighlightCardModule } from "./social-card/highlight-card/highlight-card.module";
+import { InsightCardModule } from "./social-card/insight-card/insight-card.module";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [
-        ApiConfig,
-        GitHubConfig,
-        DigitalOceanConfig,
-      ],
+      load: [ApiConfig, GitHubConfig, DigitalOceanConfig],
       isGlobal: true,
     }),
     LoggerModule.forRootAsync({
@@ -50,6 +47,7 @@ import { HighlightCardModule } from "./social-card/highlight-card/highlight-card
     S3FileStorageModule,
     UserCardModule,
     HighlightCardModule,
+    InsightCardModule,
   ],
   controllers: [],
   providers: [],

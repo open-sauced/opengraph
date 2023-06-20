@@ -1,9 +1,37 @@
+# 📦 open-sauced/opengraph changelog
+
+[![conventional commits](https://img.shields.io/badge/conventional%20commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![semantic versioning](https://img.shields.io/badge/semantic%20versioning-2.0.0-green.svg)](https://semver.org)
+
+> All notable changes to this project will be documented in this file
+
+## [2.2.0-beta.2](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.2.0-beta.1...v2.2.0-beta.2) (2023-06-20)
+
+
+### 📝 Documentation
+
+* update instructions on testing cards generation locally ([#53](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/53)) ([e152d09](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/e152d099cdca13cb36e9f115b27f9aaea4e1f440))
+
 # 📦 open-sauced/opengraph.opensauced.pizza changelog
 
 [![conventional commits](https://img.shields.io/badge/conventional%20commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![semantic versioning](https://img.shields.io/badge/semantic%20versioning-2.0.0-green.svg)](https://semver.org)
 
 > All notable changes to this project will be documented in this file
+
+## [2.2.0-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.1.2-beta.1...v2.2.0-beta.1) (2023-06-08)
+
+
+### 🍕 Features
+
+*  insights social card generation ([#51](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/51)) ([8a82a48](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/8a82a48690b806c17c54051128134c6cf84e2c05))
+
+### [2.1.2-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.1.1...v2.1.2-beta.1) (2023-06-06)
+
+
+### 🐛 Bug Fixes
+
+* remove issue templates ([#49](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/49)) ([778ad4e](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/778ad4e1dc852dc4c89f642a857348dffb6991cd))
 
 ### [2.1.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.1.0...v2.1.1) (2023-05-12)
 

@@ -18,6 +18,7 @@ const tailwindConfig = {
         "16px": "16px",
         "32px": "32px",
         "48px": "48px",
+        "58px": "58px",
         "96px": "96px",
         "134px": "134px",
         "627px": "627px",
