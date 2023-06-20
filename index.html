@@ -34,18 +34,18 @@
 <div align="center">
   <br>
 
-<p>  <a href="https://opensauced.pizza"><img src="https://i.ibb.co/7jPXt0Z/logo1-92f1a87f.png" alt="Open Sauced" class="img-responsive"></a></p>
+<p><a href="https://opensauced.pizza"><img src="https://i.ibb.co/7jPXt0Z/logo1-92f1a87f.png" alt="Open Sauced" class="img-responsive"></a></p>
 <h1 id="🍕-open-sauced-opengraph-generator-🍕">🍕 Open Sauced OpenGraph Generator 🍕</h1>
 <blockquote>
 <p>The path to your next Open Source contribution</p>
 </blockquote>
-<p>  <a href="https://www.digitalocean.com/?refcode=c65a90d0956d&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg" alt="Powered by Digital Ocean" class="img-responsive"></a></p>
-<p>  <a href="https://github.com/open-sauced/opengraph.opensauced.pizza/pulse"><img src="https://img.shields.io/github/languages/code-size/open-sauced/opengraph.opensauced.pizza?style=flat" alt="Code Size" class="img-responsive"></a>
-  <a href="https://github.com/open-sauced/opengraph.opensauced.pizza/pulse"><img src="https://img.shields.io/github/commit-activity/w/open-sauced/opengraph.opensauced.pizza?style=flat" alt="Commits" class="img-responsive"></a>
-  <a href="https://github.com/open-sauced/opengraph.opensauced.pizza/issues"><img src="https://img.shields.io/github/issues/open-sauced/opengraph.opensauced.pizza.svg?style=flat" alt="Issues" class="img-responsive"></a>
-  <a href="https://github.com/open-sauced/opengraph.opensauced.pizza/releases"><img src="https://img.shields.io/github/v/release/open-sauced/opengraph.opensauced.pizza.svg?style=flat" alt="Releases" class="img-responsive"></a>
-  <a href="https://discord.gg/U2peSNf23P"><img src="https://img.shields.io/discord/714698561081704529.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2" alt="Discord" class="img-responsive"></a>
-  <a href="https://twitter.com/saucedopen"><img src="https://img.shields.io/twitter/follow/saucedopen?label=Follow&style=social" alt="Twitter" class="img-responsive"></a></p>
+<p><a href="https://www.digitalocean.com/?refcode=c65a90d0956d&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%201.svg" alt="Powered by Digital Ocean" class="img-responsive"></a></p>
+<p><a href="https://github.com/open-sauced/opengraph.opensauced.pizza/pulse"><img src="https://img.shields.io/github/languages/code-size/open-sauced/opengraph.opensauced.pizza?style=flat" alt="Code Size" class="img-responsive"></a>
+<a href="https://github.com/open-sauced/opengraph.opensauced.pizza/pulse"><img src="https://img.shields.io/github/commit-activity/w/open-sauced/opengraph.opensauced.pizza?style=flat" alt="Commits" class="img-responsive"></a>
+<a href="https://github.com/open-sauced/opengraph.opensauced.pizza/issues"><img src="https://img.shields.io/github/issues/open-sauced/opengraph.opensauced.pizza.svg?style=flat" alt="Issues" class="img-responsive"></a>
+<a href="https://github.com/open-sauced/opengraph.opensauced.pizza/releases"><img src="https://img.shields.io/github/v/release/open-sauced/opengraph.opensauced.pizza.svg?style=flat" alt="Releases" class="img-responsive"></a>
+<a href="https://discord.gg/U2peSNf23P"><img src="https://img.shields.io/discord/714698561081704529.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2" alt="Discord" class="img-responsive"></a>
+<a href="https://twitter.com/saucedopen"><img src="https://img.shields.io/twitter/follow/saucedopen?label=Follow&style=social" alt="Twitter" class="img-responsive"></a></p>
 </div>
 
 <h2 id="🚀-live-release-environments">🚀 Live release environments</h2>
@@ -71,10 +71,16 @@
 <div><pre class="line-numbers"><code class="language-shell">npm ci</code></pre></div><p>To start a local copy of the app on port <code>3001</code>:</p>
 <div><pre class="line-numbers"><code class="language-shell">npm run start:dev</code></pre></div><h3 id="local-dev-scripts">Local dev scripts</h3>
 <p>There are a few scripts that can be used to generate and test the social cards locally without having to deploy to the CDN. This is the way to go when developing &amp; testing the interface for the social cards.</p>
-<h4 id="generating-user-profile-cards">Generating user profile cards:</h4>
-<div><pre class="line-numbers"><code class="language-shell">npm run local-dev:usercards</code></pre></div><blockquote>
+<h4 id="generating-user-profile-cards">Generating user profile cards</h4>
+<div><pre class="line-numbers"><code class="language-shell">npm run test:local:user</code></pre></div><blockquote>
 <p>Generates user cards for all users in the test array inside <code>test/local-dev/UserCards.ts</code> and outputs them in <code>dist/local-dev/</code> for testing.</p>
 </blockquote>
+<p>The same goes for the other card types:</p>
+<ul>
+<li><code>npm run test:local:insight</code> is for generating insight cards.</li>
+<li><code>npm run test:local:highlight</code> is for generating highlight cards.</li>
+</ul>
+<p>The output of these scripts can be found in the <code>dist/local-dev/</code> folder as well.</p>
 <h3 id="📝-environment-variables">📝 Environment variables</h3>
 <p>Some environment variables are required to run the application. You can find them in the <code>.env.example</code> file. While most of them are optional, some are required to run the application.</p>
 <p>One can reverse engineer the <a href="./src/config">named configs</a> but some need a little explanation.</p>
@@ -105,7 +111,7 @@ DISK_SIZE=100</code></pre></div><h3 id="🎨-code-linting">🎨 Code linting</h3
 <h3 id="📕-types">📕 Types</h3>
 <p>We have a couple of scripts to check and adjust missing types.</p>
 <p>In order to dry run what types would be added to <code>package.json</code>:</p>
-<div><pre class="line-numbers"><code class="language-shell">npm run types:auto-check </code></pre></div><p>In order to add any missing types to <code>package.json</code>:</p>
+<div><pre class="line-numbers"><code class="language-shell">npm run types:auto-check</code></pre></div><p>In order to add any missing types to <code>package.json</code>:</p>
 <div><pre class="line-numbers"><code class="language-shell">npm run types:auto-add</code></pre></div><h3 id="🚀-production-deployment">🚀 Production deployment</h3>
 <p>A production deployment is a complete build of the project, including the build of the static assets.</p>
 <div><pre class="line-numbers"><code class="language-shell">npm run build</code></pre></div><h2 id="🤝-contributing">🤝 Contributing</h2>

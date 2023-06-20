@@ -616,9 +616,9 @@ export class UserCardService {
       name: user.name,
       langs: Array.from(Object.values(langs)).sort((a, b) &#x3D;&gt; b.size - a.size),
       langTotal,
-      repos: user.topRepositories.nodes?.filter(
-        repo &#x3D;&gt; !repo?.isPrivate &amp;&amp; repo?.owner.login !&#x3D;&#x3D; username,
-      ) as Repository[],
+      repos: user.topRepositories.nodes
+        ?.filter(repo &#x3D;&gt; !repo?.isPrivate &amp;&amp; repo?.owner.login !&#x3D;&#x3D; username)
+        .filter(Boolean) as Repository[],
       avatarUrl: &#x60;${String(user.avatarUrl)}&amp;size&#x3D;150&#x60;,
       formattedName: user.login,
     };
