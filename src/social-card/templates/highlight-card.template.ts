@@ -3,7 +3,7 @@ import cardStyleSetup from "./shared/card-style-setup";
 
 const highlightCardTemplate = (
   avatarUrl: string,
-  login: string,
+  body: string,
   langs: string,
   repos: string,
   reactions: number,
@@ -18,7 +18,7 @@ const highlightCardTemplate = (
                OpenSauced Highlight
           </h1>
           <p tw="font-normal text-48px text-light-slate-11 tracking-tight">
-             ${login}
+          ${body.length > 108 ? `${body.slice(0, 108)}...` : body}
           </p>
         </div>
         <div>

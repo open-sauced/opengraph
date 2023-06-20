@@ -17,6 +17,7 @@ import { RequiresUpdateMeta } from "../user-card/user-card.service";
 
 interface HighlightCardData {
   login: string;
+  body: string;
   reactions: number;
   avatarUrl: string;
   repo: Repository;
@@ -42,7 +43,7 @@ export class HighlightCardService {
     const highlightReq = await firstValueFrom(
       this.httpService.get<DbUserHighlight>(`https://api.opensauced.pizza/v1/user/highlights/${highlightId}`),
     );
-    const { login, updated_at, url } = highlightReq.data;
+    const { login, updated_at, url, highlight: body } = highlightReq.data;
 
     const reactionsReq = await firstValueFrom(
       this.httpService.get<DbReaction[]>(`https://api.opensauced.pizza/v1/highlights/${highlightId}/reactions`),
@@ -64,6 +65,7 @@ export class HighlightCardService {
     }) as (Language & { size: number })[];
 
     return {
+      body,
       login,
       reactions,
       avatarUrl: `${String(user.avatarUrl)}&size=150`,
@@ -80,12 +82,12 @@ export class HighlightCardService {
     const { html } = await import("satori-html");
     const satori = (await import("satori")).default;
 
-    const { reactions, login, avatarUrl, repo, langs, langTotal } = highlightData
+    const { reactions, body, avatarUrl, repo, langs, langTotal } = highlightData
       ? highlightData
       : await this.getHighlightData(highlightId);
 
     const template = html(
-      highlightCardTemplate(avatarUrl, login, userLangs(langs, langTotal), userProfileRepos([repo], 2), reactions),
+      highlightCardTemplate(avatarUrl, body, userLangs(langs, langTotal), userProfileRepos([repo], 2), reactions),
     );
 
     const interArrayBuffer = await fs.readFile("node_modules/@fontsource/inter/files/inter-all-400-normal.woff");
