@@ -6,7 +6,7 @@ import { InsightCardService } from "../../src/social-card/insight-card/insight-c
 
 const testInsightIds = [350, 351];
 
-const folderPath = "dist";
+const folderPath = "dist/local-dev";
 
 async function testHighlightCards() {
   const moduleFixture: TestingModule = await Test.createTestingModule({ imports: [AppModule] }).compile();
