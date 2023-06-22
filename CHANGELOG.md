@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+### [2.2.1-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.2.0...v2.2.1-beta.1) (2023-06-22)
+
+
+### 🧑‍💻 Code Refactoring
+
+* update social card design ([#52](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/52)) ([6a46be1](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/6a46be144b40ca4b6d406236ad71e42ed509ae90))
+
 ## [2.2.0](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.1.1...v2.2.0) (2023-06-20)
 
 
