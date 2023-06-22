@@ -1,7 +1,7 @@
 import repoIconWithName from "./repo-icon-with-name";
 
 const insightRepos = (repos: { repoName: string; avatarUrl: string }[], limit: number): string => {
-  const charLimit = limit === 1 ? 60 : repos.length === 1 ? 60 : 15;
+  const charLimit = limit === 1 ? 60 : repos.length === 1 ? 60 : 9;
   const repoList = repos.map(({ repoName, avatarUrl }) =>
     repoIconWithName(
       `${repoName.substring(0, charLimit).replace(/\.+$/, "")}${repoName.length > charLimit ? "..." : ""}`,
