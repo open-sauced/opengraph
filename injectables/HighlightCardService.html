@@ -555,7 +555,7 @@ import { DbReaction } from &quot;../../github/entities/db-reaction.entity&quot;;
 import { RequiresUpdateMeta } from &quot;../user-card/user-card.service&quot;;
 
 interface HighlightCardData {
-  title: string;
+  login: string;
   body: string;
   reactions: number;
   avatarUrl: string;
@@ -582,7 +582,7 @@ export class HighlightCardService {
     const highlightReq &#x3D; await firstValueFrom(
       this.httpService.get&lt;DbUserHighlight&gt;(&#x60;https://api.opensauced.pizza/v1/user/highlights/${highlightId}&#x60;),
     );
-    const { login, title, highlight: body, updated_at, url } &#x3D; highlightReq.data;
+    const { login, updated_at, url, highlight: body } &#x3D; highlightReq.data;
 
     const reactionsReq &#x3D; await firstValueFrom(
       this.httpService.get&lt;DbReaction[]&gt;(&#x60;https://api.opensauced.pizza/v1/highlights/${highlightId}/reactions&#x60;),
@@ -604,8 +604,8 @@ export class HighlightCardService {
     }) as (Language &amp; { size: number })[];
 
     return {
-      title,
       body,
+      login,
       reactions,
       avatarUrl: &#x60;${String(user.avatarUrl)}&amp;size&#x3D;150&#x60;,
       langs: langList,
@@ -621,12 +621,12 @@ export class HighlightCardService {
     const { html } &#x3D; await import(&quot;satori-html&quot;);
     const satori &#x3D; (await import(&quot;satori&quot;)).default;
 
-    const { title, body, reactions, avatarUrl, repo, langs, langTotal } &#x3D; highlightData
+    const { reactions, body, avatarUrl, repo, langs, langTotal } &#x3D; highlightData
       ? highlightData
       : await this.getHighlightData(highlightId);
 
     const template &#x3D; html(
-      highlightCardTemplate(avatarUrl, title, body, userLangs(langs, langTotal), userProfileRepos([repo], 2), reactions),
+      highlightCardTemplate(avatarUrl, body, userLangs(langs, langTotal), userProfileRepos([repo], 2), reactions),
     );
 
     const interArrayBuffer &#x3D; await fs.readFile(&quot;node_modules/@fontsource/inter/files/inter-all-400-normal.woff&quot;);

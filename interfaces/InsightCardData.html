@@ -342,7 +342,7 @@ export class InsightCardService {
 
     const { pageName, repos, contributors } &#x3D; insightData ? insightData : await this.getInsightData(insightId);
 
-    const template &#x3D; html(insightCardTemplate(pageName, insightContributors(contributors), insightRepos(repos, 2)));
+    const template &#x3D; html(insightCardTemplate(pageName, insightContributors(contributors), insightRepos(repos, 3)));
 
     const interArrayBuffer &#x3D; await fs.readFile(&quot;node_modules/@fontsource/inter/files/inter-all-400-normal.woff&quot;);
     const interArrayBufferMedium &#x3D; await fs.readFile(&quot;node_modules/@fontsource/inter/files/inter-all-500-normal.woff&quot;);

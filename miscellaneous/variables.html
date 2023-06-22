@@ -171,28 +171,33 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>(langs: string, repos: string, reactions?: number) &#x3D;&gt; &#x60;
-    &lt;div tw&#x3D;&quot;flex-col&quot; style&#x3D;&quot;gap: 8px;&quot;&gt;
-      &lt;div tw&#x3D;&quot;h-48px ${!reactions ? &quot;items-center&quot; : &quot;justify-between&quot;}&quot; style&#x3D;&quot;gap: 8px;&quot;&gt;
+    &lt;div tw&#x3D;&quot;flex-col &quot; style&#x3D;&quot;gap: 30px;&quot;&gt;
+      &lt;div tw&#x3D;&quot;h-48px px-32px items-center justify-between&quot;&gt;
         &lt;div tw&#x3D;&quot;h-48px items-center&quot; style&#x3D;&quot;gap: 8px;&quot;&gt;
           ${repos}
         &lt;/div&gt;
 
-        ${
-  reactions
-    ? &#x60;
+
+
           &lt;div tw&#x3D;&quot;h-48px items-center&quot; style&#x3D;&quot;gap: 12px;&quot;&gt;
-            &lt;img tw&#x3D;&quot;w-32px h-32px&quot; width&#x3D;&quot;1&quot; height&#x3D;&quot;1&quot; src&#x3D;&quot;${heartIconData}&quot;/&gt;
+            ${
+  reactions
+    ? &#x60; &lt;img tw&#x3D;&quot;w-32px h-32px&quot; width&#x3D;&quot;1&quot; height&#x3D;&quot;1&quot; src&#x3D;&quot;${heartIconData}&quot;/&gt;
             &lt;span tw&#x3D;&quot;font-medium text-32px text-black&quot;&gt;
               ${reactions} Reactions
-            &lt;/span&gt;
-          &lt;/div&gt;
-        &#x60;
+            &lt;/span&gt;&#x60;
     : &quot;&quot;
 }
+
+            &lt;div&gt;
+               &lt;img tw&#x3D;&quot;w-46px h-46px rounded&quot; src&#x3D;&quot;https://raw.githubusercontent.com/open-sauced/assets/d9a0d5a317036084aa3f5f4e20cdfbe58dc37377/svgs/slice-Orange-Gradient.svg&quot;/&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
       &lt;/div&gt;
 
-      &lt;div tw&#x3D;&quot;flex-col h-12px rounded-full justify-center overflow-hidden&quot;&gt;
-        &lt;div tw&#x3D;&quot;h-12px &quot; style&#x3D;&quot;gap: 3px;&quot;&gt;
+      &lt;div tw&#x3D;&quot;flex-col rounded-b-2xl h-32px justify-center overflow-hidden&quot;&gt;
+        &lt;div tw&#x3D;&quot;h-32px &quot;&gt;
           ${langs}
         &lt;/div&gt;
       &lt;/div&gt;
@@ -523,7 +528,6 @@ query ($username: String!, $dateSince: DateTime) {
                     <td class="col-md-4">
                         <i>Default value : </i><code>(
   avatarUrl: string,
-  title: string,
   body: string,
   langs: string,
   repos: string,
@@ -531,26 +535,24 @@ query ($username: String!, $dateSince: DateTime) {
 ): string &#x3D;&gt; &#x60;
   ${cardStyleSetup}
 
-  &lt;div tw&#x3D;&quot;flex-col justify-between w-1200px h-627px bg-white rounded-2xl p-32px pt-48px&quot;&gt;
-    &lt;div style&#x3D;&quot;gap: 16px;&quot;&gt;
-      &lt;div tw&#x3D;&quot;p-2.5 pt-5&quot; style&#x3D;&quot;gap: 10px;&quot;&gt;
-        &lt;img tw&#x3D;&quot;w-132px h-132px border border-sauced-orange rounded-full&quot; src&#x3D;&quot;${avatarUrl}&quot;/&gt;
-      &lt;/div&gt;
-
-      &lt;div tw&#x3D;&quot;w-906px flex-col flex-nowrap&quot; style&#x3D;&quot;gap: -10px;&quot;&gt;
-        &lt;h1 tw&#x3D;&quot;text-72px leading-72px text-black tracking-tight&quot; style&#x3D;&quot;width: 926px; font-weight: 500;&quot;&gt;
-          ${title.length &gt; 50 ? &#x60;${title.slice(0, 50)}...&#x60; : title}
-        &lt;/h1&gt;
-        &lt;p tw&#x3D;&quot;font-normal text-48px text-light-slate-11 tracking-tight&quot;&gt;
+  &lt;div tw&#x3D;&quot;flex-col justify-between bg-white w-1200px h-627px&quot;&gt;
+    &lt;div tw&#x3D;&quot;flex-col justify-between w-full overflow-hidden pt-48px px-32px&quot;&gt;
+      &lt;div tw&#x3D;&quot;flex-row justify-between&quot; style&#x3D;&quot;gap: 16px;&quot;&gt;
+        &lt;div tw&#x3D;&quot;w-906px flex-col flex-nowrap&quot; style&#x3D;&quot;gap: -10px;&quot;&gt;
+          &lt;h1 tw&#x3D;&quot;text-72px leading-72px text-black tracking-tight&quot; style&#x3D;&quot;width: 926px; font-weight: 500;&quot;&gt;
+               OpenSauced Highlight
+          &lt;/h1&gt;
+          &lt;p tw&#x3D;&quot;font-normal text-48px text-light-slate-11 tracking-tight&quot;&gt;
           ${body.length &gt; 108 ? &#x60;${body.slice(0, 108)}...&#x60; : body}
-        &lt;/p&gt;
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;img tw&#x3D;&quot;w-132px h-132px border border-sauced-orange rounded-full&quot; src&#x3D;&quot;${avatarUrl}&quot;/&gt;
+        &lt;/div&gt;
       &lt;/div&gt;
 
-      &lt;div&gt;
-        &lt;img tw&#x3D;&quot;w-46px h-46px border border-white rounded&quot; src&#x3D;&quot;https://raw.githubusercontent.com/open-sauced/assets/d9a0d5a317036084aa3f5f4e20cdfbe58dc37377/svgs/slice-Orange-Gradient.svg&quot;/&gt;
-      &lt;/div&gt;
+
     &lt;/div&gt;
-
     ${cardFooter(langs, repos, reactions)}
   &lt;/div&gt;&#x60;</code>
                     </td>
@@ -582,11 +584,11 @@ query ($username: String!, $dateSince: DateTime) {
     &lt;div tw&#x3D;&quot;&quot;&gt;
       &lt;div tw&#x3D;&quot;w-full flex-col flex-nowrap&quot; style&#x3D;&quot;gap: -10px;&quot;&gt;
         &lt;h1 tw&#x3D;&quot;font-medium text-72px leading-72px text-zinc-900 tracking-tight&quot; style&#x3D;&quot;width: 100%;&quot;&gt;
-          ${pageName}: Insights
+          OpenSauced Insights
         &lt;/h1&gt;
+        &lt;p tw&#x3D;&quot;font-medium text-48px tracking-tight&quot;&gt; ${pageName}: Insights &lt;/p&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-
     ${insightFooter(contributors, repos)}
   &lt;/div&gt;&#x60;</code>
                     </td>
@@ -687,7 +689,7 @@ query ($username: String!, $dateSince: DateTime) {
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>(repos: { repoName: string; avatarUrl: string }[], limit: number): string &#x3D;&gt; {
-  const charLimit &#x3D; limit &#x3D;&#x3D;&#x3D; 1 ? 60 : repos.length &#x3D;&#x3D;&#x3D; 1 ? 60 : 15;
+  const charLimit &#x3D; limit &#x3D;&#x3D;&#x3D; 1 ? 60 : repos.length &#x3D;&#x3D;&#x3D; 1 ? 60 : 9;
   const repoList &#x3D; repos.map(({ repoName, avatarUrl }) &#x3D;&gt;
     repoIconWithName(
       &#x60;${repoName.substring(0, charLimit).replace(/\.+$/, &quot;&quot;)}${repoName.length &gt; charLimit ? &quot;...&quot; : &quot;&quot;}&#x60;,
@@ -1002,14 +1004,15 @@ query ($username: String!, $dateSince: DateTime) {
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>(langs: (Language &amp; { size: number })[], totalCount &#x3D; 0, joinLiteral &#x3D; &quot;&quot;) &#x3D;&gt; {
-  const filteredLangs &#x3D; langs
-    .filter(({ size }) &#x3D;&gt; size &gt; 0 &amp;&amp; (size / totalCount) * 100 &gt;&#x3D; 0.5);
+  const filteredLangs &#x3D; langs.filter(({ size }) &#x3D;&gt; size &gt; 0 &amp;&amp; (size / totalCount) * 100 &gt;&#x3D; 0.5);
 
   return filteredLangs
     .map(({ color, size }) &#x3D;&gt; {
-      const realPercent &#x3D; size / totalCount * 100;
+      const realPercent &#x3D; (size / totalCount) * 100;
 
-      return &#x60;&lt;div tw&#x3D;&quot;h-12px ${color ? &#x60;bg-[${color}]&#x60; : &quot;bg-black&quot;}&quot; style&#x3D;&quot;width: ${totalCount &gt; 0 ? realPercent : 100 / filteredLangs.length}%&quot;/&gt;&#x60;;
+      return &#x60;&lt;div tw&#x3D;&quot;h-32px ${color ? &#x60;bg-[${color}]&#x60; : &quot;bg-black&quot;}&quot; style&#x3D;&quot;width: ${
+        totalCount &gt; 0 ? realPercent : 100 / filteredLangs.length
+      }%&quot;/&gt;&#x60;;
     })
     .join(joinLiteral);
 }</code>
@@ -1038,17 +1041,17 @@ query ($username: String!, $dateSince: DateTime) {
                         <i>Default value : </i><code>(avatarUrl: string, name: string, langs: string, repos: string): string &#x3D;&gt; &#x60;
   ${cardStyleSetup}
 
-  &lt;div tw&#x3D;&quot;flex-col justify-between w-1200px h-627px bg-white rounded-2xl p-32px pt-48px&quot;&gt;
-    &lt;div style&#x3D;&quot;gap: 16px;&quot;&gt;
-      &lt;img tw&#x3D;&quot;w-134px h-134px border border-sauced-orange rounded-full&quot; src&#x3D;&quot;${avatarUrl}&quot;/&gt;
+  &lt;div tw&#x3D;&quot;flex-col justify-between rounded-2xl pt-48px bg-white w-1200px h-627px&quot;&gt;
+    &lt;div tw&#x3D;&quot;flex-col justify-between w-full bg-white px-32px &quot;&gt;
+      &lt;div tw&#x3D;&quot;justify-between items-center&quot; style&#x3D;&quot;gap: 16px;&quot;&gt;
+        &lt;h1 tw&#x3D;&quot;h-134px font-medium text-96px leading-134px text-zinc-900 tracking-tight&quot; style&#x3D;&quot;width: 926px;&quot;&gt;
+          ${name}
+        &lt;/h1&gt;
+        &lt;img tw&#x3D;&quot;w-134px h-134px border border-sauced-orange rounded-full&quot; src&#x3D;&quot;${avatarUrl}&quot;/&gt;
+      &lt;/div&gt;
 
-      &lt;h1 tw&#x3D;&quot;h-134px font-medium text-96px leading-134px text-zinc-900 tracking-tight&quot; style&#x3D;&quot;width: 926px;&quot;&gt;
-        ${name}
-      &lt;/h1&gt;
 
-      &lt;img tw&#x3D;&quot;w-48px h-48px border border-white rounded&quot; src&#x3D;&quot;https://raw.githubusercontent.com/open-sauced/assets/d9a0d5a317036084aa3f5f4e20cdfbe58dc37377/svgs/slice-Orange-Gradient.svg&quot;/&gt;
     &lt;/div&gt;
-
     ${cardFooter(langs, repos)}
   &lt;/div&gt;&#x60;</code>
                     </td>
@@ -1074,13 +1077,18 @@ query ($username: String!, $dateSince: DateTime) {
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>(repos: Repository[], limit: number): string &#x3D;&gt; {
-  const charLimit &#x3D; limit &#x3D;&#x3D;&#x3D; 1 ? 60 : repos.length &#x3D;&#x3D;&#x3D; 1 ? 60 : 15;
+  const charLimit &#x3D; limit &#x3D;&#x3D;&#x3D; 1 ? 60 : repos.length &#x3D;&#x3D;&#x3D; 1 ? 60 : 9;
   const repoList &#x3D; repos.map(({ name, owner: { avatarUrl } }) &#x3D;&gt;
-    repoIconWithName(&#x60;${name.substring(0, charLimit).replace(/\.+$/, &quot;&quot;)}${name.length &gt; charLimit ? &quot;...&quot; : &quot;&quot;}&#x60;, &#x60;${String(avatarUrl)}&amp;size&#x3D;40&#x60;));
+    repoIconWithName(
+      &#x60;${name.substring(0, charLimit).replace(/\.+$/, &quot;&quot;)}${name.length &gt; charLimit ? &quot;...&quot; : &quot;&quot;}&#x60;,
+      &#x60;${String(avatarUrl)}&amp;size&#x3D;40&#x60;,
+    ));
 
-  return &#x60;${repoList.slice(0, limit).join(&quot;&quot;)}${repoList.length &gt; limit
-    ? &#x60;&lt;h2 tw&#x3D;&quot;m-0 font-medium text-32px leading-32px text-zinc-900&quot;&gt;+${repoList.length - limit}&lt;/h2&gt;&#x60;
-    : &#x60;&#x60;}&#x60;;
+  return &#x60;${repoList.slice(0, limit).join(&quot;&quot;)}${
+    repoList.length &gt; limit
+      ? &#x60;&lt;h2 tw&#x3D;&quot;m-0 font-medium text-32px leading-32px text-zinc-900&quot;&gt;+${repoList.length - limit}&lt;/h2&gt;&#x60;
+      : &#x60;&#x60;
+  }&#x60;;
 }</code>
                     </td>
                 </tr>
