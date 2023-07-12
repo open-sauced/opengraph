@@ -85,7 +85,7 @@ export class InsightCardService {
 
     const { pageName, repos, contributors } = insightData ? insightData : await this.getInsightData(insightId);
 
-    const template = html(insightCardTemplate(pageName, insightContributors(contributors), insightRepos(repos, 2)));
+    const template = html(insightCardTemplate(pageName, insightContributors(contributors), insightRepos(repos, 3)));
 
     const interArrayBuffer = await fs.readFile("node_modules/@fontsource/inter/files/inter-all-400-normal.woff");
     const interArrayBufferMedium = await fs.readFile("node_modules/@fontsource/inter/files/inter-all-500-normal.woff");
