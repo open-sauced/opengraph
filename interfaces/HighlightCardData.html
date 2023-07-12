@@ -455,13 +455,13 @@ import { HttpService } from &quot;@nestjs/axios&quot;;
 import { Resvg } from &quot;@resvg/resvg-js&quot;;
 import { Repository, Language } from &quot;@octokit/graphql-schema&quot;;
 import fs from &quot;node:fs/promises&quot;;
+import { firstValueFrom } from &quot;rxjs&quot;;
 
 import { GithubService } from &quot;../../github/github.service&quot;;
 import { S3FileStorageService } from &quot;../../s3-file-storage/s3-file-storage.service&quot;;
 import userLangs from &quot;../templates/shared/user-langs&quot;;
 import userProfileRepos from &quot;../templates/shared/user-repos&quot;;
 import tailwindConfig from &quot;../templates/tailwind.config&quot;;
-import { firstValueFrom } from &quot;rxjs&quot;;
 import highlightCardTemplate from &quot;../templates/highlight-card.template&quot;;
 import { DbUserHighlight } from &quot;../../github/entities/db-user-highlight.entity&quot;;
 import { DbReaction } from &quot;../../github/entities/db-reaction.entity&quot;;
@@ -484,6 +484,7 @@ interface HighlightCardData {
 @Injectable()
 export class HighlightCardService {
   private readonly logger &#x3D; new Logger(this.constructor.name);
+  private fonts: Buffer[] &#x3D; [];
 
   constructor (
     private readonly httpService: HttpService,
@@ -492,20 +493,20 @@ export class HighlightCardService {
   ) {}
 
   private async getHighlightData (highlightId: number): Promise&lt;HighlightCardData&gt; {
-    const highlightReq &#x3D; await firstValueFrom(
-      this.httpService.get&lt;DbUserHighlight&gt;(&#x60;https://api.opensauced.pizza/v1/user/highlights/${highlightId}&#x60;),
+    const highlightReq &#x3D; firstValueFrom(
+      this.httpService.get&lt;DbUserHighlight&gt;(&#x60;${process.env.API_BASE_URL!}/v1/user/highlights/${highlightId}&#x60;),
     );
-    const { login, updated_at, url, highlight: body } &#x3D; highlightReq.data;
 
-    const reactionsReq &#x3D; await firstValueFrom(
-      this.httpService.get&lt;DbReaction[]&gt;(&#x60;https://api.opensauced.pizza/v1/highlights/${highlightId}/reactions&#x60;),
+    const reactionsReq &#x3D; firstValueFrom(
+      this.httpService.get&lt;DbReaction[]&gt;(&#x60;${process.env.API_BASE_URL!}/v1/highlights/${highlightId}/reactions&#x60;),
     );
-    const reactions &#x3D; reactionsReq.data.reduce&lt;number&gt;((acc, curr) &#x3D;&gt; acc + Number(curr.reaction_count), 0);
 
+    const [highlight, highlightReactions] &#x3D; await Promise.all([highlightReq, reactionsReq]);
+    const { login, updated_at, url, highlight: body } &#x3D; highlight.data;
     const [owner, repoName] &#x3D; url.replace(&quot;https://github.com/&quot;, &quot;&quot;).split(&quot;/&quot;);
 
-    const user &#x3D; await this.githubService.getUser(login);
     const repo &#x3D; await this.githubService.getRepo(owner, repoName);
+    const reactions &#x3D; highlightReactions.data.reduce&lt;number&gt;((acc, curr) &#x3D;&gt; acc + Number(curr.reaction_count), 0);
 
     const langList &#x3D; repo.languages?.edges?.flatMap(edge &#x3D;&gt; {
       if (edge) {
@@ -520,13 +521,24 @@ export class HighlightCardService {
       body,
       login,
       reactions,
-      avatarUrl: &#x60;${String(user.avatarUrl)}&amp;size&#x3D;150&#x60;,
+      avatarUrl: &#x60;https://github.com/${login}.png?size&#x3D;150&#x60;,
       langs: langList,
       langTotal: repo.languages?.totalSize ?? 0,
       repo,
       updated_at: new Date(updated_at),
       url,
     };
+  }
+
+  private async getFonts () {
+    if (this.fonts.length &#x3D;&#x3D;&#x3D; 0) {
+      const interArrayBufferReq &#x3D; fs.readFile(&quot;node_modules/@fontsource/inter/files/inter-all-400-normal.woff&quot;);
+      const interArrayBufferMediumReq &#x3D; fs.readFile(&quot;node_modules/@fontsource/inter/files/inter-all-500-normal.woff&quot;);
+
+      this.fonts &#x3D; await Promise.all([interArrayBufferReq, interArrayBufferMediumReq]);
+    }
+
+    return this.fonts;
   }
 
   // public only to be used in local scripts. Not for controller direct use.
@@ -542,8 +554,7 @@ export class HighlightCardService {
       highlightCardTemplate(avatarUrl, body, userLangs(langs, langTotal), userProfileRepos([repo], 2), reactions),
     );
 
-    const interArrayBuffer &#x3D; await fs.readFile(&quot;node_modules/@fontsource/inter/files/inter-all-400-normal.woff&quot;);
-    const interArrayBufferMedium &#x3D; await fs.readFile(&quot;node_modules/@fontsource/inter/files/inter-all-500-normal.woff&quot;);
+    const [interArrayBuffer, interArrayBufferMedium] &#x3D; await this.getFonts();
 
     const svg &#x3D; await satori(template, {
       width: 1200,
@@ -585,12 +596,16 @@ export class HighlightCardService {
     };
 
     if (hasFile) {
-      const lastModified &#x3D; await this.s3FileStorageService.getFileLastModified(hash);
+      const lastModifiedReq &#x3D; this.s3FileStorageService.getFileLastModified(hash);
+      const highlightReq &#x3D; this.getHighlightData(id);
+      const metadataReq &#x3D; this.s3FileStorageService.getFileMeta(hash);
+
+      const [lastModified, highlight, metadata] &#x3D; await Promise.all([lastModifiedReq, highlightReq, metadataReq]);
 
       returnVal.lastModified &#x3D; lastModified;
 
-      const { updated_at, reactions } &#x3D; await this.getHighlightData(id);
-      const metadata &#x3D; await this.s3FileStorageService.getFileMeta(hash);
+      const { updated_at, reactions } &#x3D; highlight;
+
       const savedReactions &#x3D; metadata?.[&quot;reactions-count&quot;] ?? &quot;0&quot;;
 
       if (lastModified &amp;&amp; lastModified &gt; updated_at &amp;&amp; savedReactions &#x3D;&#x3D;&#x3D; String(reactions)) {
@@ -604,7 +619,7 @@ export class HighlightCardService {
     return returnVal;
   }
 
-  async getHighlightCard (id: number): Promise&lt;string&gt; {
+  async getHighlightCard (id: number): Promise&lt;Buffer&gt; {
     const { remaining } &#x3D; await this.githubService.rateLimit();
 
     if (remaining &lt; 1000) {
@@ -614,16 +629,9 @@ export class HighlightCardService {
     const highlightData &#x3D; await this.getHighlightData(id);
 
     try {
-      const hash &#x3D; &#x60;highlights/${String(id)}.png&#x60;;
-      const fileUrl &#x3D; &#x60;${this.s3FileStorageService.getCdnEndpoint()}${hash}&#x60;;
-
       const { png } &#x3D; await this.generateCardBuffer(id, highlightData);
 
-      await this.s3FileStorageService.uploadFile(png, hash, &quot;image/png&quot;, { &quot;reactions-count&quot;: String(highlightData.reactions) });
-
-      this.logger.debug(&#x60;Highlight ${id} did not exist in S3, generated image and uploaded to S3, redirecting&#x60;);
-
-      return fileUrl;
+      return png;
     } catch (e) {
       this.logger.error(&#x60;Error generating highlight card for ${id}&#x60;, e);
 

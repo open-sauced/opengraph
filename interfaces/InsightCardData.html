@@ -292,7 +292,7 @@ export class InsightCardService {
     const maxRepoQueryIdsLenght &#x3D; 10;
 
     const insightPageReq &#x3D; await firstValueFrom(
-      this.httpService.get&lt;DbInsight&gt;(&#x60;https://api.opensauced.pizza/v1/insights/${insightId}&#x60;),
+      this.httpService.get&lt;DbInsight&gt;(&#x60;${process.env.API_BASE_URL!}/v1/insights/${insightId}&#x60;),
     );
 
     const { repos, name, updated_at } &#x3D; insightPageReq.data;
@@ -309,7 +309,7 @@ export class InsightCardService {
 
     const contributorsReq &#x3D; await firstValueFrom(
       this.httpService.get&lt;{ data: { author_login: string }[] }&gt;(
-        &#x60;https://api.opensauced.pizza/v1/contributors/search?${String(query)}&#x60;,
+        &#x60;${process.env.API_BASE_URL!}/v1/contributors/search?${String(query)}&#x60;,
       ),
     );
 
