@@ -22,7 +22,7 @@ export class HighlightCardController {
   @Get("/:id")
   @ApiOperation({
     operationId: "generateHighlightSocialCard",
-    summary: "Gets latest cache aware social card link for :id or generates a new one",
+    summary: "Generates the social card image for the provided highlight ID",
   })
   @Header("Content-Type", "image/png")
   @ApiOkResponse({ type: StreamableFile, description: "Social card image" })
@@ -34,15 +34,9 @@ export class HighlightCardController {
     @Param("id", ParseIntPipe) id: number,
       @Res({ passthrough: true }) res: FastifyReply,
   ): Promise<void> {
-    const { fileUrl, hasFile, needsUpdate } = await this.highlightCardService.checkRequiresUpdate(id);
+    const png = await this.highlightCardService.getHighlightCard(id);
 
-    if (hasFile && !needsUpdate) {
-      return res.status(HttpStatus.FOUND).redirect(fileUrl);
-    }
-
-    const url = await this.highlightCardService.getHighlightCard(id);
-
-    return res.status(HttpStatus.FOUND).redirect(url);
+    return res.status(HttpStatus.OK).send(png);
   }
 
   @Get("/:id/metadata")

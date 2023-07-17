@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+## [2.3.0-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.2.1...v2.3.0-beta.1) (2023-07-12)
+
+
+### 🍕 Features
+
+* improve performance when generating highlight card image ([#60](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/60)) ([2c94638](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/2c946388fee498b94774ab2a419325cc722148d8))
+
 ### [2.2.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.2.0...v2.2.1) (2023-07-12)
 
 
