@@ -1,5 +1,7 @@
 import cardFooter from "./shared/card-footer";
 import cardStyleSetup from "./shared/card-style-setup";
+import { emojify } from "node-emoji";
+
 
 const highlightCardTemplate = (
   avatarUrl: string,
@@ -15,10 +17,10 @@ const highlightCardTemplate = (
       <div tw="flex-row justify-between" style="gap: 16px;">
         <div tw="w-906px flex-col flex-nowrap" style="gap: -10px;">
           <h1 tw="text-72px leading-72px text-black tracking-tight" style="width: 926px; font-weight: 500;">
-               OpenSauced Highlight
+               OpenSauced Highlight 🔥
           </h1>
           <p tw="font-normal text-48px text-light-slate-11 tracking-tight">
-          ${body.length > 108 ? `${body.slice(0, 108)}...` : body}
+          ${body.length > 108 ? `${emojify("🔥 " +body.slice(0, 108))}...` : emojify("🔥 " +body)}
           </p>
         </div>
         <div>
