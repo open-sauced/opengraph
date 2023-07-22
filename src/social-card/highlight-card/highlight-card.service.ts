@@ -124,15 +124,14 @@ export class HighlightCardService {
       ],
       tailwindConfig,
       loadAdditionalAsset: async (code: string, segment: string) => {
-        if (code === 'emoji') {
+        if (code === "emoji") {
           // if segment is an emoji
-          return (
-            `data:image/svg+xml;base64,` + btoa(await loadEmoji( "twemoji", getIconCode(segment)))
-          )
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+          return (`data:image/svg+xml;base64,${btoa(await loadEmoji( "twemoji", getIconCode(segment)))}`);
         }
-  
+
         // if segment is normal text
-        return (code)
+        return (code);
       },
     });
 
