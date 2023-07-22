@@ -14,6 +14,7 @@ import highlightCardTemplate from "../templates/highlight-card.template";
 import { DbUserHighlight } from "../../github/entities/db-user-highlight.entity";
 import { DbReaction } from "../../github/entities/db-reaction.entity";
 import { RequiresUpdateMeta } from "../user-card/user-card.service";
+import { getIconCode, loadEmoji } from "../../utils/twemoji";
 
 interface HighlightCardData {
   login: string;
@@ -122,6 +123,17 @@ export class HighlightCardService {
         },
       ],
       tailwindConfig,
+      loadAdditionalAsset: async (code: string, segment: string) => {
+        if (code === 'emoji') {
+          // if segment is an emoji
+          return (
+            `data:image/svg+xml;base64,` + btoa(await loadEmoji( "twemoji", getIconCode(segment)))
+          )
+        }
+  
+        // if segment is normal text
+        return (code)
+      },
     });
 
     const resvg = new Resvg(svg, { background: "rgba(238, 235, 230, .9)" });
