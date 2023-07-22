@@ -52,7 +52,8 @@ export const apis = {
     }_flat.svg`,
 };
 
-const emojiCache: Record<string, Promise<String>> = {};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const emojiCache: Record<string, Promise<string>> = {};
 
 export async function loadEmoji (type: keyof typeof apis, code: string) {
   const key = `${type}:${code}`;
