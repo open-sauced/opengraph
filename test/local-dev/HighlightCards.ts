@@ -4,7 +4,7 @@ import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "fs/promises";
 import { HighlightCardService } from "../../src/social-card/highlight-card/highlight-card.service";
 
-const testHighlights = [124, 120, 116, 115];
+const testHighlights = [124, 120, 116, 115, 161];
 
 const folderPath = "dist/local-dev";
 
