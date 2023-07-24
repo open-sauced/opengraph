@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+## [2.4.0](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.3.0...v2.4.0) (2023-07-24)
+
+
+### 🍕 Features
+
+* add emoji support ([#63](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/63)) ([82c0a3a](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/82c0a3ae8fd1f42c7a538eb1efc26e00d9b4d7ca))
+
 ## [2.4.0-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.3.0...v2.4.0-beta.1) (2023-07-24)
 
 
