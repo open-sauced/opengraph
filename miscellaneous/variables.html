@@ -64,6 +64,9 @@
                             <a href="#ApiConfig" title="src/config/api.config.ts" ><b>ApiConfig</b>&nbsp;&nbsp;&nbsp;(src/.../api.config.ts)</a>
                         </li>
                         <li>
+                            <a href="#apis" title="src/utils/twemoji.ts" ><b>apis</b>&nbsp;&nbsp;&nbsp;(src/.../twemoji.ts)</a>
+                        </li>
+                        <li>
                             <a href="#cardFooter" title="src/social-card/templates/shared/card-footer.ts" ><b>cardFooter</b>&nbsp;&nbsp;&nbsp;(src/.../card-footer.ts)</a>
                         </li>
                         <li>
@@ -71,6 +74,9 @@
                         </li>
                         <li>
                             <a href="#DigitalOceanConfig" title="src/config/digital-ocean.config.ts" ><b>DigitalOceanConfig</b>&nbsp;&nbsp;&nbsp;(src/.../digital-ocean.config.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#emojiCache" title="src/utils/twemoji.ts" ><b>emojiCache</b>&nbsp;&nbsp;&nbsp;(src/.../twemoji.ts)</a>
                         </li>
                         <li>
                             <a href="#getRepo" title="src/github/gql/get-repo.ts" ><b>getRepo</b>&nbsp;&nbsp;&nbsp;(src/.../get-repo.ts)</a>
@@ -104,6 +110,12 @@
                         </li>
                         <li>
                             <a href="#tailwindConfig" title="src/social-card/templates/tailwind.config.ts" ><b>tailwindConfig</b>&nbsp;&nbsp;&nbsp;(src/.../tailwind.config.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#U200D" title="src/utils/twemoji.ts" ><b>U200D</b>&nbsp;&nbsp;&nbsp;(src/.../twemoji.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#UFE0Fg" title="src/utils/twemoji.ts" ><b>UFE0Fg</b>&nbsp;&nbsp;&nbsp;(src/.../twemoji.ts)</a>
                         </li>
                         <li>
                             <a href="#userLangs" title="src/social-card/templates/shared/user-langs.ts" ><b>userLangs</b>&nbsp;&nbsp;&nbsp;(src/.../user-langs.ts)</a>
@@ -148,6 +160,123 @@
   disk_percentage: Number(parseFloat(process.env.DISK_PERCENGATE ?? &quot;0.7&quot;)),
   disk_size: Number(parseInt(process.env.DISK_SIZE ?? &quot;100&quot;, 10) * 1024 * 1024 * 1024),
 }))</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/utils/twemoji.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="apis"></a>
+                    <span class="name">
+                        <span ><b>apis</b></span>
+                        <a href="#apis"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  twemoji: (code: string) &#x3D;&gt;
+    &#x60;https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${
+      code.toLowerCase()
+    }.svg&#x60;,
+  openmoji: &quot;https://cdn.jsdelivr.net/npm/@svgmoji/openmoji@2.0.0/svg/&quot;,
+  blobmoji: &quot;https://cdn.jsdelivr.net/npm/@svgmoji/blob@2.0.0/svg/&quot;,
+  noto: &quot;https://cdn.jsdelivr.net/gh/svgmoji/svgmoji/packages/svgmoji__noto/svg/&quot;,
+  fluent: (code: string) &#x3D;&gt;
+    &#x60;https://cdn.jsdelivr.net/gh/shuding/fluentui-emoji-unicode/assets/${
+      code.toLowerCase()
+    }_color.svg&#x60;,
+  fluentFlat: (code: string) &#x3D;&gt;
+    &#x60;https://cdn.jsdelivr.net/gh/shuding/fluentui-emoji-unicode/assets/${
+      code.toLowerCase()
+    }_flat.svg&#x60;,
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="emojiCache"></a>
+                    <span class="name">
+                        <span ><b>emojiCache</b></span>
+                        <a href="#emojiCache"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Record&lt;string, Promise&lt;string&gt;&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="U200D"></a>
+                    <span class="name">
+                        <span ><b>U200D</b></span>
+                        <a href="#U200D"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>String.fromCharCode(8205)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>modified version of <a href="https://unpkg.com/twemoji@13.1.0/dist/twemoji.esm.js">https://unpkg.com/twemoji@13.1.0/dist/twemoji.esm.js</a>.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="UFE0Fg"></a>
+                    <span class="name">
+                        <span ><b>UFE0Fg</b></span>
+                        <a href="#UFE0Fg"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>/\uFE0F/g</code>
                     </td>
                 </tr>
 
@@ -540,7 +669,7 @@ query ($username: String!, $dateSince: DateTime) {
       &lt;div tw&#x3D;&quot;flex-row justify-between&quot; style&#x3D;&quot;gap: 16px;&quot;&gt;
         &lt;div tw&#x3D;&quot;w-906px flex-col flex-nowrap&quot; style&#x3D;&quot;gap: -10px;&quot;&gt;
           &lt;h1 tw&#x3D;&quot;text-72px leading-72px text-black tracking-tight&quot; style&#x3D;&quot;width: 926px; font-weight: 500;&quot;&gt;
-               OpenSauced Highlight
+               🍕 OpenSauced Highlight
           &lt;/h1&gt;
           &lt;p tw&#x3D;&quot;font-normal text-48px text-light-slate-11 tracking-tight&quot;&gt;
           ${body.length &gt; 108 ? &#x60;${body.slice(0, 108)}...&#x60; : body}

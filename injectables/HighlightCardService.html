@@ -143,7 +143,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:36</a></div>
                             </td>
                         </tr>
 
@@ -232,8 +232,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="134"
-                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:134</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="145"
+                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:145</a></div>
                 </td>
             </tr>
 
@@ -303,8 +303,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="93"
-                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:93</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="94"
+                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:94</a></div>
                 </td>
             </tr>
 
@@ -387,8 +387,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="81"
-                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:81</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="82"
+                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:82</a></div>
                 </td>
             </tr>
 
@@ -426,8 +426,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="170"
-                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:170</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="181"
+                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:181</a></div>
                 </td>
             </tr>
 
@@ -498,8 +498,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="43"
-                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:43</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="44"
+                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:44</a></div>
                 </td>
             </tr>
 
@@ -578,7 +578,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -605,7 +605,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -634,6 +634,7 @@ import highlightCardTemplate from &quot;../templates/highlight-card.template&quo
 import { DbUserHighlight } from &quot;../../github/entities/db-user-highlight.entity&quot;;
 import { DbReaction } from &quot;../../github/entities/db-reaction.entity&quot;;
 import { RequiresUpdateMeta } from &quot;../user-card/user-card.service&quot;;
+import { getIconCode, loadEmoji } from &quot;../../utils/twemoji&quot;;
 
 interface HighlightCardData {
   login: string;
@@ -742,6 +743,16 @@ export class HighlightCardService {
         },
       ],
       tailwindConfig,
+      loadAdditionalAsset: async (code: string, segment: string) &#x3D;&gt; {
+        if (code &#x3D;&#x3D;&#x3D; &quot;emoji&quot;) {
+          // if segment is an emoji
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+          return (&#x60;data:image/svg+xml;base64,${btoa(await loadEmoji( &quot;twemoji&quot;, getIconCode(segment)))}&#x60;);
+        }
+
+        // if segment is normal text
+        return (code);
+      },
     });
 
     const resvg &#x3D; new Resvg(svg, { background: &quot;rgba(238, 235, 230, .9)&quot; });
