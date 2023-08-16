@@ -313,7 +313,7 @@
   reactions
     ? &#x60; &lt;img tw&#x3D;&quot;w-32px h-32px&quot; width&#x3D;&quot;1&quot; height&#x3D;&quot;1&quot; src&#x3D;&quot;${heartIconData}&quot;/&gt;
             &lt;span tw&#x3D;&quot;font-medium text-32px text-black&quot;&gt;
-              ${reactions} Reactions
+              ${reactions} ${reactions &gt; 1 ? &quot;Reactions&quot; : &quot;Reaction&quot;}
             &lt;/span&gt;&#x60;
     : &quot;&quot;
 }

@@ -232,8 +232,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="145"
-                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:145</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="147"
+                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:147</a></div>
                 </td>
             </tr>
 
@@ -303,8 +303,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="94"
-                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:94</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="96"
+                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:96</a></div>
                 </td>
             </tr>
 
@@ -387,8 +387,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="82"
-                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:82</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="84"
+                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:84</a></div>
                 </td>
             </tr>
 
@@ -426,8 +426,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="181"
-                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:181</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="183"
+                            class="link-to-prism">src/social-card/highlight-card/highlight-card.service.ts:183</a></div>
                 </td>
             </tr>
 
@@ -671,10 +671,12 @@ export class HighlightCardService {
     );
 
     const [highlight, highlightReactions] &#x3D; await Promise.all([highlightReq, reactionsReq]);
+
     const { login, updated_at, url, highlight: body } &#x3D; highlight.data;
     const [owner, repoName] &#x3D; url.replace(&quot;https://github.com/&quot;, &quot;&quot;).split(&quot;/&quot;);
 
     const repo &#x3D; await this.githubService.getRepo(owner, repoName);
+
     const reactions &#x3D; highlightReactions.data.reduce&lt;number&gt;((acc, curr) &#x3D;&gt; acc + Number(curr.reaction_count), 0);
 
     const langList &#x3D; repo.languages?.edges?.flatMap(edge &#x3D;&gt; {
@@ -747,11 +749,11 @@ export class HighlightCardService {
         if (code &#x3D;&#x3D;&#x3D; &quot;emoji&quot;) {
           // if segment is an emoji
           // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-          return (&#x60;data:image/svg+xml;base64,${btoa(await loadEmoji( &quot;twemoji&quot;, getIconCode(segment)))}&#x60;);
+          return &#x60;data:image/svg+xml;base64,${btoa(await loadEmoji(&quot;twemoji&quot;, getIconCode(segment)))}&#x60;;
         }
 
         // if segment is normal text
-        return (code);
+        return code;
       },
     });
 

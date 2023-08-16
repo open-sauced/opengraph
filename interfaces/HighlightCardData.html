@@ -503,10 +503,12 @@ export class HighlightCardService {
     );
 
     const [highlight, highlightReactions] &#x3D; await Promise.all([highlightReq, reactionsReq]);
+
     const { login, updated_at, url, highlight: body } &#x3D; highlight.data;
     const [owner, repoName] &#x3D; url.replace(&quot;https://github.com/&quot;, &quot;&quot;).split(&quot;/&quot;);
 
     const repo &#x3D; await this.githubService.getRepo(owner, repoName);
+
     const reactions &#x3D; highlightReactions.data.reduce&lt;number&gt;((acc, curr) &#x3D;&gt; acc + Number(curr.reaction_count), 0);
 
     const langList &#x3D; repo.languages?.edges?.flatMap(edge &#x3D;&gt; {
@@ -579,11 +581,11 @@ export class HighlightCardService {
         if (code &#x3D;&#x3D;&#x3D; &quot;emoji&quot;) {
           // if segment is an emoji
           // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-          return (&#x60;data:image/svg+xml;base64,${btoa(await loadEmoji( &quot;twemoji&quot;, getIconCode(segment)))}&#x60;);
+          return &#x60;data:image/svg+xml;base64,${btoa(await loadEmoji(&quot;twemoji&quot;, getIconCode(segment)))}&#x60;;
         }
 
         // if segment is normal text
-        return (code);
+        return code;
       },
     });
 
