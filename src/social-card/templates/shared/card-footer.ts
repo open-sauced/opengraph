@@ -14,7 +14,7 @@ const cardFooter = (langs: string, repos: string, reactions?: number) => `
   reactions
     ? ` <img tw="w-32px h-32px" width="1" height="1" src="${heartIconData}"/>
             <span tw="font-medium text-32px text-black">
-              ${reactions} Reactions
+              ${reactions} ${reactions > 1 ? "Reactions" : "Reaction"}
             </span>`
     : ""
 }

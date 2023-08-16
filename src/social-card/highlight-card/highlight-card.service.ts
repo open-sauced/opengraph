@@ -51,10 +51,12 @@ export class HighlightCardService {
     );
 
     const [highlight, highlightReactions] = await Promise.all([highlightReq, reactionsReq]);
+
     const { login, updated_at, url, highlight: body } = highlight.data;
     const [owner, repoName] = url.replace("https://github.com/", "").split("/");
 
     const repo = await this.githubService.getRepo(owner, repoName);
+
     const reactions = highlightReactions.data.reduce<number>((acc, curr) => acc + Number(curr.reaction_count), 0);
 
     const langList = repo.languages?.edges?.flatMap(edge => {
@@ -127,11 +129,11 @@ export class HighlightCardService {
         if (code === "emoji") {
           // if segment is an emoji
           // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-          return (`data:image/svg+xml;base64,${btoa(await loadEmoji( "twemoji", getIconCode(segment)))}`);
+          return `data:image/svg+xml;base64,${btoa(await loadEmoji("twemoji", getIconCode(segment)))}`;
         }
 
         // if segment is normal text
-        return (code);
+        return code;
       },
     });
 
