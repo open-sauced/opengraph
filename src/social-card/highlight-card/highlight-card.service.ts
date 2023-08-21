@@ -4,6 +4,7 @@ import { Resvg } from "@resvg/resvg-js";
 import { Repository, Language } from "@octokit/graphql-schema";
 import fs from "node:fs/promises";
 import { firstValueFrom } from "rxjs";
+import sanitizeHtml from "sanitize-html";
 
 import { GithubService } from "../../github/github.service";
 import { S3FileStorageService } from "../../s3-file-storage/s3-file-storage.service";
@@ -101,8 +102,20 @@ export class HighlightCardService {
       ? highlightData
       : await this.getHighlightData(highlightId);
 
+    const sanitizeBody = sanitizeHtml(body, {
+      allowedTags: [],
+      allowedAttributes: {},
+      disallowedTagsMode: "escape",
+    });
+
     const template = html(
-      highlightCardTemplate(avatarUrl, body, userLangs(langs, langTotal), userProfileRepos([repo], 2), reactions),
+      highlightCardTemplate(
+        avatarUrl,
+        sanitizeBody,
+        userLangs(langs, langTotal),
+        userProfileRepos([repo], 2),
+        reactions,
+      ),
     );
 
     const [interArrayBuffer, interArrayBufferMedium] = await this.getFonts();
