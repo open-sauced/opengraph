@@ -1,3 +1,5 @@
+import sanitizeHtml from "sanitize-html";
+
 import cardFooter from "./shared/card-footer";
 import cardStyleSetup from "./shared/card-style-setup";
 
@@ -7,7 +9,14 @@ const highlightCardTemplate = (
   langs: string,
   repos: string,
   reactions: number,
-): string => `
+): string => {
+  const sanitizedBody = sanitizeHtml(body, {
+    allowedTags: [],
+    allowedAttributes: {},
+    disallowedTagsMode: "discard",
+  });
+
+  return `
   ${cardStyleSetup}
 
   <div tw="flex-col justify-between bg-white w-1200px h-627px">
@@ -18,7 +27,7 @@ const highlightCardTemplate = (
                🍕 OpenSauced Highlight
           </h1>
           <p tw="font-normal text-48px text-light-slate-11 tracking-tight">
-          ${body.length > 108 ? `${body.slice(0, 108)}...` : body}
+          ${sanitizedBody.length > 108 ? `${sanitizedBody.slice(0, 108)}...` : sanitizedBody}
           </p>
         </div>
         <div>
@@ -30,5 +39,6 @@ const highlightCardTemplate = (
     </div>
     ${cardFooter(langs, repos, reactions)}
   </div>`;
+};
 
 export default highlightCardTemplate;
