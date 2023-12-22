@@ -80,8 +80,8 @@
         "typesync": "^0.10.0"
       },
       "engines": {
-        "node": ">= 18.17.0",
-        "npm": ">= 10.2.3"
+        "node": ">= 16.19.1",
+        "npm": ">= 9.6.3"
       }
     },
     "node_modules/@aduh95/viz.js": {
