@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+## [2.5.0-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.4.1-beta.2...v2.5.0-beta.1) (2024-01-25)
+
+
+### 🍕 Features
+
+* Upgrade to v2 API ([36b73e9](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/36b73e9aa51224aa281dec81670cc732246963c6))
+
 ### [2.4.1-beta.2](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.4.1-beta.1...v2.4.1-beta.2) (2023-12-22)
 
 
