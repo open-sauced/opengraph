@@ -659,15 +659,15 @@ export class HighlightCardService {
     private readonly httpService: HttpService,
     private readonly githubService: GithubService,
     private readonly s3FileStorageService: S3FileStorageService,
-  ) {}
+  ) { }
 
   private async getHighlightData (highlightId: number): Promise&lt;HighlightCardData&gt; {
     const highlightReq &#x3D; firstValueFrom(
-      this.httpService.get&lt;DbUserHighlight&gt;(&#x60;${process.env.API_BASE_URL!}/v1/user/highlights/${highlightId}&#x60;),
+      this.httpService.get&lt;DbUserHighlight&gt;(&#x60;${process.env.API_BASE_URL!}/v2/user/highlights/${highlightId}&#x60;),
     );
 
     const reactionsReq &#x3D; firstValueFrom(
-      this.httpService.get&lt;DbReaction[]&gt;(&#x60;${process.env.API_BASE_URL!}/v1/highlights/${highlightId}/reactions&#x60;),
+      this.httpService.get&lt;DbReaction[]&gt;(&#x60;${process.env.API_BASE_URL!}/v2/highlights/${highlightId}/reactions&#x60;),
     );
 
     const [highlight, highlightReactions] &#x3D; await Promise.all([highlightReq, reactionsReq]);
