@@ -5,6 +5,17 @@
 
 > All notable changes to this project will be documented in this file
 
+## [2.5.0](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.4.1...v2.5.0) (2024-01-30)
+
+
+### 🤖 Build System
+
+* **deps:** bump octokit from 2.0.14 to 3.1.2 ([#72](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/72)) ([54e3ec0](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/54e3ec0435c41e43c6ced31f3664b20b59bf0156))
+
+
+### 🍕 Features
+
+* Upgrade to v2 API ([36b73e9](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/36b73e9aa51224aa281dec81670cc732246963c6))
 
 ## [2.5.0-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.4.1-beta.2...v2.5.0-beta.1) (2024-01-25)
 
