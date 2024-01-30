@@ -5,6 +5,7 @@
 
 > All notable changes to this project will be documented in this file
 
+
 ## [2.5.0-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.4.1-beta.2...v2.5.0-beta.1) (2024-01-25)
 
 
@@ -18,6 +19,14 @@
 ### 🤖 Build System
 
 * **deps:** bump octokit from 2.0.14 to 3.1.2 ([#72](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/72)) ([54e3ec0](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/54e3ec0435c41e43c6ced31f3664b20b59bf0156))
+
+### [2.4.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.4.0...v2.4.1) (2023-08-16)
+
+
+### 🐛 Bug Fixes
+
+* update reactions count grammar ([#69](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/69)) ([765696a](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/765696a720c1767bbcb983f5b8502953ecc72446))
+
 
 ### [2.4.1-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.4.0...v2.4.1-beta.1) (2023-08-16)
 
