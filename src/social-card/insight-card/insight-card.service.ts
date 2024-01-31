@@ -9,7 +9,7 @@ import tailwindConfig from "../templates/tailwind.config";
 import { firstValueFrom } from "rxjs";
 
 import { RequiresUpdateMeta } from "../user-card/user-card.service";
-import { DbInsight } from "../../github/entities/db-insight.entity";
+import { DbInsight, DbUserInsightRepo } from "../../github/entities/db-insight.entity";
 import insightCardTemplate from "../templates/insight-card.template";
 import insightRepos from "../templates/shared/insight-repos";
 import insightContributors from "../templates/shared/insight-contributors";
@@ -34,12 +34,16 @@ export class InsightCardService {
   private async getInsightData (insightId: number): Promise<InsightCardData> {
     const maxRepoQueryIdsLenght = 10;
 
-    const insightPageReq = await firstValueFrom(
-      this.httpService.get<DbInsight>(`${process.env.API_BASE_URL!}/v2/insights/${insightId}`),
+    const insightPageApiReq = firstValueFrom(
+      this.httpService.get<DbInsight>(`${process.env.API_BASE_URL!}/v2/insights/${insightId}?include=none`),
     );
+    const insightReposApiReq = firstValueFrom(
+      this.httpService.get<DbUserInsightRepo[]>(`${process.env.API_BASE_URL!}/v2/insights/${insightId}/repos`),
+    );
+    const [insightPageReq, insightReposReq] = await Promise.all([insightPageApiReq, insightReposApiReq]);
 
-    const { repos, name, updated_at } = insightPageReq.data;
-
+    const { name, updated_at } = insightPageReq.data;
+    const { data: repos } = insightReposReq;
     const query = (new URLSearchParams);
 
     query.set(
