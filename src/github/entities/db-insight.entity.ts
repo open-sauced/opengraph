@@ -10,7 +10,7 @@ export interface DbInsight {
   repos: DbUserInsightRepo[];
 }
 
-interface DbUserInsightRepo {
+export interface DbUserInsightRepo {
   readonly id: number;
   readonly insight_id: number;
   readonly repo_id: number;
