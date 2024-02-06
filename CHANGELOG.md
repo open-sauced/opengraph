@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+### [2.5.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.5.0...v2.5.1) (2024-02-06)
+
+
+### 🐛 Bug Fixes
+
+* fetch insight and insight repositories in parallel ([#79](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/79)) ([e367547](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/e3675470dcc0acb9cd2a978f01144240bf452b71))
+
 ### [2.5.1-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.5.0...v2.5.1-beta.1) (2024-02-01)
 
 
