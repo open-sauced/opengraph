@@ -3,7 +3,7 @@
 
 [![Open Sauced](https://i.ibb.co/7jPXt0Z/logo1-92f1a87f.png)](https://opensauced.pizza)
 
-# 🍕 Open Sauced OpenGraph Generator 🍕
+# 🍕 Open Sauced OpenGraph Image Generator 🍕
 
 > The path to your next Open Source contribution
 
