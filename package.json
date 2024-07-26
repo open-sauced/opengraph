@@ -1,6 +1,6 @@
 {
   "name": "@open-sauced/opengraph.opensauced.pizza",
-  "version": "2.5.1",
+  "version": "2.5.2-beta.1",
   "keywords": [],
   "description": "OpenGraph dot Open Sauced is a general purpose social card generator",
   "author": "Ahmed Mohamed Atwa <Ahmedatwa866@yahoo.com>",

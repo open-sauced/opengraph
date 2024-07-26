@@ -5,6 +5,14 @@
 
 > All notable changes to this project will be documented in this file
 
+### [2.5.2-beta.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.5.1...v2.5.2-beta.1) (2024-07-26)
+
+
+### 🐛 Bug Fixes
+
+* filter out bot avatars from insights ([#83](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/83)) ([7fef0b9](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/7fef0b9e078e4d4e10a3199db6c1029d6ae879b5))
+* update GitHub release workflow to use generated token ([#84](https://github.com/open-sauced/opengraph.opensauced.pizza/issues/84)) ([6ffd518](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/6ffd5182ee16a707fe7606d0a3fc030dc653f162))
+
 ### [2.5.1](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.5.0...v2.5.1) (2024-02-06)
 
 
