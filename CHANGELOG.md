@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+### [2.5.3](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.5.2...v2.5.3) (2024-07-26)
+
+
+### 🐛 Bug Fixes
+
+* adjust README ([257b3af](https://github.com/open-sauced/opengraph.opensauced.pizza/commit/257b3af77c493574e6978d9c6abc7c8d482dc6c1))
+
 ### [2.5.2](https://github.com/open-sauced/opengraph.opensauced.pizza/compare/v2.5.1...v2.5.2) (2024-07-26)
 
 
